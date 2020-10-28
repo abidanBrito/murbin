@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name" translatable="false">Murbin</string>
+    <!-- Main Activity | main_activity -->
+    <string name="welcome">Bienvenido/a</string>
+    <!-- Login -->
+    <!-- User Fragment | user_fragment -->
+    <string name="user_fragment_tv_email_verification">No podrás usar la aplicación hasta que valides tu correo electrónico. Pulsa el siguiente botón para recibir el mensaje de confirmación. Gracias.</string>
+    <string name="user_fragment_btn_email_verification">Enviar mensaje de confirmación</string>
+    <string name="user_fragment_btn_email_verification_sended">Mensaje enviado</string>
+    <string name="user_fragment_tv_username">Nombre de usuario: </string>
+    <string name="user_fragment_tv_email">Email: </string>
+    <string name="user_fragment_tv_prividers">Proveedores: </string>
+    <string name="user_fragment_tv_phone">Teléfono: </string>
+    <string name="user_fragment_tv_uid">UID: </string>
+    <!-- User Fragment | user_fragment | ERROR MESSAGES -->
+    <string name="user_fragment_error_1">Datos del usuario no recibidos.</string>
+    <!-- MENUS -->
+    <!-- main_menu -->
+    <string name="main_menu_account">Mi Cuenta</string>
+    <string name="main_menu_logout">Cerrar sesión</string>
+
+</resources>

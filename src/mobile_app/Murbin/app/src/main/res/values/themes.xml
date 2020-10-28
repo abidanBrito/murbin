@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Murbin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/principal</item>
+        <item name="colorPrimaryVariant">@color/principal_variante</item>
+        <item name="colorOnPrimary">@color/blanco</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent_variante</item>
+        <item name="colorOnSecondary">@color/blanco</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/negro</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColorHint">@color/negro</item>
+    </style>
+</resources>

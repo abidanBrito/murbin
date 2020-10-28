@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "779733137396",
+    "firebase_url": "https://murbin-gti.firebaseio.com",
+    "project_id": "murbin-gti",
+    "storage_bucket": "murbin-gti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779733137396:android:68cb402995387c516d2ba1",
+        "android_client_info": {
+          "package_name": "com.example.murbin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779733137396-72dhp4ol3vr0m0sr98km7aelreh337ah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.murbin",
+            "certificate_hash": "ff643a53675956c3aa35c61bca4aa8486b42cd53"
+          }
+        },
+        {
+          "client_id": "779733137396-t26ev49ra0rfdhk7mi7v6lu9stdobbv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDq3sro6_DCVrNvBCulMyI2QaP90_rJPg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779733137396-t26ev49ra0rfdhk7mi7v6lu9stdobbv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
