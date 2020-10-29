@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.uart_demo">
+
+    <application android:label="@string/app_name">
+        <uses-library android:name="com.google.android.things" />
+
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".ArduinoUart"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".MainActivityUART">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+    <uses-permission android:name="com.google.android.things.permission.USE_PERIPHERAL_IO"/>
+</manifest>

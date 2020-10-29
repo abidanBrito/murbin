@@ -1,21 +1,26 @@
 package com.example.murbin.presentation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murbin.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.core.View;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
+    Button email_button;
 
     /*
       Constant for ease of use in debugging the class code
@@ -27,7 +32,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        login();
+        setContentView(R.layout.login_activity);
+        //login();
+
+        email_button = findViewById(R.id.login_email);
+        email_button.setOnClickListener(v -> runLoginEmail(null));
     }
 
     private void login() {
@@ -113,5 +122,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, s, Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public void runLoginEmail(View view){
+        Intent intent = new Intent(this, LoginEmailActivity.class);
+        startActivity(intent);
     }
 }
