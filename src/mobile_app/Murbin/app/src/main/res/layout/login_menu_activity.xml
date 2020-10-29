@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/login_menu_activity_iv_logo"
+        android:layout_width="186dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/login_menu_activity_iv_logo_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logonoche" />
+
+
+    <Button
+        android:id="@+id/login_menu_activity_btn_provider_email"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/main_button"
+        android:fontFamily="@font/montserratmedium"
+        android:shadowColor="@null"
+        android:shadowRadius="0"
+        android:text="@string/login_menu_activity_btn_provider_email"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_menu_activity_iv_logo"
+        app:rippleColor="@null" />
+
+
+    <TextView
+        android:id="@+id/login_menu_activity_tv_remember_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/login_menu_activity_tv_remember_password"
+        android:textColor="@color/negro"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/login_menu_activity_btn_provider_email"
+        app:layout_constraintTop_toBottomOf="@+id/login_menu_activity_btn_provider_email" />
+
+    <TextView
+        android:id="@+id/login_menu_activity_tv_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/login_menu_activity_tv_register"
+        android:textColor="@color/principal"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_menu_activity_tv_remember_password"
+        app:layout_constraintEnd_toEndOf="@+id/login_menu_activity_btn_provider_email"
+        app:layout_constraintTop_toTopOf="@+id/login_menu_activity_tv_remember_password" />
+
+
+    <TextView
+        android:id="@+id/login_menu_activity_tv_info_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/login_menu_activity_tv_info_container"
+        android:textColor="@color/negro"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/login_menu_activity_tv_privacy"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/login_menu_activity_tv_terms_and_conditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/login_menu_activity_tv_terms_and_conditions"
+        android:textColor="@color/principal"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_menu_activity_tv_info_container"
+        app:layout_constraintStart_toEndOf="@+id/login_menu_activity_tv_info_container"
+        app:layout_constraintTop_toTopOf="@+id/login_menu_activity_tv_info_container" />
+
+    <TextView
+        android:id="@+id/login_menu_activity_tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/login_menu_activity_tv_info"
+        android:textColor="@color/negro"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_menu_activity_tv_privacy"
+        app:layout_constraintEnd_toStartOf="@+id/login_menu_activity_tv_privacy"
+        app:layout_constraintTop_toTopOf="@+id/login_menu_activity_tv_privacy" />
+
+    <TextView
+        android:id="@+id/login_menu_activity_tv_privacy"
+        android:layout_width="110dp"
+        android:layout_height="13dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/login_menu_activity_tv_privacy"
+        android:textColor="@color/principal"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

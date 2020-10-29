@@ -2,8 +2,6 @@ package com.example.murbin.model;
 
 import android.net.Uri;
 
-import com.example.murbin.presentation.LoginActivity;
-
 public class UserModel {
 
     /*
