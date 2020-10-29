@@ -8,19 +8,21 @@
         android:icon="@mipmap/ic_launcher_murbin"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_murbin_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.Murbin">
 
-        <activity android:name=".presentation.LoginActivity">
+        <activity android:name=".presentation.LoginMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.MainActivity" />
+        <activity
+            android:name=".presentation.LoginWithEmailActivity"
+            android:parentActivityName=".presentation.LoginMenuActivity" />
 
-        <activity android:name=".presentation.LoginEmailActivity" />
+        <activity android:name=".presentation.MainActivity" />
 
         <activity
             android:name=".presentation.UserActivity"
