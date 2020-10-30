@@ -4,8 +4,6 @@
 
 ![Project_Logo](/img/murbin_logo.png)
 
-OUR TAKE ON SMART STREETLIGHTING
-
 ## TABLE OF CONTENTS
 1.  [Motivation](#motivation)
 2.  [Technologies and Frameworks](#technologies-and-frameworks)
