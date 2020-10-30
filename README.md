@@ -4,7 +4,7 @@
 
 ![Project_Logo](/img/murbin_logo.png)
 
-Add a brief and catchy description here.
+OUR TAKE ON SMART STREETLIGHTING
 
 ## TABLE OF CONTENTS
 1.  [Motivation](#motivation)
@@ -15,7 +15,7 @@ Add a brief and catchy description here.
 6.  [Acknowledgements](#acknowledgements)
 
 ## MOTIVATION
-This project is a team effort for our thrid semester class **Internet of Things** (IoT) project. It aims to **...**, providing meaningful realtime data and ...
+This project is a team effort for our thrid semester class **Internet of Things** (IoT) project. It aims to implement **smart streetlighting** in a way that is **not only efficient**, but also provides some **added functionalities** and interaction with the user.
 
 ## TECHNOLOGIES AND FRAMEWORKS
 ### Electronic Devices and Components
@@ -35,7 +35,7 @@ This project is a team effort for our thrid semester class **Internet of Things*
 
 ## SYSTEM ARCHITECTURE
 ![System Architecture Diagram](img/system_architecture_diagram.png)
-Refer to the [documentation](Technical_Documentation.pdf) (spanish) for further details and schematics.
+Refer to the [documentation](docs/Documento_Técnico_Diseño_01.pdf) (spanish) for further details and schematics.
 
 ## FUNCTIONALITIES AND FEATURES 
 *   [x] Gas (CO2) sensor.
@@ -44,7 +44,7 @@ Refer to the [documentation](Technical_Documentation.pdf) (spanish) for further 
 *   [ ] PIR sensor.
 
 ## DOCUMENTATION
-It can be found in the form of a PDF file for each and every Sprint, accordingly. Those of previous Sprints may and do, in fact, contain errors (schematics, pins, etc.). Please, refer to the [technical documentation](Technical_Documentation.pdf) (spanish). 
+It can be found in the form of a PDF file for each and every Sprint, accordingly. Those of previous Sprints may contain errors (schematics, pins, etc.). Please, refer to the lastest version: [technical documentation](docs/Documento_Técnico_Diseño_01.pdf) (spanish). 
 
 ## ACKNOWLEDGEMENTS
 We would like to express our sincere gratitude to our **professors** for their invaluable support, feedback and encouragement throughout the development of this project, and to **Universitat Politècnica de València** for providing us with both the knowledge and the tools needed to complete it.
