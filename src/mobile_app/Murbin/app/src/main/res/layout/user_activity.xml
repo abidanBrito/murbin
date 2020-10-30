@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
     <fragment
-        android:id="@+id/user_fragment"
+        android:id="@+id/user_activity_user_fragment"
         android:name="com.example.murbin.presentation.UserFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"

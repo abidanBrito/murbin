@@ -68,7 +68,7 @@ public class UserFragment extends Fragment {
              */
             if (!firebaseUser.isEmailVerified()) {
                 user_fragment_tv_notification.setTextColor(Color.RED);
-                user_fragment_tv_notification.setText(R.string.user_fragment_tv_email_verification);
+                user_fragment_tv_notification.setText(getResources().getString(R.string.user_fragment_tv_email_verification));
                 user_fragment_tv_notification.setVisibility(View.VISIBLE);
 
                 user_fragment_btn_email_verification.setBackgroundColor(Color.BLACK);
@@ -78,7 +78,7 @@ public class UserFragment extends Fragment {
                     public void onClick(View v) {
                         firebaseUser.sendEmailVerification();
                         user_fragment_btn_email_verification.setClickable(false);
-                        user_fragment_btn_email_verification.setText(R.string.user_fragment_btn_email_verification_sended);
+                        user_fragment_btn_email_verification.setText(getResources().getString(R.string.user_fragment_btn_email_verification_sended));
                         user_fragment_btn_email_verification.setBackgroundColor(Color.GREEN);
                         user_fragment_btn_email_verification.setTextColor(Color.WHITE);
                     }
@@ -110,7 +110,7 @@ public class UserFragment extends Fragment {
             user_fragment_tv_phone.setText(userModel.getPhone());
             user_fragment_tv_uid.setText(userModel.getUid());
         } else {
-            user_fragment_tv_notification.setText(R.string.user_fragment_error_1);
+            user_fragment_tv_notification.setText(getString(R.string.user_fragment_error_1));
             user_fragment_tv_notification.setVisibility(View.VISIBLE);
         }
 

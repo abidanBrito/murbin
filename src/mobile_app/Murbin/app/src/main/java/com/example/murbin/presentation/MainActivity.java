@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.murbin.R;
 import com.firebase.ui.auth.AuthUI;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                            Intent i = new Intent(getApplicationContext(), LoginMenuActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                                     Intent.FLAG_ACTIVITY_NEW_TASK |
                                     Intent.FLAG_ACTIVITY_CLEAR_TASK
