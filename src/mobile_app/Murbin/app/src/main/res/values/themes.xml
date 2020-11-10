@@ -7,6 +7,7 @@
         <item name="colorPrimaryVariant">@color/principal_variante</item>
         <item name="colorOnPrimary">@color/blanco</item>
         <!-- Secondary brand color. -->
+        <!--<item name="colorSecondary">@color/accent</item>-->
         <item name="colorSecondary">@color/accent</item>
         <item name="colorSecondaryVariant">@color/accent_variante</item>
         <item name="colorOnSecondary">@color/blanco</item>
