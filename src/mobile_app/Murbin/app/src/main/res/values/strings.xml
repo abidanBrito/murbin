@@ -22,13 +22,15 @@
     <string name="CustomLoginActivity_dialogue_message_one">Procesando petición</string>
     <!-- layout | login_with_email_activity -->
     <string name="login_with_email_activity_iv_go_back">Regresar</string>
-    <string name="login_with_email_activity_tv_title">Acceso</string>
+    <string name="login_with_email_activity_tv_title">Iniciar sesión</string>
     <string name="login_with_email_activity_tv_remember_password">¿No recuerdas la contraseña?</string>
-    <string name="login_with_email_activity_btn_login_with_email">Acceder</string>
+    <string name="login_with_email_activity_tv_register">¿No tienes cuenta? Regístrate</string>
+    <string name="login_with_email_activity_btn_login_with_email">Entrar</string>
+    <string name="login_with_email_activity_btn_login_with_google">Entrar con Google</string>
     <string name="login_with_email_activity_et_email">Email</string>
     <string name="login_with_email_activity_et_email_hint">Introduce el email</string>
     <string name="login_with_email_activity_et_password">Contraseña</string>
-    <string name="login_with_email_activity_et_password_hint">Introduce la contraaseña</string>
+    <string name="login_with_email_activity_et_password_hint">Introduce la contraseña</string>
     <!-- layout | login_with_email_activity | ERROR MESSAGES -->
     <string name="login_with_email_activity_error_1">Los datos acceso no son correctos.</string>
 

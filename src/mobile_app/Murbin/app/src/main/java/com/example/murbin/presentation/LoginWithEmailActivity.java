@@ -35,7 +35,7 @@ public class LoginWithEmailActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_with_email_activity);
+        setContentView(R.layout.login_activity);
 
         mToolbar = findViewById(R.id.login_with_email_activity_toolbar);
         setSupportActionBar(mToolbar);
