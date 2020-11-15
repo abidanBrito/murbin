@@ -1,3 +1,9 @@
+/*
+ * Created by Francisco Javier Paños Madrona on 6/11/20 18:00
+ * Copyright (c) 2020 . All rights reserved.
+ * Last modified 14/11/20 14:45
+ */
+
 package com.example.murbin.model;
 
 import android.net.Uri;
@@ -9,44 +15,59 @@ public class UserModel {
      */
     private static final String TAG = UserModel.class.getSimpleName();
 
-    private Uri picture;
+    private String rol;
+    private String uid;
     private String name;
+    private String surname;
     private String email;
     private String phone;
     private String provider;
-    private String uid;
+    private Uri picture;
 
+    /**
+     * Constructor Empty
+     */
     public UserModel() {
-        //
+        // Empty
     }
 
-    public UserModel(Uri picture, String name, String email, String phone, String provider, String uid) {
-        this.picture = picture;
+    /**
+     * Constructor
+     *
+     * @param rol
+     * @param uid
+     * @param name
+     * @param surname
+     * @param email
+     * @param phone
+     * @param provider
+     * @param picture
+     */
+    public UserModel(String rol, String uid, String name, String surname, String email, String phone, String provider, Uri picture) {
+        this.rol = rol;
+        this.uid = uid;
         this.name = name;
+        this.surname = surname;
         this.email = email;
         this.phone = phone;
         this.provider = provider;
-        this.uid = uid;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "picture='" + picture + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone=" + phone +
-                ", provider='" + provider + '\'' +
-                ", uid='" + uid + '\'' +
-                '}';
-    }
-
-    public Uri getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Uri picture) {
         this.picture = picture;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getName() {
@@ -55,6 +76,14 @@ public class UserModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -81,11 +110,25 @@ public class UserModel {
         this.provider = provider;
     }
 
-    public String getUid() {
-        return uid;
+    public Uri getPicture() {
+        return picture;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setPicture(Uri picture) {
+        this.picture = picture;
+    }
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "rol='" + rol + '\'' +
+                ", uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", provider='" + provider + '\'' +
+                ", picture=" + picture +
+                '}';
     }
 }
