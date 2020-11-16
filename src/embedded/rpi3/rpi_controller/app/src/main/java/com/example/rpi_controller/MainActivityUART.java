@@ -6,6 +6,11 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivityUART extends Activity
 {
 
@@ -18,6 +23,15 @@ public class MainActivityUART extends Activity
         Log.i(TAG, "Lista de UART disponibles: " + ArduinoUart.disponibles());
         uart = new ArduinoUart("UART0", 115200);
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        run(db);
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    void run(FirebaseFirestore db) {
         while (true) {
             try {
                 Thread.sleep(2000);
@@ -27,11 +41,12 @@ public class MainActivityUART extends Activity
 
             String s = uart.leer();
             Log.d(TAG, s);
+
+            Map<String, Object> datos = new HashMap<>();
+            datos.put("value", s);
+            db.collection("streetlights").document("1")
+                    .collection("sensors").document("brightness")
+                    .set(datos);
         }
     }
-
-    @Override protected void onDestroy() {
-        super.onDestroy();
-    }
-
 }
