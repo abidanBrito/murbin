@@ -4,7 +4,7 @@
  * Last modified 14/11/20 14:45
  */
 
-package com.example.murbin.presentation.zone.administrator.fragments;
+package com.example.murbin.presentation.zone.user.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,19 +13,18 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.murbin.App;
 import com.example.murbin.R;
 
-public class MediumFrameFragment extends Fragment {
+public class UserHomeFragment extends Fragment {
 
     /**
      * Constant for ease of use in debugging the class code
      */
-    private static final String TAG = MediumFrameFragment.class.getSimpleName();
+    private static final String TAG = UserHomeFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflador, ViewGroup contenedor, Bundle savedInstanceState) {
-        View view = inflador.inflate(R.layout.administrator_fragment_medium_frame, contenedor, false);
+        View view = inflador.inflate(R.layout.user_home_fragment, contenedor, false);
 
         return view;
     }

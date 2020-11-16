@@ -8,7 +8,6 @@ package com.example.murbin.presentation.auth;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NavUtils;
 
 import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
@@ -39,15 +37,14 @@ public class AuthEmailActivity extends BaseActivity implements View.OnClickListe
     private Toolbar toolbar;
     private EditText et_email, et_password;
     private TextView tv_remember_password;
-    private Button btn_auth_with_email, btn_auth_with_google;
+    private Button btn_auth_with_email;
 
     @Override
     protected void onStart() {
         super.onStart();
         if (mAuth.isLogged()) {
-
+            // logic - Redirect based on user role
         }
-
     }
 
     @Override
@@ -76,12 +73,10 @@ public class AuthEmailActivity extends BaseActivity implements View.OnClickListe
         et_password = findViewById(R.id.auth_email_activity_et_password);
         tv_remember_password = findViewById(R.id.auth_email_activity_tv_remember_password);
         btn_auth_with_email = findViewById(R.id.auth_email_activity_btn_auth_with_email);
-        btn_auth_with_google = findViewById(R.id.auth_email_activity_btn_auth_with_google);
 
         // setOnClickListener
         tv_remember_password.setOnClickListener(this);
         btn_auth_with_email.setOnClickListener(this);
-        btn_auth_with_google.setOnClickListener(this);
     }
 
     /**
@@ -116,24 +111,10 @@ public class AuthEmailActivity extends BaseActivity implements View.OnClickListe
 
     @SuppressLint("NonConstantResourceId")
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.auth_email_activity_tv_remember_password:
+            case R.id.auth_email_activity_tv_remember_password: {
                 email = et_email.getText().toString();
                 if (email.isEmpty()) {
                     // Show error on screen below form field
@@ -141,21 +122,20 @@ public class AuthEmailActivity extends BaseActivity implements View.OnClickListe
                 } else {
                     mAuth.sendPasswordResetEmail(email);
                 }
-                break;
 
-            case R.id.auth_email_activity_btn_auth_with_email:
+                break;
+            }
+
+            case R.id.auth_email_activity_btn_auth_with_email: {
                 if (checkFormLogin()) {
                     mAuth.signInWithEmailAndPassword(email, password);
                 } else {
                     // Show error
                     App.getInstance().snackMessage(container, R.color.principal, " Debes indicar email y password", AuthEmailActivity.this);
                 }
-                break;
 
-            case R.id.auth_email_activity_btn_auth_with_google:
-                // Call action Google
-                App.getInstance().snackMessage(container, R.color.principal, " Login con Google pulsado", AuthEmailActivity.this);
                 break;
+            }
         }
     }
 

@@ -83,22 +83,8 @@
         android:fontFamily="@font/montserratmedium"
         android:text="@string/auth_email_activity_tv_remember_password"
         android:textColor="@color/negro"
-        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_et_password" />
-
-    <TextView
-        android:id="@+id/auth_email_activity_tv_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/montserratmedium"
-        android:text="@string/auth_email_activity_tv_register"
-        android:textColor="@color/negro"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_tv_remember_password" />
 
     <Button
         android:id="@+id/auth_email_activity_btn_auth_with_email"
@@ -117,28 +103,6 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_et_password" />
-
-    <Button
-        android:id="@+id/auth_email_activity_btn_auth_with_google"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/accent_button"
-        android:fontFamily="@font/montserratmedium"
-        android:shadowColor="@null"
-        android:shadowRadius="0"
-        android:text="@string/auth_email_activity_btn_auth_with_google"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_btn_auth_with_email"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_tv_remember_password" />
     
 </androidx.constraintlayout.widget.ConstraintLayout>
