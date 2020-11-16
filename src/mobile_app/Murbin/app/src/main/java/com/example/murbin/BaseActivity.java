@@ -6,21 +6,21 @@
 
 package com.example.murbin;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.murbin.uses_cases.UsesCasesAuth;
+import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
+import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
+import com.example.murbin.presentation.zone.technical.TechnicalMainActivity;
+import com.example.murbin.presentation.zone.user.UserMainActivity;
 
 /**
  * The activity from which all the activities we create extend,
@@ -32,7 +32,6 @@ public class BaseActivity extends AppCompatActivity {
      * Constant for ease of use in debugging the class code
      */
     private static final String TAG = BaseActivity.class.getSimpleName();
-    private UsesCasesAuth usesCasesAuth;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
@@ -60,39 +59,11 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_main_menu, menu);
-
-        return true;
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.user_main_menu_account:
-                Toast.makeText(this, "Menú perfil pulsado", Toast.LENGTH_SHORT).show();
-
-                return true;
-            case R.id.user_main_menu_logout:
-                usesCasesAuth.signOut();
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    protected final App getApp() {
-        return (App) getApplication();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        usesCasesAuth = new UsesCasesAuth();
-        Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show();
+//    }
 
 //    @Override
 //    protected void onResume() {

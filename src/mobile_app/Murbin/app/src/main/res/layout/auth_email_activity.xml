@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/auth_email_password_fragment_container"
+    android:id="@+id/auth_email_activity_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/auth_email_password_fragment_toolbar"
+        android:id="@+id/auth_email_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -14,32 +14,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/auth_email_password_fragment_tv_title"
+        android:id="@+id/auth_email_activity_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/montserratmedium"
-        android:text="@string/auth_email_password_fragment_tv_title"
+        android:text="@string/auth_email_activity_tv_title"
         android:textColor="@color/negro"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_password_fragment_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_toolbar" />
 
     <EditText
-        android:id="@+id/auth_email_password_fragment_et_email"
+        android:id="@+id/auth_email_activity_et_email"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="32dp"
-        android:autofillHints="auth_email_password_fragment_et_email_hint"
+        android:autofillHints="auth_email_activity_et_email_hint"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="8dp"
         android:ems="0"
         android:fontFamily="@font/montserratmedium"
-        android:hint="@string/auth_email_password_fragment_et_email_hint"
-        android:inputType="textPassword"
+        android:hint="@string/auth_email_activity_et_email_hint"
+        android:inputType="textEmailAddress"
         android:paddingStart="8dp"
         android:textColor="@color/negro"
         android:textColorHighlight="@color/principal"
@@ -48,21 +48,21 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_password_fragment_tv_title" />
+        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_tv_title" />
 
     <EditText
-        android:id="@+id/auth_email_password_fragment_et_password"
+        android:id="@+id/auth_email_activity_et_password"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:autofillHints="@string/auth_email_password_fragment_et_password_hint"
+        android:autofillHints="@string/auth_email_activity_et_password_hint"
         android:drawableStart="@drawable/ic_locker"
         android:drawablePadding="8dp"
         android:ems="0"
         android:fontFamily="@font/montserratmedium"
-        android:hint="@string/auth_email_password_fragment_et_password_hint"
+        android:hint="@string/auth_email_activity_et_password_hint"
         android:inputType="textPassword"
         android:paddingStart="8dp"
         android:textColor="@color/negro"
@@ -72,36 +72,36 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_password_fragment_et_email" />
+        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_et_email" />
 
     <TextView
-        android:id="@+id/auth_email_password_fragment_tv_remember_password"
+        android:id="@+id/auth_email_activity_tv_remember_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/montserratmedium"
-        android:text="@string/auth_email_password_fragment_tv_remember_password"
+        android:text="@string/auth_email_activity_tv_remember_password"
         android:textColor="@color/negro"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_password_fragment_et_password" />
+        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_et_password" />
 
     <TextView
-        android:id="@+id/auth_email_password_fragment_tv_register"
+        android:id="@+id/auth_email_activity_tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/montserratmedium"
-        android:text="@string/auth_email_password_fragment_tv_register"
+        android:text="@string/auth_email_activity_tv_register"
         android:textColor="@color/negro"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_password_fragment_tv_remember_password" />
+        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_tv_remember_password" />
 
     <Button
-        android:id="@+id/auth_email_password_fragment_btn_auth_with_email"
+        android:id="@+id/auth_email_activity_btn_auth_with_email"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -112,15 +112,15 @@
         android:fontFamily="@font/montserratmedium"
         android:shadowColor="@null"
         android:shadowRadius="0"
-        android:text="@string/auth_email_password_fragment_btn_auth_with_email"
+        android:text="@string/auth_email_activity_btn_auth_with_email"
         android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_password_fragment_et_password" />
+        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_et_password" />
 
     <Button
-        android:id="@+id/auth_email_password_fragment_btn_auth_with_google"
+        android:id="@+id/auth_email_activity_btn_auth_with_google"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -131,13 +131,14 @@
         android:fontFamily="@font/montserratmedium"
         android:shadowColor="@null"
         android:shadowRadius="0"
-        android:text="@string/auth_email_password_fragment_btn_auth_with_google"
+        android:text="@string/auth_email_activity_btn_auth_with_google"
         android:textAllCaps="false"
         android:textSize="18sp"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/auth_email_password_fragment_btn_auth_with_email"
+        app:layout_constraintTop_toBottomOf="@+id/auth_email_activity_btn_auth_with_email"
         app:layout_constraintVertical_bias="0.0" />
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
