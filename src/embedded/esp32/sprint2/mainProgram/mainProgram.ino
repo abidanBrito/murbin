@@ -24,25 +24,7 @@ void setup() {
 void loop() {
    sensor_LUM(sensorLUM, LED_LUM);   
    sensor_CO2(sensorCO2, LED_CO2);
-   delay(1500);
-   
-   if (Serial.available() > 0) {
-      char command = (char) Serial.read();
-      switch (command) {
-         case CO2_SENSOR:
-         {
-            Serial.print("-- CO2 SENSOR --");
-            sensor_CO2(sensorCO2, LED_CO2);
-         }
-         break;
-         
-         case LUM_SENSOR:
-         { 
-            Serial.println("-- LUM SENSOR --");
-            sensor_LUM(sensorLUM, LED_LUM);
-         }
-      }
-   }   
+   delay(1500); 
 }
 
 void sensor_CO2(int pin, int ledPin){
