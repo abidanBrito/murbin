@@ -4,62 +4,73 @@
  * Last modified 14/11/20 14:45
  */
 
-package com.example.murbin.model;
+package com.example.murbin.models;
 
 import android.net.Uri;
 
-public class UserModel {
+public class User {
 
     /*
       Constant for ease of use in debugging the class code
      */
-    private static final String TAG = UserModel.class.getSimpleName();
+    private static final String TAG = User.class.getSimpleName();
 
-    private String rol;
+    private String role;
+    private String idDocument;
     private String uid;
     private String name;
     private String surname;
     private String email;
     private String phone;
-    private String provider;
-    private Uri picture;
+    private String providers;
+    private Uri photo;
 
     /**
-     * Constructor Empty
+     * Constructor Default
      */
-    public UserModel() {
+    public User() {
         // Empty
     }
 
     /**
      * Constructor
      *
-     * @param rol
-     * @param uid
-     * @param name
-     * @param surname
-     * @param email
-     * @param phone
-     * @param provider
-     * @param picture
+     * @param role       User role
+     * @param idDocument idDocument user
+     * @param uid        Unique uid of the user in firebase
+     * @param name       User name
+     * @param surname    User last name
+     * @param email      User email
+     * @param phone      User phone
+     * @param providers  Providers you have logged in with
+     * @param photo      User Photo
      */
-    public UserModel(String rol, String uid, String name, String surname, String email, String phone, String provider, Uri picture) {
-        this.rol = rol;
+    public User(String role, String idDocument, String uid, String name, String surname, String email, String phone, String providers, Uri photo) {
+        this.role = role;
+        this.idDocument = idDocument;
         this.uid = uid;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phone = phone;
-        this.provider = provider;
-        this.picture = picture;
+        this.providers = providers;
+        this.photo = photo;
     }
 
     public String getRol() {
-        return rol;
+        return role;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setRol(String role) {
+        this.role = role;
+    }
+
+    public String getIdDocument() {
+        return idDocument;
+    }
+
+    public void setIdDocument(String idDocument) {
+        this.idDocument = idDocument;
     }
 
     public String getUid() {
@@ -103,32 +114,32 @@ public class UserModel {
     }
 
     public String getProvider() {
-        return provider;
+        return providers;
     }
 
-    public void setProvider(String provider) {
-        this.provider = provider;
+    public void setProvider(String providers) {
+        this.providers = providers;
     }
 
     public Uri getPicture() {
-        return picture;
+        return photo;
     }
 
-    public void setPicture(Uri picture) {
-        this.picture = picture;
+    public void setPicture(Uri photo) {
+        this.photo = photo;
     }
 
     @Override
     public String toString() {
-        return "UserModel{" +
-                "rol='" + rol + '\'' +
+        return "User{" +
+                "role='" + role + '\'' +
                 ", uid='" + uid + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", provider='" + provider + '\'' +
-                ", picture=" + picture +
+                ", providers='" + providers + '\'' +
+                ", photo=" + photo +
                 '}';
     }
 }

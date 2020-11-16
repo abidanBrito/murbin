@@ -8,6 +8,7 @@ package com.example.murbin;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.view.ViewGroup;
 
 import androidx.core.content.ContextCompat;
@@ -26,6 +27,20 @@ public class App extends Application {
      */
     private static final String TAG = App.class.getSimpleName();
 
+    private static App instance;
+
+    public App() {
+        instance = this;
+    }
+
+    public static App getInstance() {
+        return instance;
+    }
+
+    public static Context getContext() {
+        return instance.getApplicationContext();
+    }
+
     /**
      * Method to display a message with snack bar
      * More info: https://material.io/components/snackbars
@@ -41,4 +56,18 @@ public class App extends Application {
         sb.show();
     }
 
+    /**
+     * Redirect to corresponding activity
+     *
+     * @param activity Activity where it will be redirected
+     */
+    public void redirectActivity(Class activity) {
+        Intent i;
+        i = new Intent(getInstance().getBaseContext(), activity);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
+        getInstance().getBaseContext().startActivity(i);
+    }
 }

@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.murbin">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -13,15 +11,7 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Murbin">
 
-        <activity
-            android:name=".presentation.auth.AuthActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".presentation.profiles.ProfileActivity"
-            android:screenOrientation="portrait" />
-
-        <!-- Zone User -->
+        <!-- Zone User (No need user identification) -->
         <activity
             android:name=".presentation.zone.user.UserMainActivity"
             android:screenOrientation="portrait">
@@ -31,17 +21,26 @@
             </intent-filter>
         </activity>
 
-        <!-- Zone Scientific -->
+        <activity
+            android:name=".presentation.auth.AuthEmailActivity"
+            android:parentActivityName=".presentation.zone.user.UserMainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.profiles.ProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Zone Scientific (Needs identity and role verification of the user) -->
         <activity
             android:name=".presentation.zone.scientific.ScientificMainActivity"
             android:screenOrientation="portrait" />
 
-        <!-- Zone Technical -->
+        <!-- Zone Technical (Needs identity and role verification of the user) -->
         <activity
             android:name=".presentation.zone.technical.TechnicalMainActivity"
             android:screenOrientation="portrait" />
 
-        <!-- Zone Administrator -->
+        <!-- Zone Administrator (Needs identity and role verification of the user) -->
         <activity
             android:name=".presentation.zone.administrator.AdministratorMainActivity"
             android:screenOrientation="portrait" />

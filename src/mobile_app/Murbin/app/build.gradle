@@ -2,8 +2,6 @@ plugins {
     id 'com.android.application'
 }
 
-apply plugin: 'com.google.gms.google-services'
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -51,3 +49,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:7.0.0'
     implementation 'com.firebaseui:firebase-ui-firestore:7.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
