@@ -17,31 +17,18 @@ public class MainActivityUART extends Activity
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Lista de UART disponibles: " + ArduinoUart.disponibles());
         uart = new ArduinoUart("UART0", 115200);
-        Log.d(TAG, "Mandado a Arduino: C");
-        uart.escribir("C");
 
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            Log.w(TAG, "Error en sleep()", e);
+        while (true) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                Log.w(TAG, "Error en sleep()", e);
+            }
+
+            String s = uart.leer();
+            Log.d(TAG, s);
         }
-
-        String s = uart.leer();
-        Log.d(TAG, "Recibido de Arduino: " + s);
-
-        Log.d(TAG, "Mandado a Arduino: L");
-        uart.escribir("L");
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            Log.w(TAG, "Error en sleep()", e);
-        }
-
-        s = uart.leer();
-        Log.d(TAG, "Recibido de Arduino: " + s);
     }
-
 
     @Override protected void onDestroy() {
         super.onDestroy();
