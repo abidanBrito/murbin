@@ -40,6 +40,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     // Volley library HTTP
     implementation 'com.android.volley:volley:1.1.0'
+    // Google Maps Api
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     implementation 'com.google.firebase:firebase-core'

@@ -63,8 +63,8 @@
     <!-- zone / user -->
 
     <!-- UserMainActivity -->
-    <!-- layout | user_main_activity -->
-    <string name="user_main_activity_tv_welcome">Bienvenido/a [Zona User]</string>
+    <!-- layout | user_home_fragment -->
+    <string name="user_home_fragment_tv_welcome">Bienvenido/a [Zona User]</string>
 
     <!-- zone / technical -->
 

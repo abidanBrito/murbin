@@ -23,8 +23,6 @@ public class LargeFrameFragment extends Fragment {
      */
     private static final String TAG = LargeFrameFragment.class.getSimpleName();
 
-    App aplicacion = (App) getContext();
-
     @Override
     public View onCreateView(LayoutInflater inflador, ViewGroup contenedor, Bundle savedInstanceState) {
         View view = inflador.inflate(R.layout.administrator_fragment_large_frame, contenedor, false);
