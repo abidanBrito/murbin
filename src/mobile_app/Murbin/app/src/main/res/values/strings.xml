@@ -1,55 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Francisco Javier Paños Madrona on 6/11/20 16:37
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 14/11/20 16:37
+  -->
 <resources>
 
+    <!-- Global -->
     <string name="app_name" translatable="false">Murbin</string>
 
-    <!-- MainActivity -->
-    <!-- layout | main_activity -->
-    <string name="main_activity_welcome">Bienvenido/a la aplicación de Murbin</string>
+    <!-- PREFERENCES -->
 
-    <!-- LoginMenuActivity -->
-    <!-- layout | login_menu_activity -->
-    <string name="login_menu_activity_iv_logo_description">Logo Murbin</string>
-    <string name="login_menu_activity_btn_provider_email">Email</string>
-    <string name="login_menu_activity_tv_remember_password">¿No tienes cuenta?</string>
-    <string name="login_menu_activity_tv_register">Registrate</string>
-    <string name="login_menu_activity_tv_info_container">Al continuar, aceptas nuestros</string>
-    <string name="login_menu_activity_tv_terms_and_conditions">Términos y condiciones</string>
-    <string name="login_menu_activity_tv_info">y</string>
-    <string name="login_menu_activity_tv_privacy">Política de privacidad</string>
+    <!-- PreferencesActivity -->
+    <string name="preferences_activity_title">Preferencias</string>
+    <!-- global_prefrerences -->
+    <string name="global_preferences_category_general">General</string>
+    <string name="global_preferences_key_background_music_title">Música de fondo</string>
+    <string name="global_preferences_key_background_music_summary">Reproducirá música de fondo durante el uso de la aplicación.</string>
 
-    <!-- LoginWithEmailActivity -->
-    <string name="CustomLoginActivity_dialogue_title_one">Verificando usuario</string>
-    <string name="CustomLoginActivity_dialogue_message_one">Procesando petición</string>
-    <!-- layout | login_with_email_activity -->
-    <string name="login_with_email_activity_iv_go_back">Regresar</string>
-    <string name="login_with_email_activity_tv_title">Iniciar sesión</string>
-    <string name="login_with_email_activity_tv_remember_password">¿No recuerdas la contraseña?</string>
-    <string name="login_with_email_activity_tv_register">¿No tienes cuenta? Regístrate</string>
-    <string name="login_with_email_activity_btn_login_with_email">Entrar</string>
-    <string name="login_with_email_activity_btn_login_with_google">Entrar con Google</string>
-    <string name="login_with_email_activity_et_email">Email</string>
-    <string name="login_with_email_activity_et_email_hint">Introduce el email</string>
-    <string name="login_with_email_activity_et_password">Contraseña</string>
-    <string name="login_with_email_activity_et_password_hint">Introduce la contraseña</string>
-    <!-- layout | login_with_email_activity | ERROR MESSAGES -->
-    <string name="login_with_email_activity_error_1">Los datos acceso no son correctos.</string>
-
-    <!-- UserFragment -->
-    <!-- layout | user_fragment -->
-    <string name="user_fragment_tv_email_verification">No podrás usar la aplicación hasta que valides tu correo electrónico. Pulsa el siguiente botón para recibir el mensaje de confirmación. Gracias.</string>
-    <string name="user_fragment_btn_email_verification">Enviar mensaje de confirmación</string>
-    <string name="user_fragment_btn_email_verification_sended">Mensaje enviado</string>
-    <string name="user_fragment_tv_username">Nombre de usuario: </string>
-    <string name="user_fragment_tv_email">Email: </string>
-    <string name="user_fragment_tv_prividers">Proveedores: </string>
-    <string name="user_fragment_tv_phone">Teléfono: </string>
-    <string name="user_fragment_tv_uid">UID: </string>
-    <!-- layout | user_fragment | ERROR MESSAGES -->
-    <string name="user_fragment_error_1">Datos del usuario no recibidos.</string>
+    <!-- Permissions Message -->
+    <string name="permissions_message_title">Solicitud de permiso</string>
+    <string name="permissions_message_action">OK</string>
+    <string name="permissions_message_denied">Si no concedes el permiso, no se puede realizar la acción solicitada.</string>
 
     <!-- MENUS -->
-    <!-- main_menu -->
-    <string name="main_menu_account">Mi Cuenta</string>
-    <string name="main_menu_logout">Cerrar sesión</string>
+
+    <!-- user_main_menu -->
+    <string name="user_main_menu_login">Login</string>
+    <string name="user_main_menu_settings">Ajustes</string>
+    <string name="user_main_menu_about_murbin">Sobre Murbin</string>
+
+    <!-- user_main_bottom_navigation -->
+    <string name="user_main_bottom_navigation_home">Home</string>
+    <string name="user_main_bottom_navigation_map">Mapa</string>
+    <string name="user_main_bottom_navigation_data">Histórico</string>
+
+    <!-- administrator_main_menu -->
+    <string name="administrator_main_menu_settings">Ajustes</string>
+    <string name="administrator_main_menu_logout">Desconectarse</string>
+
+    <!-- administrator_main_bottom_navigation -->
+    <string name="administrator_main_bottom_navigation_dashboard">Home</string>
+    <string name="administrator_main_bottom_navigation_subzones">Subzonas</string>
+    <string name="administrator_main_bottom_navigation_technician">Técnicos</string>
+    <string name="administrator_main_bottom_navigation_config">Config</string>
+
+    <!-- GENERALS -->
+
+    <!-- DialogFragment -->
+    <!-- about_dialog_fragment -->
+    <string name="about_dialog_fragment_tv_title_default">Sobre Murbin</string>
+    <string name="about_dialog_fragment_tv_message_default">Esta aplicación ha sido creada por el gran equipo de Murbin, para el Proyecto Internet of Things del Grado de Tecnologías Interectivas.</string>
+    <string name="about_dialog_fragment_dismiss_message">Ok</string>
+
+    <!-- AuthActivity -->
+    <string name="AuthActivity_dialogue_title_one">Verificando usuario</string>
+    <string name="AuthActivity_dialogue_message_one">Procesando petición</string>
+    <string name="AuthActivity_error_1">Los datos acceso no son correctos.</string>
+    <!-- layout | auth_email_activity -->
+    <string name="auth_email_activity_iv_go_back">Regresar</string>
+    <string name="auth_email_activity_tv_title">Iniciar sesión</string>
+    <string name="auth_email_activity_tv_remember_password">¿No recuerdas la contraseña?</string>
+    <string name="auth_email_activity_tv_register">¿No tienes cuenta? Regístrate</string>
+    <string name="auth_email_activity_btn_enter">Entrar</string>
+    <string name="auth_email_activity_btn_auth_with_google">Entrar con Google</string>
+    <string name="auth_email_activity_et_email">Email</string>
+    <string name="auth_email_activity_et_email_hint">Introduce el email</string>
+    <string name="auth_email_activity_et_password">Contraseña</string>
+    <string name="auth_email_activity_et_password_hint">Introduce la contraseña</string>
+    <!-- layout | auth_email_recovery_password_fragment -->
+    <string name="auth_email_recovery_password_fragment_tv_title">Recuperación contraseña</string>
+    <string name="auth_email_recovery_password_fragment_et_email_hint">Email</string>
+    <string name="auth_email_recovery_password_fragment_btn_enter">Enviar</string>
+
+    <!-- ProfileFragment -->
+    <!-- layout | profile_fragment -->
+    <string name="profile_fragment_tv_email_verification">No podrás usar la aplicación hasta que valides tu correo electrónico. Pulsa el siguiente botón para recibir el mensaje de confirmación. Gracias.</string>
+    <string name="profile_fragment_btn_email_verification">Enviar mensaje de confirmación</string>
+    <string name="profile_fragment_btn_email_verification_sended">Mensaje enviado</string>
+    <string name="profile_fragment_tv_username">Nombre de usuario: </string>
+    <string name="profile_fragment_tv_email">Email: </string>
+    <string name="profile_fragment_tv_prividers">Proveedores: </string>
+    <string name="profile_fragment_tv_phone">Teléfono: </string>
+    <string name="profile_fragment_tv_uid">UID: </string>
+    <!-- layout | profile_fragment | ERROR MESSAGES -->
+    <string name="profile_fragment_error_1">Datos del usuario no recibidos.</string>
+
+    <!-- ZONES -->
+
+    <!-- zone / user -->
+
+    <!-- UserMainActivity -->
+    <!-- layout | user_home_fragment -->
+    <string name="user_home_fragment_tv_welcome">Bienvenido/a [Zona User]</string>
+
+    <!-- zone / technical -->
+
+    <!-- TechnicianMainActivity -->
+    <!-- layout | technical_main_activity -->
+    <string name="technical_main_activity_tv_welcome">Bienvenido/a [Zona Technical]</string>
+
+    <!-- zone / scientific -->
+
+    <!-- ScientificMainActivity -->
+    <!-- layout | scientific_main_activity -->
+    <string name="scientific_main_activity_tv_welcome">Bienvenido/a [Zona Scientific]</string>
+
+    <!-- zone / administrator -->
+
+    <!-- AdministratorMainActivity -->
+    <!-- layout | administrator_main_activity -->
+    <string name="administrator_main_activity_tv_title">Hola</string>
+    <!-- layout | administrator_fragment_large_frame -->
+    <string name="administrator_fragment_large_frame_tv_title">Hola</string>
+    <string name="administrator_fragment_large_frame_tv_subtitle">Zona: Gandía</string>
+    <string name="administrator_fragment_large_frame_tv_type">Estado</string>
+    <string name="administrator_fragment_large_frame_tv_status">On</string>
+    <string name="administrator_fragment_large_frame_tv_number">0</string>
+    <string name="administrator_fragment_large_frame_fragment_iv_type">Image</string>
+    <string name="administrator_fragment_large_frame_btn_go">Ir</string>
+    <!-- layout | administrator_fragment_medium_frame -->
+    <string name="administrator_fragment_medium_frame_tv_salutation">Hello blank fragment</string>
+    <string name="administrator_fragment_medium_frame_tv_type">Subzonas</string>
+    <string name="administrator_fragment_medium_frame_tv_type2">Técnicos</string>
+    <!-- layout | administrator_fragment_small_frame -->
+    <string name="administrator_fragment_small_frame_tv_noise">Ruido(dB)</string>
+    <string name="administrator_fragment_small_frame_tv_temperature">Temp(Cº)</string>
+    <string name="administrator_fragment_small_frame_tv_co2">CO2(ppm)</string>
 
 </resources>

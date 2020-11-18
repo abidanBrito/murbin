@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/profile_activity_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/profile_activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/profile_activity_profile_fragment"
+        android:name="com.example.murbin.presentation.profiles.fragments.ProfileFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true" />
+
+</LinearLayout>

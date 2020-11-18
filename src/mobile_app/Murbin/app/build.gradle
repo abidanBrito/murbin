@@ -2,8 +2,6 @@ plugins {
     id 'com.android.application'
 }
 
-apply plugin: 'com.google.gms.google-services'
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -15,9 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -39,17 +35,24 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    // Constraint
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    // Material Design
+    // Added manually
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.material:material:1.2.1'
+    implementation "androidx.fragment:fragment:1.2.5"
+    // Preferences
+    implementation "androidx.preference:preference:1.1.1"
+    // Volley library HTTP
+    implementation 'com.android.volley:volley:1.1.0'
+    // Google Maps Api
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     // Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation platform('com.google.firebase:firebase-bom:26.1.0')
     implementation 'com.google.firebase:firebase-core'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
     // FirebaseUi
-    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
-    // Volley para la imagen
-    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.firebaseui:firebase-ui-auth:7.0.0'
+    implementation 'com.firebaseui:firebase-ui-firestore:7.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
