@@ -6,22 +6,21 @@
 
 package com.example.murbin.presentation.auth;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 
-public class AuthEmailActivity extends BaseActivity implements View.OnClickListener {
+public class AuthEmailActivity extends BaseActivity {
 
     /**
      * Constant for ease of use in debugging the class code
@@ -30,14 +29,14 @@ public class AuthEmailActivity extends BaseActivity implements View.OnClickListe
 
     private final Auth mAuth = new Auth(this);
 
-    private String email = "";
-    private String password = "";
+    private final String email = "";
+    private final String password = "";
 
     private ViewGroup container;
     private Toolbar toolbar;
     private EditText et_email, et_password;
     private TextView tv_remember_password;
-    private Button btn_auth_with_email;
+    private Button btn_enter;
 
     @Override
     protected void onStart() {
@@ -67,75 +66,24 @@ public class AuthEmailActivity extends BaseActivity implements View.OnClickListe
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
             getSupportActionBar().setTitle("");
         }
-
-        container = findViewById(R.id.auth_email_activity_container);
-        et_email = findViewById(R.id.auth_email_activity_et_email);
-        et_password = findViewById(R.id.auth_email_activity_et_password);
-        tv_remember_password = findViewById(R.id.auth_email_activity_tv_remember_password);
-        btn_auth_with_email = findViewById(R.id.auth_email_activity_btn_auth_with_email);
-
-        // setOnClickListener
-        tv_remember_password.setOnClickListener(this);
-        btn_auth_with_email.setOnClickListener(this);
     }
 
     /**
-     * Check if the data in the login form is correct
+     * It receives the identifier of the resource of the containing fragment and
+     * the class of fragment to which it wants to change.
      *
-     * @return boolean
+     * @param fragmentContainerId Identifier of the resource of the containing fragment
+     * @param fragmentClass       Class of fragment
      */
-    private boolean checkFormLogin() {
-        email = et_email.getText().toString();
-        password = et_password.getText().toString();
-
-        if (email.isEmpty()) {
-            // Show error on screen below form field
-            App.getInstance().snackMessage(container, R.color.principal, "Introduce un correo", AuthEmailActivity.this);
-        } else if (password.isEmpty()) {
-            // Show error on screen below form field
-            App.getInstance().snackMessage(container, R.color.principal, " Introduce una contraseña", AuthEmailActivity.this);
-        } else {
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Disconnect the user
-     */
-    protected void signOut() {
-        mAuth.signOut();
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.auth_email_activity_tv_remember_password: {
-                email = et_email.getText().toString();
-                if (email.isEmpty()) {
-                    // Show error on screen below form field
-                    App.getInstance().snackMessage(container, R.color.principal, "Introduce un correo", AuthEmailActivity.this);
-                } else {
-                    mAuth.sendPasswordResetEmail(email);
-                }
-
-                break;
-            }
-
-            case R.id.auth_email_activity_btn_auth_with_email: {
-                if (checkFormLogin()) {
-                    mAuth.signInWithEmailAndPassword(email, password);
-                } else {
-                    // Show error
-                    App.getInstance().snackMessage(container, R.color.principal, " Debes indicar email y password", AuthEmailActivity.this);
-                }
-
-                break;
-            }
+    public void replaceFragments(int fragmentContainerId, Class<?> fragmentClass) {
+        try {
+            Fragment fragment = (Fragment) fragmentClass.newInstance();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(fragmentContainerId, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -13,6 +13,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Murbin">
 
+        <!-- Services -->
+        <service android:name=".services.BackgroundMusic" />
+
         <!-- Zone User (No need user identification) -->
         <activity
             android:name=".presentation.zone.user.UserMainActivity"
@@ -29,6 +32,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".presentation.global.PreferencesActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".presentation.profiles.ProfileActivity"
             android:screenOrientation="portrait" />
 
@@ -39,7 +46,7 @@
 
         <!-- Zone Technical (Needs identity and role verification of the user) -->
         <activity
-            android:name=".presentation.zone.technical.TechnicalMainActivity"
+            android:name=".presentation.zone.technician.TechnicianMainActivity"
             android:screenOrientation="portrait" />
 
         <!-- Zone Administrator (Needs identity and role verification of the user) -->

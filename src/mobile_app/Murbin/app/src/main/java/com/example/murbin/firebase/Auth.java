@@ -7,6 +7,7 @@
 package com.example.murbin.firebase;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import com.example.murbin.R;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
 import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
-import com.example.murbin.presentation.zone.technical.TechnicalMainActivity;
+import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
 import com.example.murbin.presentation.zone.user.UserMainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +25,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Class to manage Firebase Authentication
+ */
 public class Auth {
 
     /**
@@ -41,6 +45,7 @@ public class Auth {
      * Constructor Default
      */
     public Auth() {
+        // Empty
     }
 
     /**
@@ -135,25 +140,40 @@ public class Auth {
      *
      * @param role Role of the logged in user
      */
-    private void checkRole(String role) {
+    public void checkRole(String role) {
         switch (role) {
             case "scientific": {
-                App.getInstance().redirectActivity(ScientificMainActivity.class);
+                redirectActivity(ScientificMainActivity.class);
                 break;
             }
-            case "technical": {
-                App.getInstance().redirectActivity(TechnicalMainActivity.class);
+            case "technician": {
+                redirectActivity(TechnicianMainActivity.class);
                 break;
             }
             case "administrator": {
-                App.getInstance().redirectActivity(AdministratorMainActivity.class);
+                redirectActivity(AdministratorMainActivity.class);
                 break;
             }
             default: {
-                App.getInstance().redirectActivity(UserMainActivity.class);
+                redirectActivity(UserMainActivity.class);
                 break;
             }
         }
+    }
+
+    /**
+     * Redirect to corresponding activity
+     *
+     * @param activity Activity where it will be redirected
+     */
+    public void redirectActivity(Class<?> activity) {
+        Intent i;
+        i = new Intent(App.getInstance().getBaseContext(), activity);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
+        App.getInstance().getBaseContext().startActivity(i);
     }
 
 }

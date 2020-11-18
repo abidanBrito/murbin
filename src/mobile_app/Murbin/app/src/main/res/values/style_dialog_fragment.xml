@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Francisco Javier Paños Madrona on 17/11/20 11:55
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 17/11/20 11:55
+  -->
+<resources>
+    <style name="StyleDialogFragment" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>
+    </style>
+</resources>

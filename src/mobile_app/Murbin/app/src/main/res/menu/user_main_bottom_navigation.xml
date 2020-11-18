@@ -7,13 +7,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bottom_main_menu_home"
+        android:id="@+id/user_main_bottom_navigation_home"
         android:icon="@drawable/ic_dashboard"
-        android:title="@string/bottom_main_menu_home" />
+        android:orderInCategory="100"
+        android:title="@string/user_main_bottom_navigation_home" />
 
     <item
-        android:id="@+id/bottom_main_menu_map"
+        android:id="@+id/user_main_bottom_navigation_map"
         android:icon="@drawable/ic_map"
-        android:title="@string/bottom_main_menu_map" />
+        android:orderInCategory="101"
+        android:title="@string/user_main_bottom_navigation_map" />
+
+    <item
+        android:id="@+id/user_main_bottom_navigation_data"
+        android:icon="@drawable/ic_data"
+        android:orderInCategory="102"
+        android:title="@string/user_main_bottom_navigation_data" />
 
 </menu>

@@ -23,9 +23,7 @@ public class UserHomeFragment extends Fragment {
     private static final String TAG = UserHomeFragment.class.getSimpleName();
 
     @Override
-    public View onCreateView(LayoutInflater inflador, ViewGroup contenedor, Bundle savedInstanceState) {
-        View view = inflador.inflate(R.layout.user_home_fragment, contenedor, false);
-
-        return view;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.user_fragment_home, container, false);
     }
 }

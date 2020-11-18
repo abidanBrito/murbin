@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Francisco Javier Paños Madrona on 17/11/20 12:56
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 17/11/20 12:56
+  -->
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="global_preferences">
+
+    <PreferenceCategory android:title="@string/global_preferences_category_general">
+
+        <SwitchPreferenceCompat
+            android:key="global_preferences_key_background_music"
+            android:summary="@string/global_preferences_key_background_music_summary"
+            android:title="@string/global_preferences_key_background_music_title" />
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

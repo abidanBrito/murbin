@@ -6,5 +6,8 @@
 
 package com.example.murbin.firebase;
 
+/**
+ * Class to manage the Firestore database in Firebase
+ */
 public class FIrestore {
 }
