@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.murbin.App;
 import com.example.murbin.R;
 
 public class MediumFrameFragment extends Fragment {
@@ -24,9 +23,7 @@ public class MediumFrameFragment extends Fragment {
     private static final String TAG = MediumFrameFragment.class.getSimpleName();
 
     @Override
-    public View onCreateView(LayoutInflater inflador, ViewGroup contenedor, Bundle savedInstanceState) {
-        View view = inflador.inflate(R.layout.administrator_fragment_medium_frame, contenedor, false);
-
-        return view;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.administrator_fragment_medium_frame, container, false);
     }
 }
