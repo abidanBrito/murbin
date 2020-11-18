@@ -1,4 +1,4 @@
-package com.example.uart_demo;
+package com.example.rpi_controller;
 
 import org.junit.Test;
 
