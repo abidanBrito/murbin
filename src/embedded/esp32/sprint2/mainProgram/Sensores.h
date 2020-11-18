@@ -19,7 +19,7 @@
     
     
     //variables interrupciones
-    static volatile uint8_t movimiento=0;
+    static volatile bool movimiento=0;
     const int LED_PIR = 12;
 
     //SENSORES SIN WIFI//

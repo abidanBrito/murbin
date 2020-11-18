@@ -43,14 +43,10 @@ void setup() {
 void loop() {
    
    //variable que detecta si la interrupcion ha sido producida
-   if(movimiento){
-    Serial.println("\n ********************");
-    Serial.println("Movimiento detectado");
-    Serial.println("********************");
-    digitalWrite(LED_PIR,HIGH);
-    
+   if(movimiento){   
+    movimiento=0;
+   }else{
     digitalWrite(LED_PIR,LOW);
-    movimiento--;
    }
    
    sensor_LUM(sensorLUM, LED_LUM);   
@@ -70,7 +66,12 @@ void loop() {
 
 //interrupcion para movimiento
 void  IRAM_ATTR detectarMovimiento(void* arg){
-        movimiento=2;
+        movimiento=1;
+    digitalWrite(LED_PIR,HIGH);
+    Serial.println("\n ********************");
+    Serial.println("Movimiento detectado");
+    Serial.println("********************");
+    
 }
 void detectar_movimiento()
 {

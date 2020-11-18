@@ -6,5 +6,12 @@
 
 void sensor_ruido(int pin, int ledPin)
 {
-  Serial.println(analogRead(pin));
+  int valor = analogRead(pin);
+
+  if(valor > 3000){
+    Serial.println(" se ha superado el humbral de ruido");
+    digitalWrite(ledPin, HIGH);
+    delay(2000);
+  }
+  
 }
