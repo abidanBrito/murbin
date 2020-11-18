@@ -1,118 +1,87 @@
+#include "Sensores.h"
+#include "DHT.h" //para sensor DHT
+
+//definiendo pines
 const int sensorCO2 = 34;    
 const int sensorLUM = 35;
-// const int sensorPIR = 33; // pin de entrada (para el sensor PIR)
-int pirState = LOW;           // de inicio no hay movimiento
-int val = 0;                  // estado del pin
- 
+const int sensorRUIDO = 14;
+
+//para sensor temperatura
+#define DHTTYPE DHT11   // DHT 11
+const int DHTPin = 26;
+DHT dht(DHTPin, DHTTYPE);
+
+
+//definiendo leds
 #define LED_LUM 32
 #define LED_CO2 33
-//#define LED_PIR 26
- 
-#define LUM_SENSOR  'L'       // defino el primer sensor de manera escalable
-#define CO2_SENSOR  'C'       // defino el segundo sensor de manera escalable
-#define PIR_SENSOR  'P'       // defino el tercer sensor de manera escalable
- 
+#define LED_RUIDO 33
+
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  
+  //inicializa el sensor de temperatura.
+  dht.begin();
+   
   //Configurando los pines de entrada y salida
-//  pinMode(sensorPIR, INPUT);  
   pinMode(sensorCO2, INPUT);       // Sensor CO2
   pinMode(sensorLUM, INPUT);       // Sensor LUZ
+  pinMode (sensorRUIDO, INPUT);  // Sensor de Ruido
+  pinMode(DHTPin, INPUT);          // Sensor de Temperatura y Humedad
+  detectar_movimiento();  //llama a la funcion para programar la interrupcion del sensor de movimiento.
+ 
+
+  //configurando Leds
   pinMode(LED_LUM, OUTPUT);
   pinMode(LED_CO2, OUTPUT);
+  pinMode(LED_PIR, OUTPUT);
+  pinMode(LED_RUIDO, OUTPUT);
+ 
 }
  
 void loop() {
+   
+   //variable que detecta si la interrupcion ha sido producida
+   if(movimiento){
+    Serial.println("\n ********************");
+    Serial.println("Movimiento detectado");
+    Serial.println("********************");
+    digitalWrite(LED_PIR,HIGH);
+    
+    digitalWrite(LED_PIR,LOW);
+    movimiento--;
+   }
+   
    sensor_LUM(sensorLUM, LED_LUM);   
    sensor_CO2(sensorCO2, LED_CO2);
-   delay(1500);
+   sensor_ruido(sensorRUIDO, LED_RUIDO);
    
-   if (Serial.available() > 0) {
-      char command = (char) Serial.read();
-      switch (command) {
-         case CO2_SENSOR:
-         {
-            Serial.print("-- CO2 SENSOR --");
-            sensor_CO2(sensorCO2, LED_CO2);
-         }
-         break;
-         
-         case LUM_SENSOR:
-         { 
-            Serial.println("-- LUM SENSOR --");
-            sensor_LUM(sensorLUM, LED_LUM);
-         }
-         break;  
-         case PIR_SENSOR:
-         {  
-            Serial.print("-- PIR SENSOR --");
-            //readPIRSensor(sensorPIR, LED_PIR);
-         } 
-         break;
-      }
-   }   
-}
- 
-void sensor_CO2(int pin, int ledPin){
-  int value = analogRead(pin);
-  if (value < 1780) 
-  {
-    Serial.print("Nivel alto de CO2: ");
-    digitalWrite(ledPin , HIGH);  
-    delay(2500);
-    digitalWrite(ledPin , LOW);
-  }
-  else //si la salida del sensor es 0
-  {
-    Serial.print("Nivel medio de C02: ");
-  }
-  Serial.println(value);
-}
- 
-//programa sensor luz
-void sensor_LUM(int pin, int ledPin){
-  int valor = analogRead(pin);
 
-  if (valor < 3050){
-    Serial.print("Hay luz intensa: ");
-  }
-  else {
-    if (valor > 3050 && valor < 3220){
-      Serial.print("Hay luz ambiental: ");
-    }
-    else {
-      Serial.print("No hay luz: ");
-    }
-    digitalWrite(ledPin, HIGH);
-    delay(2500);
-    digitalWrite(ledPin, LOW);
-  }
-     
-  Serial.println(valor);
+   // Sensor te temperatura Humedad
+   float h = dht.readHumidity();
+   float t = dht.readTemperature();
+   sensor_DHT(h,t);
+   
+   delay(3000);
+   
+   
 }
 
-void readPIRSensor(int inputPin, int ledPin) {
-val = digitalRead(inputPin);
-  if (val == HIGH)   //si está activado
-  { 
-    digitalWrite(ledPin, HIGH);  //LED ON
-    delay(2000); // 
-    digitalWrite(ledPin, LOW);
-    if (pirState == LOW)  //si previamente estaba apagado
-    {
-      Serial.println("Sensor activado");
-      pirState = HIGH;
-    }
-  } 
-  else   //si esta desactivado
-  {
-    digitalWrite(ledPin, LOW); // LED OFF
-    if (pirState == HIGH)  //si previamente estaba encendido
-    {
-      Serial.println("Sensor parado");
-      pirState = LOW;
-    }
-  }
+//interrupcion para movimiento
+void  IRAM_ATTR detectarMovimiento(void* arg){
+        movimiento=2;
+}
+void detectar_movimiento()
+{
+  // Configurar pines
+  gpio_set_direction(sensorPIR, GPIO_MODE_INPUT);
+  // Configurar interrupciones en pines
+  gpio_set_intr_type(sensorPIR, GPIO_INTR_POSEDGE);
+    // Setting pull down mode.
+  gpio_set_pull_mode(sensorPIR, GPIO_PULLDOWN_ONLY);
+  // install ISR service with default configuration
+  gpio_install_isr_service(sensorPIR_FLAG_LEVEL);
+    // attach the interrupt service routine
+  gpio_isr_handler_add(sensorPIR, detectarMovimiento, NULL);
 }
