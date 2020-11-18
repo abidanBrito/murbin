@@ -34,10 +34,12 @@ public class MainActivityUART extends Activity
     void run(FirebaseFirestore db) {
         while (true) {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 Log.w(TAG, "Error en sleep()", e);
             }
+
+            uart.escribir("L");
 
             String s = uart.leer();
             Log.d(TAG, s);
