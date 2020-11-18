@@ -6,6 +6,7 @@
 
 package com.example.murbin;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,12 @@ import android.view.ViewGroup;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.murbin.presentation.global.PreferencesActivity;
+import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
+import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
+import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
+import com.example.murbin.presentation.zone.user.UserMainActivity;
+import com.example.murbin.services.BackgroundMusic;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -42,6 +49,43 @@ public class App extends Application {
     }
 
     /**
+     * Starts or stops the class of the service received as a parameter,
+     * depending on the Boolean parameter received as well.
+     *
+     * @param serviceClass Class of service
+     * @param newStatus    Value true to start or false to stop
+     */
+    public void changeServiceStatus(Class<?> serviceClass, boolean newStatus) {
+        if (newStatus) {
+            if (!isServiceRunning(serviceClass)) {
+                startService(new Intent(instance.getApplicationContext(),
+                        serviceClass));
+            }
+        } else {
+            stopService(new Intent(instance.getApplicationContext(),
+                    BackgroundMusic.class));
+        }
+    }
+
+    /**
+     * Check if the class of the service passed as reference is running or not.
+     *
+     * @param serviceClass Class of service
+     * @return boolean
+     */
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Method to display a message with snack bar
      * More info: https://material.io/components/snackbars
      *
@@ -56,18 +100,4 @@ public class App extends Application {
         sb.show();
     }
 
-    /**
-     * Redirect to corresponding activity
-     *
-     * @param activity Activity where it will be redirected
-     */
-    public void redirectActivity(Class activity) {
-        Intent i;
-        i = new Intent(getInstance().getBaseContext(), activity);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                Intent.FLAG_ACTIVITY_NEW_TASK |
-                Intent.FLAG_ACTIVITY_CLEAR_TASK
-        );
-        getInstance().getBaseContext().startActivity(i);
-    }
 }

@@ -18,9 +18,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
+import com.example.murbin.presentation.global.PreferencesActivity;
 import com.example.murbin.presentation.zone.user.fragments.UserHomeFragment;
 import com.example.murbin.presentation.zone.user.fragments.UserMapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -68,7 +70,7 @@ public class UserMainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.bottom_main_menu_home:
+                    case R.id.user_main_bottom_navigation_home:
 //                        Toast.makeText(UserMainActivity.this, "Menú Home pulsado", Toast.LENGTH_SHORT).show();
                         // Create new fragment and transaction
                         fragment = new UserHomeFragment();
@@ -79,7 +81,7 @@ public class UserMainActivity extends BaseActivity {
 
                         break;
 
-                    case R.id.bottom_main_menu_map:
+                    case R.id.user_main_bottom_navigation_map:
 //                        Toast.makeText(UserMainActivity.this, "Menú Mapa pulsado", Toast.LENGTH_SHORT).show();
                         // Create new fragment and transaction
                         fragment = new UserMapFragment();
@@ -88,6 +90,11 @@ public class UserMainActivity extends BaseActivity {
                         transaction_map.addToBackStack(null);
                         transaction_map.commit();
 
+                        break;
+
+
+                    case R.id.user_main_bottom_navigation_data:
+                        Toast.makeText(UserMainActivity.this, "Menú Histórico pulsado", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -101,14 +108,20 @@ public class UserMainActivity extends BaseActivity {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.bottom_main_menu_home:
+                    case R.id.user_main_bottom_navigation_home:
 //                        Toast.makeText(UserMainActivity.this, "Menú Home ya está pulsado", Toast.LENGTH_SHORT).show();
                         // None action
 
                         break;
 
-                    case R.id.bottom_main_menu_map:
-//                        Toast.makeText(UserMainActivity.this, "Menú Mapa  ya está pulsado", Toast.LENGTH_SHORT).show();
+                    case R.id.user_main_bottom_navigation_map:
+//                        Toast.makeText(UserMainActivity.this, "Menú Mapa ya está pulsado", Toast.LENGTH_SHORT).show();
+                        // None action
+
+                        break;
+
+                    case R.id.user_main_bottom_navigation_data:
+                        Toast.makeText(UserMainActivity.this, "Menú Histórico ya está pulsado", Toast.LENGTH_SHORT).show();
                         // None action
 
                         break;
@@ -127,11 +140,28 @@ public class UserMainActivity extends BaseActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.user_main_menu_account) {
-            Intent intent = new Intent(UserMainActivity.this, AuthEmailActivity.class);
-            startActivity(intent);
+        switch (item.getItemId()) {
+            case R.id.user_main_menu_account: {
+                Intent intent = new Intent(UserMainActivity.this, AuthEmailActivity.class);
+                startActivity(intent);
 
-            return true;
+                break;
+            }
+
+            case R.id.user_main_menu_settings: {
+                Intent i = new Intent(this, PreferencesActivity.class);
+                startActivity(i);
+
+                break;
+            }
+
+            case R.id.user_main_menu_about_murbin: {
+                showDialogFragment(
+                        getString(R.string.about_dialog_fragment_tv_title_default),
+                        getString(R.string.about_dialog_fragment_tv_message_default));
+
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);

@@ -35,11 +35,11 @@ public class UserMapFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.user_map_fragment, container, false);
+        View view = inflater.inflate(R.layout.user_fragment_map, container, false);
 
         mMapView = view.findViewById(R.id.user_map_fragment_mapview);
         mMapView.onCreate(savedInstanceState);
-        mMapView.onResume(); // needed to get the map to display immediately
+        mMapView.onResume(); // Needed to get the map to display immediately
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());

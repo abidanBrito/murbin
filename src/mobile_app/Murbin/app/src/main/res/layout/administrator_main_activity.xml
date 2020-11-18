@@ -3,15 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/administrator_main_activity_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toTopOf="@id/administrator_main_activity_bottom_navigation"
+    app:layout_constraintTop_toTopOf="parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/administrator_main_activity_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
         android:id="@+id/administrator_main_activity_tv_title"
@@ -19,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserratsemibold"
-        android:text="@string/administrator_fragment_large_frame_tv_title"
+        android:text="@string/administrator_main_activity_tv_title"
         android:textColor="@color/negro"
-        android:textSize="34sp"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_toolbar" />
@@ -39,28 +43,105 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_tv_title" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/administrator_main_activity_large_frame_fragment"
-        android:name="com.example.murbin.presentation.zone.administrator.fragments.LargeFrameFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/administrator_main_activity_bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_tv_subtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_tv_subtitle"
+        app:layout_constraintVertical_bias="0.32999998">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/administrator_main_activity_medium_frame_fragment"
-        android:name="com.example.murbin.presentation.zone.administrator.fragments.MediumFrameFragment"
+        <!-- Status -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/administrator_main_activity_large_frame_fragment"
+            class="com.example.murbin.presentation.zone.administrator.fragments.LargeFrameFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Noise -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/administrator_main_activity_noise_fragment"
+            class="com.example.murbin.presentation.zone.administrator.fragments.SmallFrameFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/administrator_main_activity_co2_fragment"
+            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_large_frame_fragment" />
+
+        <!-- CO2 -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/administrator_main_activity_co2_fragment"
+            class="com.example.murbin.presentation.zone.administrator.fragments.SmallFrameFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/administrator_main_activity_noise_fragment"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/administrator_main_activity_temperature_fragment"
+            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_large_frame_fragment" />
+
+        <!-- Temperature -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/administrator_main_activity_temperature_fragment"
+            class="com.example.murbin.presentation.zone.administrator.fragments.SmallFrameFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/administrator_main_activity_co2_fragment"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_large_frame_fragment" />
+
+        <!-- Subzones -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/administrator_main_activity_subzones_fragment"
+            class="com.example.murbin.presentation.zone.administrator.fragments.MediumFrameFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/administrator_main_activity_technicians_fragment"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_temperature_fragment" />
+
+        <!-- Technicians -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/administrator_main_activity_technicians_fragment"
+            class="com.example.murbin.presentation.zone.administrator.fragments.MediumFrameFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/administrator_main_activity_subzones_fragment"
+            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_noise_fragment" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/administrator_main_activity_bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_large_frame_fragment" />
+        app:menu="@menu/administrator_main_bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
