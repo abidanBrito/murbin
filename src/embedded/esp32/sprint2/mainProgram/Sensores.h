@@ -19,15 +19,16 @@
     
     
     //variables interrupciones
-    static volatile int movimiento = 0; //interrupcion movimiento.
-    
+    static volatile uint8_t movimiento=0;
+    const int LED_PIR = 12;
 
     //SENSORES SIN WIFI//
     void sensor_LUM(int, int);
     void sensor_CO2(int, int);
     void detectar_movimiento();
     void sensor_DHT(float, float);
-    //void detectar_ruido();
+    void encender_rele(int);
+    void sensor_ruido(int, int);
    
     
 #endif
