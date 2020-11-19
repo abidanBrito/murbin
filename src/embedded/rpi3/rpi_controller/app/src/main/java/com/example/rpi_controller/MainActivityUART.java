@@ -55,10 +55,17 @@ public class MainActivityUART extends Activity
 
     void run(FirebaseFirestore db) {
         while (true) {
-            String brightnessValue = getSensorData("L");
-            String soundValue = getSensorData("S");
-            String co2Value = getSensorData("C");
-            // String humidityValue = getSensorData("H");
+            String brightnessValue = getSensorData("Luminosity: ", "L");
+            String soundValue = getSensorData("Noise level: ","S");
+            String co2Value = getSensorData("CO2: ","C");
+            String temperatureValue = getSensorData("Temperature: ", "T");
+            String humidityValue = getSensorData("Humidity", "H");
+
+            pushDataFirestore(db, brightnessValue, "brightness");
+            pushDataFirestore(db, soundValue, "noise");
+            pushDataFirestore(db, co2Value, "co2");
+            pushDataFirestore(db, temperatureValue, "temperature");
+            pushDataFirestore(db, humidityValue, "humidity");
 
             try {
                 MqttMessage light = new MqttMessage(brightnessValue.getBytes());
@@ -78,27 +85,29 @@ public class MainActivityUART extends Activity
             } catch (MqttException e) {
                 Log.e(Mqtt.TAG, "Error al publicar.", e);
             }
-
-            // Push new readings over to Firestore
-            Map<String, Object> datos = new HashMap<>();
-            datos.put("value", brightnessValue);
-            db.collection("streetlights").document("1")
-                    .collection("sensors").document("brightness")
-                    .set(datos);
         }
     }
 
-    String getSensorData(String dataPick) {
+    String getSensorData(String sensorType, String data) {
+        String value = "";
         try {
-            Thread.sleep(500);
+            uart.escribir(data);
+            Thread.sleep(1600);
         } catch (InterruptedException e) {
             Log.w(TAG, "Error en sleep()", e);
         }
 
-        uart.escribir(dataPick);
-        String value = uart.leer();
-        Log.d(TAG, value);
-
+        value = uart.leer();
+        Log.d(TAG, sensorType + value);
         return value;
+    }
+
+    void pushDataFirestore(FirebaseFirestore db, String value, String sensorDocument) {
+        // Push new readings over to Firestore
+        Map<String, Object> datos = new HashMap<>();
+        datos.put("value", value);
+        db.collection("streetlights").document("1")
+                .collection("sensors").document(sensorDocument)
+                .set(datos);
     }
 }
