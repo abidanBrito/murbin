@@ -5,20 +5,10 @@
 void sensor_LUM(int pin, int ledPin){
   int valor = analogRead(pin);
 
-  if (valor < 3050){
-    Serial.print("Hay luz intensa: ");
-  }
-  else {
-    if (valor > 3050 && valor < 3220){
-      Serial.print("Hay luz ambiental: ");
-    }
-    else {
-      Serial.print("No hay luz: ");
-    }
+  if (valor > 800){
     digitalWrite(ledPin, HIGH);
-    delay(2500);
+    delay(1000);
     digitalWrite(ledPin, LOW);
+    Serial.println(valor);
   }
-     
-  Serial.println(valor);
 }
