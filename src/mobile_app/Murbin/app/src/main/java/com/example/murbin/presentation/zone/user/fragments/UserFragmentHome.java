@@ -15,12 +15,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.murbin.R;
 
-public class UserHomeFragment extends Fragment {
+public class UserFragmentHome extends Fragment {
 
     /**
      * Constant for ease of use in debugging the class code
      */
-    private static final String TAG = UserHomeFragment.class.getSimpleName();
+    private static final String TAG = UserFragmentHome.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

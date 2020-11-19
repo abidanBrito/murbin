@@ -6,8 +6,6 @@
 
 package com.example.murbin.models;
 
-import android.net.Uri;
-
 public class User {
 
     /*
@@ -15,15 +13,14 @@ public class User {
      */
     private static final String TAG = User.class.getSimpleName();
 
+    private static final String DEFAULT_ROLE = "user";
+
     private String role;
-    private String idDocument;
     private String uid;
     private String name;
     private String surname;
     private String email;
-    private String phone;
-    private String providers;
-    private Uri photo;
+    private long lastAccess;
 
     /**
      * Constructor Default
@@ -36,41 +33,31 @@ public class User {
      * Constructor
      *
      * @param role       User role
-     * @param idDocument idDocument user
      * @param uid        Unique uid of the user in firebase
      * @param name       User name
      * @param surname    User last name
      * @param email      User email
-     * @param phone      User phone
-     * @param providers  Providers you have logged in with
-     * @param photo      User Photo
+     * @param lastAccess Last access user datetime
      */
-    public User(String role, String idDocument, String uid, String name, String surname, String email, String phone, String providers, Uri photo) {
-        this.role = role;
-        this.idDocument = idDocument;
+    public User(String role, String uid, String name, String surname, String email, String lastAccess) {
+        this.role = ((role != null && !role.equals("")) ? role : DEFAULT_ROLE);
         this.uid = uid;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.phone = phone;
-        this.providers = providers;
-        this.photo = photo;
+        this.lastAccess = ((lastAccess != null && !lastAccess.equals("")) ? Long.parseLong(lastAccess) : System.currentTimeMillis());
     }
 
-    public String getRol() {
+    public static String getDefaultRole() {
+        return DEFAULT_ROLE;
+    }
+
+    public String getRole() {
         return role;
     }
 
-    public void setRol(String role) {
+    public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getIdDocument() {
-        return idDocument;
-    }
-
-    public void setIdDocument(String idDocument) {
-        this.idDocument = idDocument;
     }
 
     public String getUid() {
@@ -105,28 +92,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public long getLastAccess() {
+        return lastAccess;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getProvider() {
-        return providers;
-    }
-
-    public void setProvider(String providers) {
-        this.providers = providers;
-    }
-
-    public Uri getPicture() {
-        return photo;
-    }
-
-    public void setPicture(Uri photo) {
-        this.photo = photo;
+    public void setLastAccess(long lastAccess) {
+        this.lastAccess = lastAccess;
     }
 
     @Override
@@ -137,9 +108,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", providers='" + providers + '\'' +
-                ", photo=" + photo +
+                ", lastAccess=" + lastAccess +
                 '}';
     }
 }

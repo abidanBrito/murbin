@@ -58,6 +58,37 @@ public class AdministratorMainActivity extends BaseActivity {
         actionsBottomNavigationView();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.administrator_main_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.administrator_main_menu_settings: {
+                Intent intent = new Intent(this, PreferencesActivity.class);
+                startActivity(intent);
+
+                break;
+            }
+
+            case R.id.administrator_main_menu_logout: {
+                mAuth.signOut();
+                Intent intent = new Intent(AdministratorMainActivity.this, AuthEmailActivity.class);
+                startActivity(intent);
+
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
     /**
      * Method for bottom navigation functionality
      */
@@ -121,37 +152,6 @@ public class AdministratorMainActivity extends BaseActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.administrator_main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.administrator_main_menu_settings: {
-                Intent i = new Intent(this, PreferencesActivity.class);
-                startActivity(i);
-
-                break;
-            }
-
-            case R.id.administrator_main_menu_logout: {
-                mAuth.signOut();
-                Intent intent = new Intent(AdministratorMainActivity.this, AuthEmailActivity.class);
-                startActivity(intent);
-
-                break;
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
-
     }
 
 }

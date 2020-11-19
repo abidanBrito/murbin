@@ -16,7 +16,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/user_main_activity_fragment"
-        android:name="com.example.murbin.presentation.zone.user.fragments.UserHomeFragment"
+        class="com.example.murbin.presentation.zone.user.fragments.UserFragmentHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/user_main_activity_bottom_navigation"

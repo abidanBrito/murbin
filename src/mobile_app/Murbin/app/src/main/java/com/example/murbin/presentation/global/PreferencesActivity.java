@@ -9,7 +9,6 @@ package com.example.murbin.presentation.global;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -17,7 +16,11 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
+import com.example.murbin.models.User;
 import com.example.murbin.presentation.global.fragments.GlobalPreferencesFragment;
+import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
+import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
+import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
 import com.example.murbin.presentation.zone.user.UserMainActivity;
 
 public class PreferencesActivity extends BaseActivity {
@@ -60,8 +63,25 @@ public class PreferencesActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
 //            Toast.makeText(App.getContext(), "Botón atrás pulsado", Toast.LENGTH_SHORT).show();
-            // Customize which activity you want to redirect to when pressing arrow back
-            Intent intent = new Intent(PreferencesActivity.this, UserMainActivity.class);
+            User user = App.getCurrentUser();
+            Class<?> redirectActivityClass = UserMainActivity.class;
+
+            if (user != null) {
+                switch (user.getRole()) {
+                    case "root":
+                    case "administrator":
+                        redirectActivityClass = AdministratorMainActivity.class;
+                        break;
+                    case "technician":
+                        redirectActivityClass = TechnicianMainActivity.class;
+                        break;
+                    case "scientific":
+                        redirectActivityClass = ScientificMainActivity.class;
+                        break;
+                }
+            }
+
+            Intent intent = new Intent(PreferencesActivity.this, redirectActivityClass);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();

@@ -44,6 +44,14 @@
     <string name="administrator_main_bottom_navigation_technician">Técnicos</string>
     <string name="administrator_main_bottom_navigation_config">Config</string>
 
+    <!-- technician_main_menu -->
+    <string name="technician_main_menu_settings">Ajustes</string>
+    <string name="technician_main_menu_logout">Desconectarse</string>
+
+    <!-- scientific_main_menu -->
+    <string name="scientific_main_menu_settings">Ajustes</string>
+    <string name="scientific_main_menu_logout">Desconectarse</string>
+
     <!-- GENERALS -->
 
     <!-- DialogFragment -->
@@ -90,14 +98,20 @@
     <!-- zone / user -->
 
     <!-- UserMainActivity -->
-    <!-- layout | user_home_fragment -->
-    <string name="user_home_fragment_tv_welcome">Bienvenido/a [Zona User]</string>
+    <!-- layout | user_fragment_home -->
+    <string name="user_fragment_home_old_tv_welcome">Bienvenido [Zone User]</string>
+    <string name="user_fragment_home_tv_title">Tu entorno</string>
 
-    <!-- zone / technical -->
+    <!-- user_fragment_frame -->
+    <string name="user_fragment_frame_tv_value">103</string>
+    <string name="user_fragment_frame_tv_type">Ruido</string>
+    <string name="user_fragment_frame_tv_unit">dB</string>
+
+    <!-- zone / technician -->
 
     <!-- TechnicianMainActivity -->
-    <!-- layout | technical_main_activity -->
-    <string name="technical_main_activity_tv_welcome">Bienvenido/a [Zona Technical]</string>
+    <!-- layout | technician_main_activity -->
+    <string name="technician_main_activity_tv_welcome">Bienvenido/a [Zona Technical]</string>
 
     <!-- zone / scientific -->
 
