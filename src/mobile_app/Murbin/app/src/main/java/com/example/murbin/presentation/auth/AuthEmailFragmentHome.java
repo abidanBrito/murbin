@@ -7,8 +7,10 @@
 package com.example.murbin.presentation.auth;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.example.murbin.App;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
+import com.example.murbin.presentation.zone.user.UserMainActivity;
 
 public class AuthEmailFragmentHome extends Fragment implements View.OnClickListener {
 
@@ -128,6 +131,22 @@ public class AuthEmailFragmentHome extends Fragment implements View.OnClickListe
                 break;
             }
         }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+//            Toast.makeText(App.getContext(), "Botón atrás pulsado", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), UserMainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            getActivity().finish();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
