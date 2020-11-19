@@ -20,11 +20,17 @@ This project is a team effort for our thrid semester class **Internet of Things*
 *   **Raspberry Pi 3**.
 *   **ESP32** / **M5Stack** Modular Rapid Prototyping.
 *   Photodiode.
+*   Gas sensor.
+*   Noise sensor.
+*   Temperature and humidity sensor.
+*   PIR sensor.
+*   Operational Amplifiers.
 *   Resistors.
 
 ### Mobile and Cloud Platforms
 *   **Android Things** embedded Operating System.
 *   **Firebase**. 
+*   **MQTT**.
 
 ### Software Development 
 *   Arduino IDE. 
@@ -33,13 +39,11 @@ This project is a team effort for our thrid semester class **Internet of Things*
 
 ## SYSTEM ARCHITECTURE
 ![System Architecture Diagram](img/system_architecture_diagram.png)
-Refer to the [documentation](docs/Documento_Técnico_Diseño_01.pdf) (spanish) for further details and schematics.
+Refer to the [documentation](docs/Documento_Técnico_Diseño_v1.pdf) (spanish) for further details and schematics.
 
 ## FUNCTIONALITIES AND FEATURES 
-*   [x] Gas (CO2) sensor.
-*   [x] Luminosity sensor.
-*   [ ] Noise sensor.
-*   [ ] PIR sensor.
+*   [x] High CO2 levels detection.
+*   [ ]
 
 ## DOCUMENTATION
 It can be found in the form of a PDF file for each and every Sprint, accordingly. Those of previous Sprints may contain errors (schematics, pins, etc.). Please, refer to the lastest version: [technical documentation](docs/Documento_Técnico_Diseño_01.pdf) (spanish). 
