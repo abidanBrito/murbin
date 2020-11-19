@@ -11,12 +11,10 @@ const int sensorRUIDO = 14;
 const int DHTPin = 26;
 DHT dht(DHTPin, DHTTYPE);
 
-
 //definiendo leds
 #define LED_LUM 32
 #define LED_CO2 33
 #define LED_RUIDO 33
-
 
 void setup() {
   // put your setup code here, to run once:
@@ -37,41 +35,50 @@ void setup() {
   pinMode(LED_CO2, OUTPUT);
   pinMode(LED_PIR, OUTPUT);
   pinMode(LED_RUIDO, OUTPUT);
- 
 }
  
 void loop() {
-   
-   //variable que detecta si la interrupcion ha sido producida
-   if(movimiento){
-    Serial.println("\n ********************");
-    Serial.println("Movimiento detectado");
-    Serial.println("********************");
-    digitalWrite(LED_PIR,HIGH);
-    
-    digitalWrite(LED_PIR,LOW);
-    movimiento--;
+   // variable que detecta si la interrupcion ha sido producida
+   if (movimiento){   
+      movimiento=0;
+      delay(3000);
+   }
+   else{
+      digitalWrite(LED_PIR,LOW);
    }
    
-   sensor_LUM(sensorLUM, LED_LUM);   
-   sensor_CO2(sensorCO2, LED_CO2);
-   sensor_ruido(sensorRUIDO, LED_RUIDO);
-   
-
-   // Sensor te temperatura Humedad
-   float h = dht.readHumidity();
-   float t = dht.readTemperature();
-   sensor_DHT(h,t);
-   
-   delay(3000);
-   
-   
+   if (Serial.available() > 0) {
+      char command = (char) Serial.read();
+      switch (command) {
+         case 'L':
+            sensor_LUM(sensorLUM, LED_LUM);   
+            break;
+         case 'C':
+            sensor_CO2(sensorCO2, LED_CO2);           
+            break; 
+         case 'T':
+            Serial.println((int) dht.readTemperature());
+            break; 
+         case 'H':{
+           Serial.println((int) dht.readHumidity());
+            break;
+         }
+         case 'S':{
+          Serial.println(analogRead(sensorRUIDO));
+            break; 
+         }       
+      }
+   }
 }
 
 //interrupcion para movimiento
 void  IRAM_ATTR detectarMovimiento(void* arg){
-        movimiento=2;
+        movimiento=1;
+    digitalWrite(LED_PIR,HIGH);
+    Serial.println(" -- Movimiento detectado --");
+    
 }
+
 void detectar_movimiento()
 {
   // Configurar pines
