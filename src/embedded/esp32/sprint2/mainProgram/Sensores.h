@@ -17,7 +17,6 @@
      //#define sensorRUIDO GPIO_NUM_39 //pin sensor de ruido
      #define sensorRUIDO_FLAG_LEVEL ESP_INTR_FLAG_LEVEL1 //definiendo nivel de interrupcion sensor ruido
     
-    
     //variables interrupciones
     static volatile bool movimiento=0;
     const int LED_PIR = 12;
@@ -26,9 +25,6 @@
     void sensor_LUM(int, int);
     void sensor_CO2(int, int);
     void detectar_movimiento();
-    void sensor_DHT(float, float);
     void encender_rele(int);
-    void sensor_ruido(int, int);
-   
     
 #endif

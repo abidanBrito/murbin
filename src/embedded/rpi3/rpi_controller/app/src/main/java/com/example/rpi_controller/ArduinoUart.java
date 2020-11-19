@@ -27,7 +27,7 @@ public class ArduinoUart extends Activity {
     public void escribir(String s) {
         try {
             int escritos = uart.write(s.getBytes(), s.length());
-            Log.d(TAG, escritos+" bytes escritos en UART");
+            Log.d(TAG, escritos + " bytes escritos en UART");
         } catch (IOException e) {
             Log.w(TAG, "Error al escribir en UART", e);
         }

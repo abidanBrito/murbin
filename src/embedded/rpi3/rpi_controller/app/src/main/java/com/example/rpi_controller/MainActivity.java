@@ -29,15 +29,13 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
  * <p>
  * You can find additional examples on GitHub: https://github.com/androidthings
  */
+
 public class MainActivity extends AppCompatActivity {
     public static MqttClient client = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
     }
 
 }
