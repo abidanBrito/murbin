@@ -43,7 +43,6 @@ Refer to the [documentation](docs/Documento_Técnico_Diseño_v1.pdf) (spanish) f
 
 ## FUNCTIONALITIES AND FEATURES 
 *   [x] High CO2 levels detection.
-*   [ ] 
 
 ## DOCUMENTATION
 It can be found in the form of a PDF file for each and every Sprint, accordingly. Those of previous Sprints may contain errors (schematics, pins, etc.). Please, refer to the lastest version: [technical documentation](docs/Documento_Técnico_Diseño_01.pdf) (spanish). 
