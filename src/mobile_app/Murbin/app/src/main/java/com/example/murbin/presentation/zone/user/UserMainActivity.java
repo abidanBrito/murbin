@@ -11,8 +11,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +31,13 @@ import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.global.PreferencesActivity;
 import com.example.murbin.presentation.zone.user.fragments.UserFragmentHome;
 import com.example.murbin.presentation.zone.user.fragments.UserFragmentMap;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class UserMainActivity extends BaseActivity {
 
@@ -36,15 +45,18 @@ public class UserMainActivity extends BaseActivity {
      * Constant for ease of use in debugging the class code
      */
     private static final String TAG = UserMainActivity.class.getSimpleName();
-    Toolbar mToolbar;
-    BottomNavigationView bottomNavigationView;
-    Fragment fragment;
+    private Toolbar mToolbar;
+    private BottomNavigationView bottomNavigationView;
+    private Fragment fragment;
+    private ViewGroup container;
+    private TextView brightness, temperature, co2, noise, humidity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_main_activity);
         initializeLayoutElements();
+        getLastMeasures();
     }
 
     /**
@@ -58,9 +70,52 @@ public class UserMainActivity extends BaseActivity {
             getSupportActionBar().setTitle("");
         }
 
+        container = findViewById(R.id.user_main_activity_container);
+
+        brightness = findViewById(R.id.user_fragment_home_brightness);
+        temperature = findViewById(R.id.user_fragment_home_temperature);
+        co2 = findViewById(R.id.user_fragment_home_co2);
+        noise = findViewById(R.id.user_fragment_home_noise);
+        humidity = findViewById(R.id.user_fragment_home_humidity);
+
         //BottomNavigationView menu
         bottomNavigationView = findViewById(R.id.user_main_activity_bottom_navigation);
         actionsBottomNavigationView();
+    }
+
+    private void getLastMeasures() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference sensors;
+
+        sensors = db.collection("streetlights").document("1")
+                .collection("sensors");
+
+        sensors.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    String value = "";
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData().get("value"));
+                        if (document.getId().equals("brightness")) {
+                            brightness.setText("Brillo: " + document.getData().get("value"));
+                        } else if (document.getId().equals("co2")) {
+                            co2.setText("CO2: " + document.getData().get("value"));
+                        } else if (document.getId().equals("noise")) {
+                            noise.setText("Ruido: " + document.getData().get("value"));
+                        } else if (document.getId().equals("temperature")) {
+                            temperature.setText("Temperatura: " + document.getData().get("value"));
+                        } else if (document.getId().equals("humidity")) {
+                            humidity.setText("Humedad: " + document.getData().get("value"));
+                        }
+                    }
+                } else {
+                    Log.w(TAG, "Error getting documents.", task.getException());
+                }
+            }
+        });
+
     }
 
 

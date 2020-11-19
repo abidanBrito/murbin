@@ -99,10 +99,13 @@
 
     <!-- UserMainActivity -->
     <!-- layout | user_fragment_home -->
-    <string name="user_fragment_home_tv_welcome">Bienvenido/a [Zona User]</string>
+    <string name="user_fragment_home_old_tv_welcome">Bienvenido [Zone User]</string>
+    <string name="user_fragment_home_tv_title">Tu entorno</string>
 
     <!-- user_fragment_frame -->
-    <string name="user_fragment_frame_tv_title">Tu entorno</string>
+    <string name="user_fragment_frame_tv_value">103</string>
+    <string name="user_fragment_frame_tv_type">Ruido</string>
+    <string name="user_fragment_frame_tv_unit">dB</string>
 
     <!-- zone / technician -->
 
