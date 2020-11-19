@@ -21,10 +21,8 @@ import static com.example.rpi_controller.MainActivity.client;
 
 public class MainActivityUART extends Activity
 {
-
     private static final String TAG = MainActivityUART.class.getSimpleName();
     ArduinoUart uart;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,14 +40,8 @@ public class MainActivityUART extends Activity
             Log.e(Mqtt.TAG, "Error al conectar.", e);
         }
 
-
         run(db);
-
-
-
-
     }
-
 
     @Override public void onDestroy() {
         try {
@@ -63,70 +55,50 @@ public class MainActivityUART extends Activity
 
     void run(FirebaseFirestore db) {
         while (true) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                Log.w(TAG, "Error en sleep()", e);
-            }
-
-        uart.escribir("L");
-        String l = uart.leer();
-        Log.d(TAG, l);
-        uart.escribir("S");
-        String s = uart.leer();
-        Log.d(TAG, s);
-        uart.escribir("C");
-        String c = uart.leer();
-        Log.d(TAG, c);
-        uart.escribir("H");
-        String t = uart.leer();
-        Log.d(TAG, t);
-        /*
-        uart.escribir("T");
-        String h = uart.leer();
-        Log.d(TAG, h);
-        */
-
-
+            String brightnessValue = getSensorData("L");
+            String soundValue = getSensorData("S");
+            String co2Value = getSensorData("C");
+            // String humidityValue = getSensorData("H");
 
             try {
-                MqttMessage luz = new MqttMessage(l.getBytes());
-                luz.setQos(Mqtt.qos);
-                luz.setRetained(false);
-                client.publish(Mqtt.topicRoot+"luz", luz);
+                MqttMessage light = new MqttMessage(brightnessValue.getBytes());
+                light.setQos(Mqtt.qos);
+                light.setRetained(false);
+                client.publish(Mqtt.topicRoot + "light", light);
 
-                MqttMessage co2 = new MqttMessage(c.getBytes());
+                MqttMessage co2 = new MqttMessage(co2Value.getBytes());
                 co2.setQos(Mqtt.qos);
                 co2.setRetained(false);
-                client.publish(Mqtt.topicRoot+"co2", co2);
+                client.publish(Mqtt.topicRoot + "co2", co2);
 
-    /*
-                MqttMessage humedad = new MqttMessage(h.getBytes());
-                humedad.setQos(Mqtt.qos);
-                humedad.setRetained(false);
-                client.publish(Mqtt.topicRoot+"humedad", humedad);
-
-                MqttMessage temp = new MqttMessage(t.getBytes());
-                temp.setQos(Mqtt.qos);
-                temp.setRetained(false);
-                client.publish(Mqtt.topicRoot+"temperatura", temp);
-*/
-                MqttMessage sound = new MqttMessage(s.getBytes());
+                MqttMessage sound = new MqttMessage(soundValue.getBytes());
                 sound.setQos(Mqtt.qos);
                 sound.setRetained(false);
-                client.publish(Mqtt.topicRoot+"sonido", sound);
+                client.publish(Mqtt.topicRoot + "sound", sound);
             } catch (MqttException e) {
                 Log.e(Mqtt.TAG, "Error al publicar.", e);
             }
 
-
-
-            /*Map<String, Object> datos = new HashMap<>();
-            datos.put("value", s);
+            // Push new readings over to Firestore
+            Map<String, Object> datos = new HashMap<>();
+            datos.put("value", brightnessValue);
             db.collection("streetlights").document("1")
                     .collection("sensors").document("brightness")
-                    .set(datos);*/
+                    .set(datos);
         }
     }
 
+    String getSensorData(String dataPick) {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Log.w(TAG, "Error en sleep()", e);
+        }
+
+        uart.escribir(dataPick);
+        String value = uart.leer();
+        Log.d(TAG, value);
+
+        return value;
+    }
 }
