@@ -6,6 +6,7 @@
 
 package com.example.murbin.presentation.auth;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -65,25 +66,6 @@ public class AuthEmailActivity extends BaseActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
             getSupportActionBar().setTitle("");
-        }
-    }
-
-    /**
-     * It receives the identifier of the resource of the containing fragment and
-     * the class of fragment to which it wants to change.
-     *
-     * @param fragmentContainerId Identifier of the resource of the containing fragment
-     * @param fragmentClass       Class of fragment
-     */
-    public void replaceFragments(int fragmentContainerId, Class<?> fragmentClass) {
-        try {
-            Fragment fragment = (Fragment) fragmentClass.newInstance();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(fragmentContainerId, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

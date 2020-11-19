@@ -55,20 +55,16 @@ public class ProfileFragment extends Fragment {
 
             User user = new User(
                     "user",
-                    null,
                     firebaseUser.getUid(),
                     firebaseUser.getDisplayName(),
                     null,
                     firebaseUser.getEmail(),
-                    firebaseUser.getPhoneNumber(),
-                    providers.toString(),
-                    firebaseUser.getPhotoUrl()
+                    firebaseUser.getPhoneNumber()
             );
 
             final NetworkImageView profile_fragment_niv_picture = view.findViewById(R.id.profile_fragment_niv_picture);
             final TextView profile_fragment_tv_name = view.findViewById(R.id.profile_fragment_tv_name);
             final TextView profile_fragment_tv_email = view.findViewById(R.id.profile_fragment_tv_email);
-            final TextView profile_fragment_tv_providers = view.findViewById(R.id.profile_fragment_tv_providers);
             final TextView profile_fragment_tv_phone = view.findViewById(R.id.profile_fragment_tv_phone);
             final TextView profile_fragment_tv_uid = view.findViewById(R.id.profile_fragment_tv_uid);
 
@@ -96,28 +92,8 @@ public class ProfileFragment extends Fragment {
                 profile_fragment_btn_email_verification.setVisibility(View.VISIBLE);
             }
 
-            if (user.getPicture() != null) {
-                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-                ImageLoader pictureReader = new ImageLoader(requestQueue, new ImageLoader.ImageCache() {
-                    private final LruCache<String, Bitmap> cache = new LruCache<String, Bitmap>(10);
-
-                    public void putBitmap(String url, Bitmap bitmap) {
-                        cache.put(url, bitmap);
-                    }
-
-                    public Bitmap getBitmap(String url) {
-                        return cache.get(url);
-                    }
-                });
-
-                profile_fragment_niv_picture.setImageUrl(user.getPicture().toString(), pictureReader);
-                profile_fragment_niv_picture.setVisibility(View.VISIBLE);
-            }
-
             profile_fragment_tv_name.setText(user.getName());
             profile_fragment_tv_email.setText(user.getEmail());
-            profile_fragment_tv_providers.setText(user.getProvider());
-            profile_fragment_tv_phone.setText(user.getPhone());
             profile_fragment_tv_uid.setText(user.getUid());
         } else {
             profile_fragment_tv_notification.setText(getString(R.string.profile_fragment_error_1));

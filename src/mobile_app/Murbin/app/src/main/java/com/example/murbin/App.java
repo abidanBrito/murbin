@@ -6,19 +6,19 @@
 
 package com.example.murbin;
 
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.ViewGroup;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.murbin.presentation.global.PreferencesActivity;
-import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
-import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
-import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
-import com.example.murbin.presentation.zone.user.UserMainActivity;
+import com.example.murbin.models.User;
 import com.example.murbin.services.BackgroundMusic;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,12 +29,16 @@ import com.google.android.material.snackbar.Snackbar;
  */
 public class App extends Application {
 
+    public static final int PERMIT_REQUEST_CODE_ACCESS_FINE_LOCATION = 3001;
+
     /**
      * Constant for ease of use in debugging the class code
      */
     private static final String TAG = App.class.getSimpleName();
 
     private static App instance;
+
+    private static User currentUser = null;
 
     public App() {
         instance = this;
@@ -46,6 +50,35 @@ public class App extends Application {
 
     public static Context getContext() {
         return instance.getApplicationContext();
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
+
+    /**
+     * @param permission    Permission requested
+     * @param justification Justification message for requesting permission
+     * @param requestCode   Response code
+     * @param activity      Activity
+     */
+    public void requestPermission(final String permission, String justification, final int requestCode, final Activity activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+            new AlertDialog.Builder(activity).
+                    setTitle(R.string.permissions_message_title).
+                    setMessage(justification).
+                    setPositiveButton(R.string.permissions_message_action, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+                        }
+                    }).show();
+        } else {
+            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+        }
     }
 
     /**

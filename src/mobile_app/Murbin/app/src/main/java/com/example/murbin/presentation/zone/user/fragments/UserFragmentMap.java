@@ -23,12 +23,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class UserMapFragment extends Fragment {
+public class UserFragmentMap extends Fragment {
 
     /**
      * Constant for ease of use in debugging the class code
      */
-    private static final String TAG = UserMapFragment.class.getSimpleName();
+    private static final String TAG = UserFragmentMap.class.getSimpleName();
 
     MapView mMapView;
     private GoogleMap map;

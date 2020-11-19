@@ -1,0 +1,7 @@
+@startuml
+class Article {
+    - title
+    + getTitle()
+}
+User "1" -- "*" Article
+@enduml
