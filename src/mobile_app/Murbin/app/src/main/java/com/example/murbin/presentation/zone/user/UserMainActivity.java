@@ -48,15 +48,12 @@ public class UserMainActivity extends BaseActivity {
     private Toolbar mToolbar;
     private BottomNavigationView bottomNavigationView;
     private Fragment fragment;
-    private ViewGroup container;
-    private TextView brightness, temperature, co2, noise, humidity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_main_activity);
         initializeLayoutElements();
-        getLastMeasures();
     }
 
     /**
@@ -70,54 +67,11 @@ public class UserMainActivity extends BaseActivity {
             getSupportActionBar().setTitle("");
         }
 
-        container = findViewById(R.id.user_main_activity_container);
-
-        brightness = findViewById(R.id.user_fragment_home_brightness);
-        temperature = findViewById(R.id.user_fragment_home_temperature);
-        co2 = findViewById(R.id.user_fragment_home_co2);
-        noise = findViewById(R.id.user_fragment_home_noise);
-        humidity = findViewById(R.id.user_fragment_home_humidity);
 
         //BottomNavigationView menu
         bottomNavigationView = findViewById(R.id.user_main_activity_bottom_navigation);
         actionsBottomNavigationView();
     }
-
-    private void getLastMeasures() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        CollectionReference sensors;
-
-        sensors = db.collection("streetlights").document("1")
-                .collection("sensors");
-
-        sensors.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    String value = "";
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d(TAG, document.getId() + " => " + document.getData().get("value"));
-                        if (document.getId().equals("brightness")) {
-                            brightness.setText("Brillo: " + document.getData().get("value"));
-                        } else if (document.getId().equals("co2")) {
-                            co2.setText("CO2: " + document.getData().get("value"));
-                        } else if (document.getId().equals("noise")) {
-                            noise.setText("Ruido: " + document.getData().get("value"));
-                        } else if (document.getId().equals("temperature")) {
-                            temperature.setText("Temperatura: " + document.getData().get("value"));
-                        } else if (document.getId().equals("humidity")) {
-                            humidity.setText("Humedad: " + document.getData().get("value"));
-                        }
-                    }
-                } else {
-                    Log.w(TAG, "Error getting documents.", task.getException());
-                }
-            }
-        });
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -251,4 +205,5 @@ public class UserMainActivity extends BaseActivity {
             }
         });
     }
+
 }
