@@ -8,13 +8,14 @@ package com.example.murbin.firebase;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.example.murbin.App;
 import com.example.murbin.R;
-import com.example.murbin.presentation.auth.AuthEmailActivity;
+import com.example.murbin.data.UserCrud;
+import com.example.murbin.data.repositories.UserCrudRepository;
+import com.example.murbin.models.User;
 import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
 import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
 import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
@@ -33,10 +34,11 @@ public class Auth {
     /**
      * Constant for ease of use in debugging the class code
      */
-    private static final String TAG = AuthEmailActivity.class.getSimpleName();
-    private static final int RC_SIGN_IN = 1001;
+    private static final String TAG = Auth.class.getSimpleName();
+//    private static final int RC_SIGN_IN = 1001; // For Google (Not used actually)
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final UserCrud userCrud = new UserCrud();
     private FirebaseUser mFirebaseUser;
 
     private Activity activity = null;
@@ -78,24 +80,22 @@ public class Auth {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     if (isLogged()) {
-//                        mFirebaseUser = mAuth.getCurrentUser();
-//                        Log.d(TAG, "Nombre usuario: " + mFirebaseUser.getDisplayName());
-                        // Recovery firestore data user and send role correctly
-                        checkRole("administrator");
+                        mFirebaseUser = mAuth.getCurrentUser();
+                        userCrud.read(mFirebaseUser.getUid(), new UserCrudRepository.ReadListener() {
+                            @Override
+                            public void onResponse(User user) {
+                                App.setCurrentUser(user);
+                                checkRole(App.getCurrentUser().getRole());
+                            }
+                        });
                     } else {
-                        if (activity != null) {
-                            App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Usuario no logueado?", App.getInstance().getBaseContext());
-                        }
+                        App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Usuario no logueado?", App.getInstance().getBaseContext());
                     }
-                    // Logic
                 } else {
-                    Exception exception = task.getException();
+//                    Exception exception = task.getException();
 //                    Log.d(TAG, "Excepción Task: " + exception.getMessage());
-                    if (activity != null) {
-//                        App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Datos de acceso incorrectos", App.getInstance().getBaseContext());
-                        App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Error: " + exception.getMessage(), App.getInstance().getBaseContext());
-
-                    }
+//                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Error: " + exception.getMessage(), App.getInstance().getBaseContext());
+                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Datos de acceso incorrectos", App.getInstance().getBaseContext());
                 }
             }
         });
@@ -107,25 +107,20 @@ public class Auth {
      * @param email User validated email
      */
     public void sendPasswordResetEmail(String email) {
-        mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "Mensaje de restablecimiento enviado");
-                            if (activity != null) {
-                                App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Mensaje de restablecimiento enviado", App.getInstance().getBaseContext());
-                            }
-                        } else {
-                            Exception exception = task.getException();
-//                            Log.d(TAG, "Excepción Task: " + exception.getMessage());
-                            if (activity != null) {
-                                App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Error: " + exception.getMessage(), App.getInstance().getBaseContext());
-                                App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Sí el email esta en nuestro sistema recibirás un mensaje de restablecimiento enviado.", App.getInstance().getBaseContext());
-                            }
-                        }
-                    }
-                });
+        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+//                    Log.d(TAG, "Mensaje de restablecimiento enviado");
+                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Sí el email esta en nuestro sistema recibirás un mensaje de restablecimiento de contraseña.", App.getInstance().getBaseContext());
+                } else {
+//                    Exception exception = task.getException();
+//                    Log.d(TAG, "Excepción Task: " + exception.getMessage());
+//                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Error: " + exception.getMessage(), App.getInstance().getBaseContext());
+                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Sí el email esta en nuestro sistema recibirás un mensaje de restablecimiento  de contraseña.", App.getInstance().getBaseContext());
+                }
+            }
+        });
     }
 
     /**
@@ -142,16 +137,17 @@ public class Auth {
      */
     public void checkRole(String role) {
         switch (role) {
-            case "scientific": {
-                redirectActivity(ScientificMainActivity.class);
+            case "root":
+            case "administrator": {
+                redirectActivity(AdministratorMainActivity.class);
                 break;
             }
             case "technician": {
                 redirectActivity(TechnicianMainActivity.class);
                 break;
             }
-            case "administrator": {
-                redirectActivity(AdministratorMainActivity.class);
+            case "scientific": {
+                redirectActivity(ScientificMainActivity.class);
                 break;
             }
             default: {

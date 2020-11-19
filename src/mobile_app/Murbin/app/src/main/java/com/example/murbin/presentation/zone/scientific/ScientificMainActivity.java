@@ -6,10 +6,19 @@
 
 package com.example.murbin.presentation.zone.scientific;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
+import com.example.murbin.firebase.Auth;
+import com.example.murbin.presentation.auth.AuthEmailActivity;
+import com.example.murbin.presentation.global.PreferencesActivity;
 
 public class ScientificMainActivity extends BaseActivity {
 
@@ -18,10 +27,58 @@ public class ScientificMainActivity extends BaseActivity {
      */
     private static final String TAG = ScientificMainActivity.class.getSimpleName();
 
+    private final Auth mAuth = new Auth(this);
+
+    Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scientific_main_activity);
+        initializeLayoutElements();
+    }
+
+    /**
+     * Method to start the layout elements
+     */
+    private void initializeLayoutElements() {
+        // Toolbar menu
+        mToolbar = findViewById(R.id.scientific_main_activity_toolbar);
+        setSupportActionBar(mToolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.scientific_main_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.scientific_main_menu_settings: {
+                Intent intent = new Intent(this, PreferencesActivity.class);
+                startActivity(intent);
+
+                break;
+            }
+
+            case R.id.scientific_main_menu_logout: {
+                mAuth.signOut();
+                Intent intent = new Intent(ScientificMainActivity.this, AuthEmailActivity.class);
+                startActivity(intent);
+
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
