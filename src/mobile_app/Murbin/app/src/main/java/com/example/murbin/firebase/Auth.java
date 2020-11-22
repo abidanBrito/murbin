@@ -17,9 +17,8 @@ import com.example.murbin.data.UserCrud;
 import com.example.murbin.data.repositories.UserCrudRepository;
 import com.example.murbin.models.User;
 import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
-import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
+import com.example.murbin.presentation.zone.general.GeneralMainActivity;
 import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
-import com.example.murbin.presentation.zone.user.UserMainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -146,12 +145,8 @@ public class Auth {
                 redirectActivity(TechnicianMainActivity.class);
                 break;
             }
-            case "scientific": {
-                redirectActivity(ScientificMainActivity.class);
-                break;
-            }
             default: {
-                redirectActivity(UserMainActivity.class);
+                redirectActivity(GeneralMainActivity.class);
                 break;
             }
         }

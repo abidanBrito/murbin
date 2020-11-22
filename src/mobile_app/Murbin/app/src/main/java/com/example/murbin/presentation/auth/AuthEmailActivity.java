@@ -28,7 +28,7 @@ public class AuthEmailActivity extends BaseActivity {
      */
     private static final String TAG = AuthEmailActivity.class.getSimpleName();
 
-    private final Auth mAuth = new Auth(this);
+    private Auth mAuth;
 
     private final String email = "";
     private final String password = "";
@@ -42,15 +42,13 @@ public class AuthEmailActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (mAuth.isLogged()) {
-            // logic - Redirect based on user role
-        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_email_activity);
+        mAuth = new Auth(this);
         initializeLayoutElements();
     }
 

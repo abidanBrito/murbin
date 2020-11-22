@@ -46,7 +46,7 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.about_fragment_dialog, container);
+        return inflater.inflate(R.layout.dialog_fragment, container);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-            TextView tv_message = view.findViewById(R.id.about_dialog_fragment_tv_message);
+            TextView tv_message = view.findViewById(R.id.dialog_fragment_tv_message);
             String title = getArguments().getString("title", "");
             String message = getArguments().getString("message", "");
 

@@ -4,7 +4,7 @@
  * Last modified 14/11/20 14:45
  */
 
-package com.example.murbin.presentation.zone.user.fragments;
+package com.example.murbin.presentation.zone.general.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,25 +24,25 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class UserFragmentHome extends Fragment {
+public class GeneralFragmentHome extends Fragment {
 
     /**
      * Constant for ease of use in debugging the class code
      */
-    private static final String TAG = UserFragmentHome.class.getSimpleName();
+    private static final String TAG = GeneralFragmentHome.class.getSimpleName();
 
     private ViewGroup container;
     private TextView brightness, temperature, co2, noise, humidity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.user_fragment_home, container, false);
+        View view = inflater.inflate(R.layout.general_fragment_home, container, false);
 
-        brightness = view.findViewById(R.id.user_fragment_home_brightness);
-        temperature = view.findViewById(R.id.user_fragment_home_temperature);
-        co2 = view.findViewById(R.id.user_fragment_home_co2);
-        noise = view.findViewById(R.id.user_fragment_home_noise);
-        humidity = view.findViewById(R.id.user_fragment_home_humidity);
+        brightness = view.findViewById(R.id.general_fragment_home_brightness);
+        temperature = view.findViewById(R.id.general_fragment_home_temperature);
+        co2 = view.findViewById(R.id.general_fragment_home_co2);
+        noise = view.findViewById(R.id.general_fragment_home_noise);
+        humidity = view.findViewById(R.id.general_fragment_home_humidity);
 
         getLastMeasures();
 

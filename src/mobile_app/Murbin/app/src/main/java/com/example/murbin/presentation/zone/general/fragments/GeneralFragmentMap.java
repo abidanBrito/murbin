@@ -4,7 +4,7 @@
  * Last modified 14/11/20 14:45
  */
 
-package com.example.murbin.presentation.zone.user.fragments;
+package com.example.murbin.presentation.zone.general.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,19 +23,19 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class UserFragmentMap extends Fragment {
+public class GeneralFragmentMap extends Fragment {
 
     /**
      * Constant for ease of use in debugging the class code
      */
-    private static final String TAG = UserFragmentMap.class.getSimpleName();
+    private static final String TAG = GeneralFragmentMap.class.getSimpleName();
 
     MapView mMapView;
     private GoogleMap map;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.user_fragment_map, container, false);
+        View view = inflater.inflate(R.layout.general_fragment_map, container, false);
 
         mMapView = view.findViewById(R.id.user_map_fragment_mapview);
         mMapView.onCreate(savedInstanceState);

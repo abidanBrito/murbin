@@ -20,7 +20,7 @@ import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
-import com.example.murbin.presentation.global.PreferencesActivity;
+import com.example.murbin.presentation.global.GlobalPreferencesActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdministratorMainActivity extends BaseActivity {
@@ -70,7 +70,7 @@ public class AdministratorMainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.administrator_main_menu_settings: {
-                Intent intent = new Intent(this, PreferencesActivity.class);
+                Intent intent = new Intent(this, GlobalPreferencesActivity.class);
                 startActivity(intent);
 
                 break;

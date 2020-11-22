@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/user_main_activity_container"
+    android:id="@+id/general_main_activity_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_constraintBottom_toTopOf="@id/user_main_activity_bottom_navigation"
+    app:layout_constraintBottom_toTopOf="@id/general_main_activity_bottom_navigation"
     app:layout_constraintTop_toTopOf="parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/user_main_activity_toolbar"
+        android:id="@+id/general_main_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/user_main_activity_fragment"
-        class="com.example.murbin.presentation.zone.user.fragments.UserFragmentHome"
+        android:id="@+id/general_main_activity_fragment"
+        class="com.example.murbin.presentation.zone.general.fragments.GeneralFragmentHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/user_main_activity_bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/general_main_activity_bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_main_activity_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/general_main_activity_toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/user_main_activity_bottom_navigation"
+        android:id="@+id/general_main_activity_bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

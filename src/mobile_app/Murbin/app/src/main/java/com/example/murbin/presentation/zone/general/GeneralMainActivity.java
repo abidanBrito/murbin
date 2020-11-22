@@ -4,18 +4,15 @@
  * Last modified 14/11/20 14:45
  */
 
-package com.example.murbin.presentation.zone.user;
+package com.example.murbin.presentation.zone.general;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,23 +25,17 @@ import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
-import com.example.murbin.presentation.global.PreferencesActivity;
-import com.example.murbin.presentation.zone.user.fragments.UserFragmentHome;
-import com.example.murbin.presentation.zone.user.fragments.UserFragmentMap;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.murbin.presentation.global.GlobalPreferencesActivity;
+import com.example.murbin.presentation.zone.general.fragments.GeneralFragmentHome;
+import com.example.murbin.presentation.zone.general.fragments.GeneralFragmentMap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-public class UserMainActivity extends BaseActivity {
+public class GeneralMainActivity extends BaseActivity {
 
     /**
      * Constant for ease of use in debugging the class code
      */
-    private static final String TAG = UserMainActivity.class.getSimpleName();
+    private static final String TAG = GeneralMainActivity.class.getSimpleName();
     private Toolbar mToolbar;
     private BottomNavigationView bottomNavigationView;
     private Fragment fragment;
@@ -52,7 +43,7 @@ public class UserMainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_main_activity);
+        setContentView(R.layout.general_main_activity);
         initializeLayoutElements();
     }
 
@@ -61,7 +52,7 @@ public class UserMainActivity extends BaseActivity {
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.user_main_activity_toolbar);
+        mToolbar = findViewById(R.id.general_main_activity_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
@@ -69,7 +60,7 @@ public class UserMainActivity extends BaseActivity {
 
 
         //BottomNavigationView menu
-        bottomNavigationView = findViewById(R.id.user_main_activity_bottom_navigation);
+        bottomNavigationView = findViewById(R.id.general_main_activity_bottom_navigation);
         actionsBottomNavigationView();
     }
 
@@ -85,14 +76,14 @@ public class UserMainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.user_main_menu_account: {
-                Intent intent = new Intent(UserMainActivity.this, AuthEmailActivity.class);
+                Intent intent = new Intent(GeneralMainActivity.this, AuthEmailActivity.class);
                 startActivity(intent);
 
                 break;
             }
 
             case R.id.user_main_menu_settings: {
-                Intent i = new Intent(this, PreferencesActivity.class);
+                Intent i = new Intent(this, GlobalPreferencesActivity.class);
                 startActivity(i);
 
                 break;
@@ -100,8 +91,8 @@ public class UserMainActivity extends BaseActivity {
 
             case R.id.user_main_menu_about_murbin: {
                 showDialogFragment(
-                        getString(R.string.about_dialog_fragment_tv_title_default),
-                        getString(R.string.about_dialog_fragment_tv_message_default));
+                        getString(R.string.dialog_fragment_tv_title_default),
+                        getString(R.string.dialog_fragment_tv_message_default));
 
                 break;
             }
@@ -125,11 +116,11 @@ public class UserMainActivity extends BaseActivity {
     }
 
     private void loadMap() {
-        if (ActivityCompat.checkSelfPermission(UserMainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(GeneralMainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // Create new fragment and transaction
-            fragment = new UserFragmentMap();
+            fragment = new GeneralFragmentMap();
             FragmentTransaction transaction_map = getSupportFragmentManager().beginTransaction();
-            transaction_map.replace(R.id.user_main_activity_fragment, fragment);
+            transaction_map.replace(R.id.general_main_activity_fragment, fragment);
             transaction_map.addToBackStack(null);
             transaction_map.commit();
         } else {
@@ -137,7 +128,7 @@ public class UserMainActivity extends BaseActivity {
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     "Sin el permiso, no puedo mostrar el Mapa",
                     App.PERMIT_REQUEST_CODE_ACCESS_FINE_LOCATION,
-                    UserMainActivity.this
+                    GeneralMainActivity.this
             );
         }
     }
@@ -153,24 +144,24 @@ public class UserMainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.user_main_bottom_navigation_home:
-//                        Toast.makeText(UserMainActivity.this, "Menú Home pulsado", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(GeneralMainActivity.this, "Menú Home pulsado", Toast.LENGTH_SHORT).show();
                         // Create new fragment and transaction
-                        fragment = new UserFragmentHome();
+                        fragment = new GeneralFragmentHome();
                         FragmentTransaction transaction_home = getSupportFragmentManager().beginTransaction();
-                        transaction_home.replace(R.id.user_main_activity_fragment, fragment);
+                        transaction_home.replace(R.id.general_main_activity_fragment, fragment);
                         transaction_home.addToBackStack(null);
                         transaction_home.commit();
 
                         break;
 
                     case R.id.user_main_bottom_navigation_map:
-//                        Toast.makeText(UserMainActivity.this, "Menú Mapa pulsado", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(GeneralMainActivity.this, "Menú Mapa pulsado", Toast.LENGTH_SHORT).show();
                         loadMap();
 
                         break;
 
                     case R.id.user_main_bottom_navigation_data:
-                        Toast.makeText(UserMainActivity.this, "Menú Histórico pulsado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GeneralMainActivity.this, "Menú Histórico pulsado", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -185,19 +176,19 @@ public class UserMainActivity extends BaseActivity {
             public void onNavigationItemReselected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.user_main_bottom_navigation_home:
-//                        Toast.makeText(UserMainActivity.this, "Menú Home ya está pulsado", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(GeneralMainActivity.this, "Menú Home ya está pulsado", Toast.LENGTH_SHORT).show();
                         // None action
 
                         break;
 
                     case R.id.user_main_bottom_navigation_map:
-//                        Toast.makeText(UserMainActivity.this, "Menú Mapa ya está pulsado", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(GeneralMainActivity.this, "Menú Mapa ya está pulsado", Toast.LENGTH_SHORT).show();
                         // None action
 
                         break;
 
                     case R.id.user_main_bottom_navigation_data:
-                        Toast.makeText(UserMainActivity.this, "Menú Histórico ya está pulsado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GeneralMainActivity.this, "Menú Histórico ya está pulsado", Toast.LENGTH_SHORT).show();
                         // None action
 
                         break;

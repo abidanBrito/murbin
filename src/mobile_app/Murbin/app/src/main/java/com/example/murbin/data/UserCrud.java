@@ -38,7 +38,6 @@ public class UserCrud implements UserCrudRepository {
     @Override
     public String create(User user) {
         //
-
         return "";
     }
 

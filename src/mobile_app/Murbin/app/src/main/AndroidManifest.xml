@@ -13,12 +13,19 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Murbin">
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <!-- Services -->
         <service android:name=".services.BackgroundMusic" />
 
-        <!-- Zone User (No need user identification) -->
+        <!-- Zone General (No need identification) -->
         <activity
-            android:name=".presentation.zone.user.UserMainActivity"
+            android:name=".presentation.zone.general.GeneralMainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,39 +34,32 @@
         </activity>
 
         <activity
-            android:name=".presentation.auth.AuthEmailActivity"
-            android:parentActivityName=".presentation.zone.user.UserMainActivity"
+            android:name=".presentation.global.GlobalPreferencesActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".presentation.global.PreferencesActivity"
+            android:name=".presentation.auth.AuthEmailActivity"
+            android:parentActivityName=".presentation.zone.general.GeneralMainActivity"
             android:screenOrientation="portrait" />
 
+        <!-- Needs identification and roles "root", "administrator" or "technician") -->
         <activity
             android:name=".presentation.profiles.ProfileActivity"
             android:screenOrientation="portrait" />
 
-        <!-- Zone Scientific (Needs identity and role verification of the user) -->
-        <activity
-            android:name=".presentation.zone.scientific.ScientificMainActivity"
-            android:screenOrientation="portrait" />
+        <!-- ZONE ADMINISTRATOR -->
 
-        <!-- Zone Technical (Needs identity and role verification of the user) -->
-        <activity
-            android:name=".presentation.zone.technician.TechnicianMainActivity"
-            android:screenOrientation="portrait" />
-
-        <!-- Zone Administrator (Needs identity and role verification of the user) -->
+        <!-- Needs identification and roles "root" or "administrator" -->
         <activity
             android:name=".presentation.zone.administrator.AdministratorMainActivity"
             android:screenOrientation="portrait" />
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+        <!-- ZONE TECHNICIAN -->
+
+        <!-- Needs identification and role "technician" -->
+        <activity
+            android:name=".presentation.zone.technician.TechnicianMainActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 
