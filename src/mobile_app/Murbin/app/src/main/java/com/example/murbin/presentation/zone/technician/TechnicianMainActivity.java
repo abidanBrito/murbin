@@ -18,8 +18,7 @@ import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
-import com.example.murbin.presentation.global.PreferencesActivity;
-import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
+import com.example.murbin.presentation.global.GlobalPreferencesActivity;
 
 public class TechnicianMainActivity extends BaseActivity {
 
@@ -63,7 +62,7 @@ public class TechnicianMainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.technician_main_menu_settings: {
-                Intent intent = new Intent(this, PreferencesActivity.class);
+                Intent intent = new Intent(this, GlobalPreferencesActivity.class);
                 startActivity(intent);
 
                 break;

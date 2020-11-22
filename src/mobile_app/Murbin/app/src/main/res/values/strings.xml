@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Created by Francisco Javier Paños Madrona on 6/11/20 16:37
   ~ Copyright (c) 2020 . All rights reserved.
   ~ Last modified 14/11/20 16:37
@@ -10,7 +11,7 @@
 
     <!-- PREFERENCES -->
 
-    <!-- PreferencesActivity -->
+    <!-- GlobalPreferencesActivity -->
     <string name="preferences_activity_title">Preferencias</string>
     <!-- global_prefrerences -->
     <string name="global_preferences_category_general">General</string>
@@ -54,11 +55,12 @@
 
     <!-- GENERALS -->
 
+    <!-- GlobalPreferencesActivity -->
     <!-- DialogFragment -->
-    <!-- about_dialog_fragment -->
-    <string name="about_dialog_fragment_tv_title_default">Sobre Murbin</string>
-    <string name="about_dialog_fragment_tv_message_default">Esta aplicación ha sido creada por el gran equipo de Murbin, para el Proyecto Internet of Things del Grado de Tecnologías Interectivas.</string>
-    <string name="about_dialog_fragment_dismiss_message">Ok</string>
+    <!-- dialog_fragment -->
+    <string name="dialog_fragment_tv_title_default">Sobre Murbin</string>
+    <string name="dialog_fragment_tv_message_default">Esta aplicación ha sido creada por el gran equipo de Murbin, para el Proyecto Internet of Things del Grado de Tecnologías Interectivas.</string>
+    <string name="dialog_fragment_dismiss_message">Ok</string>
 
     <!-- AuthActivity -->
     <string name="AuthActivity_dialogue_title_one">Verificando usuario</string>
@@ -80,6 +82,7 @@
     <string name="auth_email_recovery_password_fragment_et_email_hint">Email</string>
     <string name="auth_email_recovery_password_fragment_btn_enter">Enviar</string>
 
+    <!-- ProfileActivity -->
     <!-- ProfileFragment -->
     <!-- layout | profile_fragment -->
     <string name="profile_fragment_tv_email_verification">No podrás usar la aplicación hasta que valides tu correo electrónico. Pulsa el siguiente botón para recibir el mensaje de confirmación. Gracias.</string>
@@ -95,31 +98,18 @@
 
     <!-- ZONES -->
 
-    <!-- zone / user -->
+    <!-- ZONE GENERAL -->
 
-    <!-- UserMainActivity -->
-    <!-- layout | user_fragment_home -->
-    <string name="user_fragment_home_old_tv_welcome">Bienvenido [Zone User]</string>
-    <string name="user_fragment_home_tv_title">Tu entorno</string>
+    <!-- GeneralMainActivity -->
+    <!-- layout | general_fragment_home -->
+    <string name="general_fragment_home_old_tv_welcome">Bienvenido [Zone User]</string>
+    <string name="general_fragment_home_tv_title">Tu entorno</string>
+    <!-- layout | general_fragment_frame -->
+    <string name="general_fragment_frame_tv_value">103</string>
+    <string name="general_fragment_frame_tv_type">Ruido</string>
+    <string name="general_fragment_frame_tv_unit">dB</string>
 
-    <!-- user_fragment_frame -->
-    <string name="user_fragment_frame_tv_value">103</string>
-    <string name="user_fragment_frame_tv_type">Ruido</string>
-    <string name="user_fragment_frame_tv_unit">dB</string>
-
-    <!-- zone / technician -->
-
-    <!-- TechnicianMainActivity -->
-    <!-- layout | technician_main_activity -->
-    <string name="technician_main_activity_tv_welcome">Bienvenido/a [Zona Technical]</string>
-
-    <!-- zone / scientific -->
-
-    <!-- ScientificMainActivity -->
-    <!-- layout | scientific_main_activity -->
-    <string name="scientific_main_activity_tv_welcome">Bienvenido/a [Zona Scientific]</string>
-
-    <!-- zone / administrator -->
+    <!-- ZONE ADMINISTRATOR -->
 
     <!-- AdministratorMainActivity -->
     <!-- layout | administrator_main_activity -->
@@ -140,5 +130,11 @@
     <string name="administrator_fragment_small_frame_tv_noise">Ruido(dB)</string>
     <string name="administrator_fragment_small_frame_tv_temperature">Temp(Cº)</string>
     <string name="administrator_fragment_small_frame_tv_co2">CO2(ppm)</string>
+
+    <!-- ZONE TECHNICIAN -->
+
+    <!-- TechnicianMainActivity -->
+    <!-- layout | technician_main_activity -->
+    <string name="technician_main_activity_tv_welcome">Bienvenido/a [Zona Technical]</string>
 
 </resources>

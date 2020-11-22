@@ -19,16 +19,15 @@ import com.example.murbin.R;
 import com.example.murbin.models.User;
 import com.example.murbin.presentation.global.fragments.GlobalPreferencesFragment;
 import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
-import com.example.murbin.presentation.zone.scientific.ScientificMainActivity;
+import com.example.murbin.presentation.zone.general.GeneralMainActivity;
 import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
-import com.example.murbin.presentation.zone.user.UserMainActivity;
 
-public class PreferencesActivity extends BaseActivity {
+public class GlobalPreferencesActivity extends BaseActivity {
 
     /**
      * Constant for ease of use in debugging the class code
      */
-    private static final String TAG = PreferencesActivity.class.getSimpleName();
+    private static final String TAG = GlobalPreferencesActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +63,7 @@ public class PreferencesActivity extends BaseActivity {
         if (item.getItemId() == android.R.id.home) {
 //            Toast.makeText(App.getContext(), "Botón atrás pulsado", Toast.LENGTH_SHORT).show();
             User user = App.getCurrentUser();
-            Class<?> redirectActivityClass = UserMainActivity.class;
+            Class<?> redirectActivityClass = GeneralMainActivity.class;
 
             if (user != null) {
                 switch (user.getRole()) {
@@ -75,13 +74,13 @@ public class PreferencesActivity extends BaseActivity {
                     case "technician":
                         redirectActivityClass = TechnicianMainActivity.class;
                         break;
-                    case "scientific":
-                        redirectActivityClass = ScientificMainActivity.class;
+                    default:
+                        redirectActivityClass = GeneralMainActivity.class;
                         break;
                 }
             }
 
-            Intent intent = new Intent(PreferencesActivity.this, redirectActivityClass);
+            Intent intent = new Intent(GlobalPreferencesActivity.this, redirectActivityClass);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();

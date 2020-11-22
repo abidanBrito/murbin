@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/user_fragment_home_container"
+    android:id="@+id/general_fragment_home_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/user_fragment_home_co2"
+        android:id="@+id/general_fragment_home_co2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -15,39 +15,39 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/user_fragment_home_temperature"
+        android:id="@+id/general_fragment_home_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/user_fragment_home_co2" />
+        app:layout_constraintTop_toTopOf="@id/general_fragment_home_co2" />
 
     <TextView
-        android:id="@+id/user_fragment_home_noise"
+        android:id="@+id/general_fragment_home_noise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/user_fragment_home_temperature" />
+        app:layout_constraintTop_toTopOf="@id/general_fragment_home_temperature" />
 
     <TextView
-        android:id="@+id/user_fragment_home_brightness"
+        android:id="@+id/general_fragment_home_brightness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/user_fragment_home_noise" />
+        app:layout_constraintTop_toTopOf="@id/general_fragment_home_noise" />
 
     <TextView
-        android:id="@+id/user_fragment_home_humidity"
+        android:id="@+id/general_fragment_home_humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/user_fragment_home_brightness" />humidity
+        app:layout_constraintTop_toTopOf="@id/general_fragment_home_brightness" />humidity
 
 </androidx.constraintlayout.widget.ConstraintLayout>
