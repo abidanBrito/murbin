@@ -6,10 +6,8 @@
 
 package com.example.murbin.presentation.profiles.fragments;
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +16,16 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.Volley;
 import com.example.murbin.App;
 import com.example.murbin.R;
 import com.example.murbin.models.User;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 
 public class ProfileFragment extends Fragment {
-
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = ProfileFragment.class.getSimpleName();
-
-    App aplicacion = (App) getContext();
 
     @Override
     public View onCreateView(LayoutInflater inflador, ViewGroup contenedor, Bundle savedInstanceState) {
@@ -59,7 +48,7 @@ public class ProfileFragment extends Fragment {
                     firebaseUser.getDisplayName(),
                     null,
                     firebaseUser.getEmail(),
-                    firebaseUser.getPhoneNumber()
+                    null
             );
 
             final NetworkImageView profile_fragment_niv_picture = view.findViewById(R.id.profile_fragment_niv_picture);

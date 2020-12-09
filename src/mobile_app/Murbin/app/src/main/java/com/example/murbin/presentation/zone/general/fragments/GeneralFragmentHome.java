@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.murbin.App;
 import com.example.murbin.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,27 +27,29 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class GeneralFragmentHome extends Fragment {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = GeneralFragmentHome.class.getSimpleName();
-
-    private ViewGroup container;
     private TextView brightness, temperature, co2, noise, humidity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.general_fragment_home, container, false);
 
+        initializeLayoutElements(view);
+        getLastMeasures();
+
+        return view;
+    }
+
+    /**
+     * Method to start the layout elements
+     *
+     * @param view View
+     */
+    private void initializeLayoutElements(View view) {
         brightness = view.findViewById(R.id.general_fragment_home_brightness);
         temperature = view.findViewById(R.id.general_fragment_home_temperature);
         co2 = view.findViewById(R.id.general_fragment_home_co2);
         noise = view.findViewById(R.id.general_fragment_home_noise);
         humidity = view.findViewById(R.id.general_fragment_home_humidity);
-
-        getLastMeasures();
-
-        return view;
     }
 
     private void getLastMeasures() {
@@ -57,19 +60,16 @@ public class GeneralFragmentHome extends Fragment {
         sensors = db.collection("streetlights").document("1")
                 .collection("sensors");
 
-        sensors.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    String value;
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        value = document.getData().get("value").toString();
-//                        Log.d(TAG, document.getId() + " => " + value);
-                        setValueSensor(document.getId(), value);
-                    }
-                } else {
-                    Log.w(TAG, "Error getting documents.", task.getException());
+        sensors.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String value;
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    value = document.getData().get("value").toString();
+//                        Log.d(App.DEFAULT_TAG, document.getId() + " => " + value);
+                    setValueSensor(document.getId(), value);
                 }
+            } else {
+                Log.d(App.DEFAULT_TAG, "Error getting documents.", task.getException());
             }
         });
 

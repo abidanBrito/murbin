@@ -8,11 +8,6 @@ package com.example.murbin.models;
 
 public class Measure {
 
-    /*
-      Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = Measure.class.getSimpleName();
-
     private int co2;
     private double noise;
     private int brightness;

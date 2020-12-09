@@ -24,10 +24,4 @@
         android:orderInCategory="102"
         android:title="@string/administrator_main_bottom_navigation_technician" />
 
-    <item
-        android:id="@+id/administrator_main_bottom_navigation_config"
-        android:icon="@drawable/ic_data"
-        android:orderInCategory="103"
-        android:title="@string/administrator_main_bottom_navigation_config" />
-
 </menu>

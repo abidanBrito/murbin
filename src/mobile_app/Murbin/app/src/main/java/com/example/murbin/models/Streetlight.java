@@ -9,11 +9,6 @@ package com.example.murbin.models;
 
 public class Streetlight {
 
-    /*
-      Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = Streetlight.class.getSimpleName();
-
     private String parentSubzoneID;
     private String name;
     private GeoPoint geoPoint;

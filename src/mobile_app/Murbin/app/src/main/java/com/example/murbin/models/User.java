@@ -6,12 +6,14 @@
 
 package com.example.murbin.models;
 
-public class User {
+import com.google.firebase.Timestamp;
 
-    /*
-      Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = User.class.getSimpleName();
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+public class User {
 
     private static final String DEFAULT_ROLE = "user";
 
@@ -20,7 +22,7 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    private long lastAccess;
+    private Date lastAccess;
 
     /**
      * Constructor Default
@@ -37,15 +39,15 @@ public class User {
      * @param name       User name
      * @param surname    User last name
      * @param email      User email
-     * @param lastAccess Last access user datetime
+     * @param lastAccess Last access user timestamp
      */
-    public User(String role, String uid, String name, String surname, String email, String lastAccess) {
+    public User(String role, String uid, String name, String surname, String email, Timestamp lastAccess) {
         this.role = ((role != null && !role.equals("")) ? role : DEFAULT_ROLE);
         this.uid = uid;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.lastAccess = ((lastAccess != null && !lastAccess.equals("")) ? Long.parseLong(lastAccess) : System.currentTimeMillis());
+        this.lastAccess = (lastAccess != null) ? lastAccess.toDate() : new Date(System.currentTimeMillis());
     }
 
     public static String getDefaultRole() {
@@ -92,23 +94,44 @@ public class User {
         this.email = email;
     }
 
-    public long getLastAccess() {
+    public Date getLastAccess() {
         return lastAccess;
     }
 
-    public void setLastAccess(long lastAccess) {
+    public void setLastAccess(Date lastAccess) {
         this.lastAccess = lastAccess;
     }
 
     @Override
     public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        String lastAccess_formatted = formatter.format(lastAccess);
+
         return "User{" +
                 "role='" + role + '\'' +
                 ", uid='" + uid + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", lastAccess=" + lastAccess +
+                ", lastAccess=" + lastAccess_formatted +
                 '}';
+    }
+
+    /**
+     * Transform User to Map
+     *
+     * @return Map<String, Object>
+     */
+    public Map<String, Object> parseToMap() {
+        Map<String, Object> userMap = new HashMap<>();
+
+        userMap.put("role", this.getRole());
+        userMap.put("uid", this.getUid());
+        userMap.put("name", this.getName());
+        userMap.put("surname", this.getSurname());
+        userMap.put("email", this.getEmail());
+        userMap.put("lastAccess", new Timestamp(this.getLastAccess()));
+
+        return userMap;
     }
 }

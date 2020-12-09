@@ -8,11 +8,6 @@ package com.example.murbin.models;
 
 public class MeasureBrightness {
 
-    /*
-      Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = MeasureBrightness.class.getSimpleName();
-
     private String id;
     private String date;
     private String value;

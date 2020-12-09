@@ -8,11 +8,6 @@ package com.example.murbin.models;
 
 public class GeoPoint {
 
-    /*
-      Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = GeoPoint.class.getSimpleName();
-
     private double latitude;
     private double longitude;
 

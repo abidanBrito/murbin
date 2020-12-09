@@ -16,9 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
-import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.global.fragments.DialogFragment;
-import com.example.murbin.services.BackgroundMusic;
+import com.example.murbin.services.BackgroundMusicService;
 
 /**
  * The activity from which all the activities we create extend,
@@ -26,68 +25,58 @@ import com.example.murbin.services.BackgroundMusic;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = BaseActivity.class.getSimpleName();
-
-    private final Auth mAuth = new Auth(this);
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
     }
 
     @Override
+    public void onBackPressed() {
+        // Very important for safety
+        // Leave empty to avoid pressing the back button on the device hardware
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
-//        Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean newStatus = pref.getBoolean("global_preferences_key_background_music", false);
-//        Log.d(TAG, ((newStatus) ? "TRUE" : "FALSE"));
-        App.getInstance().changeServiceStatus(BackgroundMusic.class, newStatus);
+        App.getInstance().changeServiceStatus(BackgroundMusicService.class, newStatus);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-//        Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-//        Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle saveState) {
         super.onSaveInstanceState(saveState);
-//        Toast.makeText(this, "onSaveInstanceState", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle loadState) {
         super.onRestoreInstanceState(loadState);
-//        Toast.makeText(this, "onRestoreInstanceState", Toast.LENGTH_SHORT).show();
     }
 
     /**

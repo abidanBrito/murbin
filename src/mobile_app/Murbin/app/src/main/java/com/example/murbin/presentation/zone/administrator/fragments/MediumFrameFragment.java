@@ -17,11 +17,6 @@ import com.example.murbin.R;
 
 public class MediumFrameFragment extends Fragment {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = MediumFrameFragment.class.getSimpleName();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.administrator_fragment_medium_frame, container, false);

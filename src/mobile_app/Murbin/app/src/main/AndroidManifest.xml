@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.murbin">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -16,12 +17,13 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <!-- Services -->
-        <service android:name=".services.BackgroundMusic" />
+        <service android:name=".services.BackgroundMusicService" />
 
         <!-- Zone General (No need identification) -->
         <activity
@@ -33,13 +35,17 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".presentation.global.GlobalPreferencesActivity"
-            android:screenOrientation="portrait" />
+        <!-- LOGIN -->
 
         <activity
             android:name=".presentation.auth.AuthEmailActivity"
             android:parentActivityName=".presentation.zone.general.GeneralMainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- ZONE GLOBAL -->
+
+        <activity
+            android:name=".presentation.global.GlobalPreferencesActivity"
             android:screenOrientation="portrait" />
 
         <!-- Needs identification and roles "root", "administrator" or "technician") -->
@@ -52,6 +58,45 @@
         <!-- Needs identification and roles "root" or "administrator" -->
         <activity
             android:name=".presentation.zone.administrator.AdministratorMainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- CRUD TECHNICIANS -->
+        <activity
+            android:name=".presentation.zone.administrator.AdministratorTechnicianListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.administrator.AdministratorTechnicianEditActivity"
+            android:parentActivityName=".presentation.zone.administrator.AdministratorTechnicianListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.administrator.AdministratorTechnicianCreateActivity"
+            android:parentActivityName=".presentation.zone.administrator.AdministratorTechnicianListActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- CRUD SUBZONES -->
+        <activity
+            android:name=".presentation.zone.administrator.AdministratorSubzoneListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.administrator.AdministratorSubzoneEditActivity"
+            android:parentActivityName=".presentation.zone.administrator.AdministratorSubzoneListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.administrator.AdministratorSubzoneCreateActivity"
+            android:parentActivityName=".presentation.zone.administrator.AdministratorSubzoneListActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- CRUD ADMINISTRATORS -->
+        <activity
+            android:name=".presentation.zone.administrator.RootAdministratorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.administrator.RootAdministratorEditActivity"
+            android:parentActivityName=".presentation.zone.administrator.RootAdministratorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.administrator.RootAdministratorCreateActivity"
+            android:parentActivityName=".presentation.zone.administrator.RootAdministratorListActivity"
             android:screenOrientation="portrait" />
 
         <!-- ZONE TECHNICIAN -->

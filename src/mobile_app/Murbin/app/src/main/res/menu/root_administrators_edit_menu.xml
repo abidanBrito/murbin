@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Francisco Javier Paños Madrona on 6/12/20 10:06
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 6/12/20 10:06
+  -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/root_administrators_edit_menu_delete"
+        android:orderInCategory="100"
+        android:title="@string/root_administrators_edit_menu_delete"
+        app:showAsAction="always" />
+
+</menu>

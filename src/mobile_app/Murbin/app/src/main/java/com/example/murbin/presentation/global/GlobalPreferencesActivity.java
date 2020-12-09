@@ -24,11 +24,6 @@ import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
 
 public class GlobalPreferencesActivity extends BaseActivity {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = GlobalPreferencesActivity.class.getSimpleName();
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +56,6 @@ public class GlobalPreferencesActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-//            Toast.makeText(App.getContext(), "Botón atrás pulsado", Toast.LENGTH_SHORT).show();
             User user = App.getCurrentUser();
             Class<?> redirectActivityClass = GeneralMainActivity.class;
 
@@ -83,7 +77,6 @@ public class GlobalPreferencesActivity extends BaseActivity {
             Intent intent = new Intent(GlobalPreferencesActivity.this, redirectActivityClass);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
 
             return true;
         }

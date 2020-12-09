@@ -8,14 +8,14 @@ package com.example.murbin.firebase;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.example.murbin.App;
 import com.example.murbin.R;
-import com.example.murbin.data.UserCrud;
-import com.example.murbin.data.repositories.UserCrudRepository;
-import com.example.murbin.models.User;
+import com.example.murbin.data.UsersDatabaseCrud;
+import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
 import com.example.murbin.presentation.zone.general.GeneralMainActivity;
 import com.example.murbin.presentation.zone.technician.TechnicianMainActivity;
@@ -25,19 +25,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Date;
+
 /**
  * Class to manage Firebase Authentication
  */
 public class Auth {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = Auth.class.getSimpleName();
 //    private static final int RC_SIGN_IN = 1001; // For Google (Not used actually)
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private final UserCrud userCrud = new UserCrud();
+    private final UsersDatabaseCrud userCrud = new UsersDatabaseCrud();
     private FirebaseUser mFirebaseUser;
 
     private Activity activity = null;
@@ -68,6 +66,15 @@ public class Auth {
     }
 
     /**
+     * Return current user logged
+     *
+     * @return FirebaseUser
+     */
+    public FirebaseUser getCurrentUser() {
+        return mAuth.getCurrentUser();
+    }
+
+    /**
      * Try to log in with the email and password passed as parameters
      *
      * @param email    User validated email
@@ -80,21 +87,25 @@ public class Auth {
                 if (task.isSuccessful()) {
                     if (isLogged()) {
                         mFirebaseUser = mAuth.getCurrentUser();
-                        userCrud.read(mFirebaseUser.getUid(), new UserCrudRepository.ReadListener() {
-                            @Override
-                            public void onResponse(User user) {
-                                App.setCurrentUser(user);
-                                checkRole(App.getCurrentUser().getRole());
-                            }
+                        userCrud.read(mFirebaseUser.getUid(), user -> {
+                            Log.d(App.DEFAULT_TAG, mFirebaseUser.getUid());
+                            App.setCurrentUser(user);
+                            // Update lastAccess field
+                            user.setLastAccess(new Date(System.currentTimeMillis()));
+                            userCrud.update(user.getUid(), user.parseToMap(), response -> {
+                                if (response) {
+                                    checkRole(App.getCurrentUser().getRole());
+                                } else {
+                                    Intent intent = new Intent(App.getContext(), GeneralMainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.putExtra("message", "No se ha podido verificar tu identidad correctamente.");
+                                    App.getContext().startActivity(intent);
+                                }
+                            });
                         });
-                    } else {
-                        App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Usuario no logueado?", App.getInstance().getBaseContext());
                     }
                 } else {
-//                    Exception exception = task.getException();
-//                    Log.d(TAG, "Excepción Task: " + exception.getMessage());
-//                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Error: " + exception.getMessage(), App.getInstance().getBaseContext());
-                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Datos de acceso incorrectos", App.getInstance().getBaseContext());
+                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.black, "Datos de acceso incorrectos.", App.getContext());
                 }
             }
         });
@@ -106,19 +117,11 @@ public class Auth {
      * @param email User validated email
      */
     public void sendPasswordResetEmail(String email) {
-        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-//                    Log.d(TAG, "Mensaje de restablecimiento enviado");
-                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Sí el email esta en nuestro sistema recibirás un mensaje de restablecimiento de contraseña.", App.getInstance().getBaseContext());
-                } else {
-//                    Exception exception = task.getException();
-//                    Log.d(TAG, "Excepción Task: " + exception.getMessage());
-//                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Error: " + exception.getMessage(), App.getInstance().getBaseContext());
-                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.principal, "Sí el email esta en nuestro sistema recibirás un mensaje de restablecimiento  de contraseña.", App.getInstance().getBaseContext());
-                }
-            }
+        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+            Intent intent = new Intent(App.getContext(), AuthEmailActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("message", "Sí el email esta registrado recibirás un correo para restablecer la contraseña.");
+            App.getContext().startActivity(intent);
         });
     }
 
@@ -127,6 +130,7 @@ public class Auth {
      */
     public void signOut() {
         mAuth.signOut();
+        App.setCurrentUser(null);
     }
 
     /**
@@ -159,12 +163,12 @@ public class Auth {
      */
     public void redirectActivity(Class<?> activity) {
         Intent i;
-        i = new Intent(App.getInstance().getBaseContext(), activity);
+        i = new Intent(App.getContext(), activity);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
         );
-        App.getInstance().getBaseContext().startActivity(i);
+        App.getContext().startActivity(i);
     }
 
 }
