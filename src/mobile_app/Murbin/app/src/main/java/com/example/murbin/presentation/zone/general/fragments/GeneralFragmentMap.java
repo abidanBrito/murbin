@@ -25,11 +25,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GeneralFragmentMap extends Fragment {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = GeneralFragmentMap.class.getSimpleName();
-
     MapView mMapView;
     private GoogleMap map;
 

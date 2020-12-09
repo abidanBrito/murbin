@@ -1,7 +1,7 @@
 /*
- * Created by Francisco Javier Paños Madrona on 6/11/20 18:00
+ * Created by Francisco Javier Paños Madrona on 9/12/20 19:03
  * Copyright (c) 2020 . All rights reserved.
- * Last modified 14/11/20 14:45
+ * Last modified 9/12/20 17:41
  */
 
 package com.example.murbin.presentation.zone.technician;
@@ -11,25 +11,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.global.GlobalPreferencesActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class TechnicianMainActivity extends BaseActivity {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = TechnicianMainActivity.class.getSimpleName();
-
     private final Auth mAuth = new Auth(this);
 
-    Toolbar mToolbar;
+    private Toolbar mToolbar;
+    private BottomNavigationView mBottomNavigationView;
+    private ViewGroup mContainer;
+    private String mMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,18 @@ public class TechnicianMainActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
+        }
+
+        mContainer = findViewById(R.id.technician_main_activity_toolbar);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey("message")) {
+                mMessage = extras.getString("message", "");
+                if (mMessage != null && !mMessage.isEmpty()) {
+                    App.getInstance().snackMessage(mContainer, R.color.black, mMessage, this);
+                }
+            }
         }
     }
 
@@ -78,5 +92,7 @@ public class TechnicianMainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
     }
+
 }

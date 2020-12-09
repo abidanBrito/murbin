@@ -6,38 +6,17 @@
 
 package com.example.murbin.presentation.auth;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
+import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
-import com.example.murbin.firebase.Auth;
 
 public class AuthEmailActivity extends BaseActivity {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = AuthEmailActivity.class.getSimpleName();
-
-    private Auth mAuth;
-
-    private final String email = "";
-    private final String password = "";
-
-    private ViewGroup container;
-    private Toolbar toolbar;
-    private EditText et_email, et_password;
-    private TextView tv_remember_password;
-    private Button btn_enter;
+    private ViewGroup mContainer;
+    private String mMessage;
 
     @Override
     protected void onStart() {
@@ -48,7 +27,6 @@ public class AuthEmailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_email_activity);
-        mAuth = new Auth(this);
         initializeLayoutElements();
     }
 
@@ -56,14 +34,17 @@ public class AuthEmailActivity extends BaseActivity {
      * Method to start the layout elements
      */
     private void initializeLayoutElements() {
-        // Toolbar menu
-        toolbar = findViewById(R.id.auth_email_activity_toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
-            getSupportActionBar().setTitle("");
+
+        mContainer = findViewById(R.id.auth_email_activity_container);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey("message")) {
+                mMessage = extras.getString("message", "");
+                if (mMessage != null && !mMessage.isEmpty()) {
+                    App.getInstance().snackMessage(mContainer, R.color.black, mMessage, this);
+                }
+            }
         }
     }
 

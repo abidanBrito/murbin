@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/administrator_technicians_edit_activity_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toTopOf="@id/administrator_technicians_edit_activity_bottom_navigation"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/administrator_technicians_edit_activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <TextView
+        android:id="@+id/administrator_technicians_edit_activity_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/administrator_technicians_edit_activity_tv_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_edit_activity_toolbar" />
+
+    <TextView
+        android:id="@+id/administrator_technicians_edit_activity_tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:labelFor="@+id/administrator_technicians_edit_activity_et_name"
+        android:text="@string/administrator_technicians_edit_activity_tv_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_edit_activity_tv_title" />
+
+    <EditText
+        android:id="@+id/administrator_technicians_edit_activity_et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="@string/administrator_technicians_edit_activity_et_name_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/administrator_technicians_edit_activity_tv_name" />
+
+    <TextView
+        android:id="@+id/administrator_technicians_edit_activity_tv_surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:labelFor="@+id/administrator_technicians_edit_activity_et_surname"
+        android:text="@string/administrator_technicians_edit_activity_tv_surname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_edit_activity_et_name" />
+
+    <EditText
+        android:id="@+id/administrator_technicians_edit_activity_et_surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="@string/administrator_technicians_edit_activity_et_surname_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/administrator_technicians_edit_activity_tv_surname" />
+
+    <TextView
+        android:id="@+id/administrator_technicians_edit_activity_tv_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:labelFor="@+id/administrator_technicians_edit_activity_et_email"
+        android:text="@string/administrator_technicians_edit_activity_tv_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_edit_activity_et_surname" />
+
+    <EditText
+        android:id="@+id/administrator_technicians_edit_activity_et_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="@string/administrator_technicians_edit_activity_et_email_hint"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/administrator_technicians_edit_activity_tv_email" />
+
+    <Button
+        android:id="@+id/administrator_technicians_edit_activity_btn_save"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/main_button"
+        android:fontFamily="@font/montserratmedium"
+        android:shadowColor="@null"
+        android:shadowRadius="0"
+        android:text="@string/administrator_technicians_edit_activity_btn_save"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_edit_activity_et_email" />
+
+    <Button
+        android:id="@+id/administrator_technicians_edit_activity_btn_cancel"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/accent_button"
+        android:fontFamily="@font/montserratmedium"
+        android:shadowColor="@null"
+        android:shadowRadius="0"
+        android:text="@string/administrator_technicians_edit_activity_btn_cancel"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_edit_activity_btn_save" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/administrator_technicians_edit_activity_bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/administrator_main_bottom_navigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

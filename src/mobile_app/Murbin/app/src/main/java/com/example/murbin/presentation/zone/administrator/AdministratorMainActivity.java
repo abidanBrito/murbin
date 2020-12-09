@@ -11,11 +11,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
@@ -25,15 +26,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdministratorMainActivity extends BaseActivity {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = AdministratorMainActivity.class.getSimpleName();
-
     private final Auth mAuth = new Auth(this);
 
     private Toolbar mToolbar;
-    private BottomNavigationView bottomNavigationView;
+    private BottomNavigationView mBottomNavigationView;
+    private ViewGroup mContainer;
+    private String mMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +51,25 @@ public class AdministratorMainActivity extends BaseActivity {
             getSupportActionBar().setTitle("");
         }
 
-        //BottomNavigationView menu
-        bottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
+        mContainer = findViewById(R.id.administrator_main_activity_toolbar);
+
+        // BottomNavigationView menu
+        mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
+        if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
+            mBottomNavigationView.getMenu().clear();
+            mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);
+        }
         actionsBottomNavigationView();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey("message")) {
+                mMessage = extras.getString("message", "");
+                if (mMessage != null && !mMessage.isEmpty()) {
+                    App.getInstance().snackMessage(mContainer, R.color.black, mMessage, this);
+                }
+            }
+        }
     }
 
     @Override
@@ -94,30 +108,29 @@ public class AdministratorMainActivity extends BaseActivity {
      */
     public void actionsBottomNavigationView() {
         // Actions when pressing an option in the lower navigation
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.administrator_main_bottom_navigation_home:
-                        Toast.makeText(AdministratorMainActivity.this, "Menú Home pulsado", Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    case R.id.administrator_main_bottom_navigation_subzones:
-                        Toast.makeText(AdministratorMainActivity.this, "Menú Subzonas pulsado", Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    case R.id.administrator_main_bottom_navigation_technician:
-                        Toast.makeText(AdministratorMainActivity.this, "Menú Técnicos pulsado", Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    case R.id.administrator_main_bottom_navigation_config:
-                        Toast.makeText(AdministratorMainActivity.this, "Menú Configuración pulsado", Toast.LENGTH_SHORT).show();
-
-                        break;
+                Intent intent;
+                int id = item.getItemId();
+                if (id == R.id.administrator_main_bottom_navigation_home
+                        || id == R.id.root_main_bottom_navigation_home) {
+                    // Empty activity
+                } else if (id == R.id.administrator_main_bottom_navigation_subzones
+                        || id == R.id.root_main_bottom_navigation_subzones) {
+                    intent = new Intent(AdministratorMainActivity.this, AdministratorSubzoneListActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else if (id == R.id.administrator_main_bottom_navigation_technician
+                        || id == R.id.root_main_bottom_navigation_technician) {
+                    intent = new Intent(AdministratorMainActivity.this, AdministratorTechnicianListActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else if (id == R.id.root_main_bottom_navigation_administrator) {
+                    intent = new Intent(AdministratorMainActivity.this, RootAdministratorListActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
 
                 return true;
@@ -125,30 +138,22 @@ public class AdministratorMainActivity extends BaseActivity {
         });
 
         // Actions when pressing an option already selected from the lower navigation
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        mBottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.administrator_main_bottom_navigation_home:
-                        Toast.makeText(AdministratorMainActivity.this, "Menú Home ya está pulsado", Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    case R.id.administrator_main_bottom_navigation_subzones:
-                        Toast.makeText(AdministratorMainActivity.this, "Menú Subzonas ya está pulsado", Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    case R.id.administrator_main_bottom_navigation_technician:
-                        Toast.makeText(AdministratorMainActivity.this, "Menú Técnicos ya está pulsado", Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    case R.id.administrator_main_bottom_navigation_config:
-                        Toast.makeText(AdministratorMainActivity.this, "Menú Configuración ya está pulsado", Toast.LENGTH_SHORT).show();
-
-                        break;
+                int id = item.getItemId();
+                if (id == R.id.administrator_main_bottom_navigation_home
+                        || id == R.id.root_main_bottom_navigation_home) {
+                    // Empty activity
+                } else if (id == R.id.administrator_main_bottom_navigation_subzones
+                        || id == R.id.root_main_bottom_navigation_subzones) {
+                    // Empty action
+                } else if (id == R.id.administrator_main_bottom_navigation_technician
+                        || id == R.id.root_main_bottom_navigation_technician) {
+                    // Empty action
+                } else if (id == R.id.root_main_bottom_navigation_administrator) {
+                    // Empty action
                 }
             }
         });

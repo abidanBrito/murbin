@@ -8,11 +8,6 @@ package com.example.murbin.models;
 
 public class Zone {
 
-    /*
-      Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = Zone.class.getSimpleName();
-
     private String name;
     private boolean status;
 

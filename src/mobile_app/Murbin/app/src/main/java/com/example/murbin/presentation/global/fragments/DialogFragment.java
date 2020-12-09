@@ -23,11 +23,6 @@ import com.example.murbin.R;
  */
 public class DialogFragment extends androidx.fragment.app.DialogFragment {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = DialogFragment.class.getSimpleName();
-
     public DialogFragment() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
@@ -61,7 +56,7 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
             if (getDialog() != null) {
                 getDialog().setTitle(title);
                 tv_message.setText(message);
-                getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             }
         }
 

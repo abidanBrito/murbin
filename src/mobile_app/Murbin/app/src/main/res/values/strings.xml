@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Francisco Javier Paños Madrona on 6/11/20 16:37
   ~ Copyright (c) 2020 . All rights reserved.
   ~ Last modified 14/11/20 16:37
@@ -13,45 +12,67 @@
 
     <!-- GlobalPreferencesActivity -->
     <string name="preferences_activity_title">Preferencias</string>
-    <!-- global_prefrerences -->
+    <!-- global_preferences -->
     <string name="global_preferences_category_general">General</string>
-    <string name="global_preferences_key_background_music_title">Música de fondo</string>
-    <string name="global_preferences_key_background_music_summary">Reproducirá música de fondo durante el uso de la aplicación.</string>
+    <string name="global_preferences_key_background_music_title">Servicio de Música</string>
+    <string name="global_preferences_key_background_music_summary">Inicia/Detiene el servicio de reproducción de música.</string>
 
     <!-- Permissions Message -->
-    <string name="permissions_message_title">Solicitud de permiso</string>
+    <string name="permissions_message_title">Solicitud de permisos</string>
     <string name="permissions_message_action">OK</string>
     <string name="permissions_message_denied">Si no concedes el permiso, no se puede realizar la acción solicitada.</string>
 
     <!-- MENUS -->
 
-    <!-- user_main_menu -->
-    <string name="user_main_menu_login">Login</string>
-    <string name="user_main_menu_settings">Ajustes</string>
-    <string name="user_main_menu_about_murbin">Sobre Murbin</string>
-
-    <!-- user_main_bottom_navigation -->
-    <string name="user_main_bottom_navigation_home">Home</string>
-    <string name="user_main_bottom_navigation_map">Mapa</string>
-    <string name="user_main_bottom_navigation_data">Histórico</string>
+    <!-- general_main_menu -->
+    <string name="general_main_menu_login">Login</string>
+    <string name="general_main_menu_settings">Ajustes</string>
+    <string name="general_main_menu_about_murbin">Sobre Murbin</string>
+    <!-- general_main_bottom_navigation -->
+    <string name="general_main_bottom_navigation_home">Home</string>
+    <string name="general_main_bottom_navigation_map">Mapa</string>
+    <string name="general_main_bottom_navigation_data">Histórico</string>
 
     <!-- administrator_main_menu -->
     <string name="administrator_main_menu_settings">Ajustes</string>
     <string name="administrator_main_menu_logout">Desconectarse</string>
-
     <!-- administrator_main_bottom_navigation -->
     <string name="administrator_main_bottom_navigation_dashboard">Home</string>
     <string name="administrator_main_bottom_navigation_subzones">Subzonas</string>
     <string name="administrator_main_bottom_navigation_technician">Técnicos</string>
-    <string name="administrator_main_bottom_navigation_config">Config</string>
+
+    <!-- administrator_technician_main_menu -->
+    <string name="administrator_technician_main_menu_settings">Ajustes</string>
+    <string name="administrator_technician_main_menu_logout">Desconectarse</string>
+    <!-- administrator_technicians_list_menu -->
+    <string name="administrator_technicians_list_menu_create">Nuevo</string>
+    <!-- administrator_technicians_edit_menu -->
+    <string name="administrator_technicians_edit_menu_delete">Eliminar</string>
+
+    <!-- administrator_subzone_main_menu -->
+    <string name="administrator_subzone_main_menu_settings">Ajustes</string>
+    <string name="administrator_subzone_main_menu_logout">Desconectarse</string>
+    <!-- administrator_subzones_list_menu -->
+    <string name="administrator_subzones_list_menu_create">Nuevo</string>
+    <!-- administrator_subzones_edit_menu -->
+    <string name="administrator_subzones_edit_menu_delete">Eliminar</string>
+
+    <!-- root_administrator_main_menu -->
+    <string name="root_administrator_main_menu_settings">Ajustes</string>
+    <string name="root_administrator_main_menu_logout">Desconectarse</string>
+    <!-- root_administrators_list_menu -->
+    <string name="root_administrators_list_menu_create">Nuevo</string>
+    <!-- root_administrators_edit_menu -->
+    <string name="root_administrators_edit_menu_delete">Eliminar</string>
+    <!-- root_main_bottom_navigation -->
+    <string name="root_main_bottom_navigation_dashboard">Home</string>
+    <string name="root_main_bottom_navigation_subzones">Subzonas</string>
+    <string name="root_main_bottom_navigation_technician">Técnicos</string>
+    <string name="root_main_bottom_navigation_administrator">Admins</string>
 
     <!-- technician_main_menu -->
     <string name="technician_main_menu_settings">Ajustes</string>
     <string name="technician_main_menu_logout">Desconectarse</string>
-
-    <!-- scientific_main_menu -->
-    <string name="scientific_main_menu_settings">Ajustes</string>
-    <string name="scientific_main_menu_logout">Desconectarse</string>
 
     <!-- GENERALS -->
 
@@ -59,13 +80,10 @@
     <!-- DialogFragment -->
     <!-- dialog_fragment -->
     <string name="dialog_fragment_tv_title_default">Sobre Murbin</string>
-    <string name="dialog_fragment_tv_message_default">Esta aplicación ha sido creada por el gran equipo de Murbin, para el Proyecto Internet of Things del Grado de Tecnologías Interectivas.</string>
-    <string name="dialog_fragment_dismiss_message">Ok</string>
+    <string name="dialog_fragment_tv_message_default">Esta aplicación ha sido creada por el gran equipo de Murbin, para el Proyecto Internet of Things del Grado de Tecnologías Interectivas.\n\nLa música que se puede escuchar es libre de derechos y está ofrecida por Audionautix.com</string>
+    <string name="dialog_fragment_dismiss_message">OK</string>
 
     <!-- AuthActivity -->
-    <string name="AuthActivity_dialogue_title_one">Verificando usuario</string>
-    <string name="AuthActivity_dialogue_message_one">Procesando petición</string>
-    <string name="AuthActivity_error_1">Los datos acceso no son correctos.</string>
     <!-- layout | auth_email_activity -->
     <string name="auth_email_activity_iv_go_back">Regresar</string>
     <string name="auth_email_activity_tv_title">Iniciar sesión</string>
@@ -101,13 +119,9 @@
     <!-- ZONE GENERAL -->
 
     <!-- GeneralMainActivity -->
-    <!-- layout | general_fragment_home -->
-    <string name="general_fragment_home_old_tv_welcome">Bienvenido [Zone User]</string>
-    <string name="general_fragment_home_tv_title">Tu entorno</string>
-    <!-- layout | general_fragment_frame -->
-    <string name="general_fragment_frame_tv_value">103</string>
-    <string name="general_fragment_frame_tv_type">Ruido</string>
-    <string name="general_fragment_frame_tv_unit">dB</string>
+    <string name="GeneralMainActivity_permission_error_1">Denegaste el permiso, no puedo mostrar las farolas de tu ubicación.</string>
+    <!-- UsesCasesZoneGeneral -->
+    <string name="UsesCasesZoneGeneral_permission_justification_map">Se require el acceso a tu ubicación para poder mostrarte las farolas más cercanas.</string>
 
     <!-- ZONE ADMINISTRATOR -->
 
@@ -123,18 +137,96 @@
     <string name="administrator_fragment_large_frame_fragment_iv_type">Image</string>
     <string name="administrator_fragment_large_frame_btn_go">Ir</string>
     <!-- layout | administrator_fragment_medium_frame -->
-    <string name="administrator_fragment_medium_frame_tv_salutation">Hello blank fragment</string>
     <string name="administrator_fragment_medium_frame_tv_type">Subzonas</string>
     <string name="administrator_fragment_medium_frame_tv_type2">Técnicos</string>
     <!-- layout | administrator_fragment_small_frame -->
     <string name="administrator_fragment_small_frame_tv_noise">Ruido(dB)</string>
     <string name="administrator_fragment_small_frame_tv_temperature">Temp(Cº)</string>
     <string name="administrator_fragment_small_frame_tv_co2">CO2(ppm)</string>
+    <!-- AdministratorTechnicianListActivity -->
+    <string name="AdministratorTechnicianListActivity_toolbar_title">Técnicos</string>
+    <!-- AdministratorTechnicianEditActivity -->
+    <string name="AdministratorTechnicianEditActivity_alert_dialog_delete_title">Confirmación</string>
+    <string name="AdministratorTechnicianEditActivity_alert_dialog_delete_message">Se va a proceder a eliminar al técnico, el proceso es irreversible. ¿Confirma la eliminación?</string>
+    <string name="AdministratorTechnicianEditActivity_alert_dialog_confirm_text">Sí</string>
+    <string name="AdministratorTechnicianEditActivity_alert_dialog_cancel_text">Cancelar</string>
+    <!-- layout | administrator_technicians_edit_activity -->
+    <string name="administrator_technicians_edit_activity_tv_title">Editar Técnico</string>
+    <string name="administrator_technicians_edit_activity_tv_name">Nombre</string>
+    <string name="administrator_technicians_edit_activity_et_name_hint">Introduce el nombre</string>
+    <string name="administrator_technicians_edit_activity_tv_surname">Apellidos</string>
+    <string name="administrator_technicians_edit_activity_et_surname_hint">Introduce los apellidos</string>
+    <string name="administrator_technicians_edit_activity_tv_email">Email</string>
+    <string name="administrator_technicians_edit_activity_et_email_hint">Introduce el email</string>
+    <string name="administrator_technicians_edit_activity_btn_cancel">Cancelar</string>
+    <string name="administrator_technicians_edit_activity_btn_save">Guardar</string>
+    <!-- layout | administrator_technicians_create_activity -->
+    <string name="administrator_technicians_create_activity_tv_title">Crear Técnico</string>
+    <string name="administrator_technicians_create_activity_tv_name">Nombre</string>
+    <string name="administrator_technicians_create_activity_et_name_hint">Introduce el nombre</string>
+    <string name="administrator_technicians_create_activity_tv_surname">Apellidos</string>
+    <string name="administrator_technicians_create_activity_et_surname_hint">Introduce los apellidos</string>
+    <string name="administrator_technicians_create_activity_tv_email">Email</string>
+    <string name="administrator_technicians_create_activity_et_email_hint">Introduce el email</string>
+    <string name="administrator_technicians_create_activity_btn_cancel">Cancelar</string>
+    <string name="administrator_technicians_create_activity_btn_save">Guardar</string>
+    <!-- AdministratorSubzoneListActivity -->
+    <string name="AdministratorSubzoneListActivity_toolbar_title">Subzonas</string>
+    <!-- AdministratorSubzoneEditActivity -->
+    <string name="AdministratorSubzoneEditActivity_alert_dialog_delete_title">Confirmación</string>
+    <string name="AdministratorSubzoneEditActivity_alert_dialog_delete_message">Se va a proceder a eliminar la subzona, el proceso es irreversible. ¿Confirma la eliminación?</string>
+    <string name="AdministratorSubzoneEditActivity_alert_dialog_confirm_text">Sí</string>
+    <string name="AdministratorSubzoneEditActivity_alert_dialog_cancel_text">Cancelar</string>
+    <!-- layout | administrator_subzones_edit_activity -->
+    <string name="administrator_subzones_edit_activity_tv_title">Editar Subzona</string>
+    <string name="administrator_subzones_edit_activity_tv_name">Nombre</string>
+    <string name="administrator_subzones_edit_activity_et_name_hint">Introduce el nombre</string>
+    <string name="administrator_subzones_edit_activity_tv_status">Apellidos</string>
+    <string name="administrator_subzones_edit_activity_btn_cancel">Cancelar</string>
+    <string name="administrator_subzones_edit_activity_btn_save">Guardar</string>
+    <!-- layout | administrator_subzones_create_activity -->
+    <string name="administrator_subzones_create_activity_tv_title">Crear Subzona</string>
+    <string name="administrator_subzones_create_activity_tv_name">Nombre</string>
+    <string name="administrator_subzones_create_activity_et_name_hint">Introduce el nombre</string>
+    <string name="administrator_subzones_create_activity_tv_status">Estado</string>
+    <string name="administrator_subzones_create_activity_btn_cancel">Cancelar</string>
+    <string name="administrator_subzones_create_activity_btn_save">Guardar</string>
+    <!-- RootAdministratorsListActivity -->
+    <string name="RootAdministratorsListActivity_toolbar_title">Administradores</string>
+    <!-- RootAdministratorsEditActivity -->
+    <string name="RootAdministratorEditActivity_alert_dialog_delete_title">Confirmación</string>
+    <string name="RootAdministratorEditActivity_alert_dialog_delete_message">Se va a proceder a eliminar al administrador, el proceso es irreversible. ¿Confirma la eliminación?</string>
+    <string name="RootAdministratorEditActivity_alert_dialog_confirm_text">Sí</string>
+    <string name="RootAdministratorEditActivity_alert_dialog_cancel_text">Cancelar</string>
+    <!-- layout | root_administrators_edit_activity -->
+    <string name="root_administrators_edit_activity_tv_title">Editar Administrador</string>
+    <string name="root_administrators_edit_activity_tv_name">Nombre</string>
+    <string name="root_administrators_edit_activity_et_name_hint">Introduce el nombre</string>
+    <string name="root_administrators_edit_activity_tv_surname">Apellidos</string>
+    <string name="root_administrators_edit_activity_et_surname_hint">Introduce los apellidos</string>
+    <string name="root_administrators_edit_activity_tv_email">Email</string>
+    <string name="root_administrators_edit_activity_et_email_hint">Introduce el email</string>
+    <string name="root_administrators_edit_activity_btn_cancel">Cancelar</string>
+    <string name="root_administrators_edit_activity_btn_save">Guardar</string>
+    <!-- layout | root_administrators_create_activity -->
+    <string name="root_administrators_create_activity_tv_title">Crear Administrador</string>
+    <string name="root_administrators_create_activity_tv_name">Nombre</string>
+    <string name="root_administrators_create_activity_et_name_hint">Introduce el nombre</string>
+    <string name="root_administrators_create_activity_tv_surname">Apellidos</string>
+    <string name="root_administrators_create_activity_et_surname_hint">Introduce los apellidos</string>
+    <string name="root_administrators_create_activity_tv_email">Email</string>
+    <string name="root_administrators_create_activity_et_email_hint">Introduce el email</string>
+    <string name="root_administrators_create_activity_btn_cancel">Cancelar</string>
+    <string name="root_administrators_create_activity_btn_save">Guardar</string>
 
     <!-- ZONE TECHNICIAN -->
 
     <!-- TechnicianMainActivity -->
     <!-- layout | technician_main_activity -->
-    <string name="technician_main_activity_tv_welcome">Bienvenido/a [Zona Technical]</string>
+    <string name="technician_main_activity_tv_welcome">Bienvenido/a [Zona Technician]</string>
+
+    <!-- BackgroundMusicService -->
+    <string name="BackgroundMusic_notification_channel_title">Reproduciendo música</string>
+    <string name="BackgroundMusic_notification_channel_description">Disfruta de buena música con Murbin App</string>
 
 </resources>

@@ -8,11 +8,6 @@ package com.example.murbin.models;
 
 public class MeasureCo2 {
 
-    /*
-      Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = MeasureCo2.class.getSimpleName();
-
     private String id;
     private String date;
     private String value;

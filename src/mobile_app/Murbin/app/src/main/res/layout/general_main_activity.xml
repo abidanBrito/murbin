@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_constraintBottom_toTopOf="@id/general_main_activity_bottom_navigation"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toBottomOf="@id/auth_email_activity_toolbar">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/general_main_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,7 +19,7 @@
         android:id="@+id/general_main_activity_fragment"
         class="com.example.murbin.presentation.zone.general.fragments.GeneralFragmentHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/general_main_activity_bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +33,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/user_main_bottom_navigation" />
+        app:menu="@menu/general_main_bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,14 +6,11 @@
 
 package com.example.murbin.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Subzone {
 
-    /*
-      Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = Subzone.class.getSimpleName();
-
-    private String parentZoneID;
     private String name;
     private boolean status;
 
@@ -27,12 +24,10 @@ public class Subzone {
     /**
      * Constructor
      *
-     * @param parentZoneID Name of the parent zone [parent_ID]
-     * @param name         Subzone name [ID]
-     * @param status       Status of the streetlights in the subzone [On/Off]
+     * @param name   Subzone name [ID]
+     * @param status Status of the streetlights in the subzone [On/Off]
      */
-    public Subzone(String parentZoneID, boolean status, String name) {
-        this.parentZoneID = parentZoneID;
+    public Subzone(String name, boolean status) {
         this.name = name;
         this.status = status;
     }
@@ -56,9 +51,22 @@ public class Subzone {
     @Override
     public String toString() {
         return "Subzone{" +
-                "parentZoneID='" + parentZoneID + '\'' +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", status=" + status +
                 '}';
+    }
+
+    /**
+     * Transform Subzone to Map
+     *
+     * @return Map<String, Object>
+     */
+    public Map<String, Object> parseToMap() {
+        Map<String, Object> subzoneMap = new HashMap<>();
+
+        subzoneMap.put("name", this.getName());
+        subzoneMap.put("status", this.isStatus());
+
+        return subzoneMap;
     }
 }

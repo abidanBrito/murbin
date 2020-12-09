@@ -15,11 +15,6 @@ import com.example.murbin.R;
 
 public class ProfileActivity extends BaseActivity {
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = ProfileActivity.class.getSimpleName();
-
     private Toolbar mToolbar;
 
     @Override

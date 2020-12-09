@@ -7,4 +7,11 @@
 package com.example.murbin.uses_cases;
 
 public class UsesCasesZoneTechnician {
+
+    /**
+     * Constructor empty
+     */
+    public UsesCasesZoneTechnician() {
+        //
+    }
 }

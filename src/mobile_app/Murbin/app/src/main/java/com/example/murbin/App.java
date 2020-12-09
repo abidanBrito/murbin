@@ -13,13 +13,16 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.ViewGroup;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.murbin.data.UsersDatabaseCrud;
+import com.example.murbin.firebase.Auth;
 import com.example.murbin.models.User;
-import com.example.murbin.services.BackgroundMusic;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -29,15 +32,13 @@ import com.google.android.material.snackbar.Snackbar;
  */
 public class App extends Application {
 
+    public static final String DEFAULT_TAG = "APP_MURBIN";
     public static final int PERMIT_REQUEST_CODE_ACCESS_FINE_LOCATION = 3001;
 
-    /**
-     * Constant for ease of use in debugging the class code
-     */
-    private static final String TAG = App.class.getSimpleName();
-
+    public static final String ROLE_ROOT = "root";
+    public static final String ROLE_ADMINISTRATOR = "administrator";
+    public static final String ROLE_TECHNICIAN = "technician";
     private static App instance;
-
     private static User currentUser = null;
 
     public App() {
@@ -58,6 +59,23 @@ public class App extends Application {
 
     public static void setCurrentUser(User user) {
         currentUser = user;
+    }
+
+    /**
+     * Check if email is valid
+     *
+     * @param email Email for check
+     * @return boolean
+     */
+    public static boolean isValidEmail(CharSequence email) {
+        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // Runs only when you start the application for the first time
+//        toZoneUserLogged();
     }
 
     /**
@@ -89,14 +107,13 @@ public class App extends Application {
      * @param newStatus    Value true to start or false to stop
      */
     public void changeServiceStatus(Class<?> serviceClass, boolean newStatus) {
+        Intent serviceIntent = new Intent(instance.getApplicationContext(), serviceClass);
         if (newStatus) {
             if (!isServiceRunning(serviceClass)) {
-                startService(new Intent(instance.getApplicationContext(),
-                        serviceClass));
+                startService(serviceIntent);
             }
         } else {
-            stopService(new Intent(instance.getApplicationContext(),
-                    BackgroundMusic.class));
+            stopService(serviceIntent);
         }
     }
 
@@ -131,6 +148,22 @@ public class App extends Application {
         Snackbar sb = Snackbar.make(cl, message, BaseTransientBottomBar.LENGTH_SHORT);
         sb.getView().setBackgroundColor(ContextCompat.getColor(context, color));
         sb.show();
+    }
+
+    /**
+     * When run, it redirects to the user's zone based on their role.
+     */
+    public void toZoneUserLogged() {
+        Auth mAuth = new Auth();
+        if (mAuth.isLogged()) {
+            UsersDatabaseCrud mUsersDatabaseCrud = new UsersDatabaseCrud();
+            mUsersDatabaseCrud.read(mAuth.getCurrentUser().getUid(), user -> {
+                if (user != null) {
+                    App.setCurrentUser(user);
+                    mAuth.checkRole(App.getCurrentUser().getRole());
+                }
+            });
+        }
     }
 
 }
