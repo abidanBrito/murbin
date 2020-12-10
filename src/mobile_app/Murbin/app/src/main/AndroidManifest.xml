@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.TIC" />
 
     <application
         android:name=".App"
@@ -24,6 +26,14 @@
 
         <!-- Services -->
         <service android:name=".services.BackgroundMusicService" />
+        <service android:name=".services.StreetlightWarningService" />
+
+        <!-- Receivers -->
+        <receiver android:name=".receivers.WarningReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_TIME_TICK"/>
+            </intent-filter>
+        </receiver>
 
         <!-- Zone General (No need identification) -->
         <activity
@@ -48,7 +58,7 @@
             android:name=".presentation.global.GlobalPreferencesActivity"
             android:screenOrientation="portrait" />
 
-        <!-- Needs identification and roles "root", "administrator" or "technician") -->
+        <!-- Needs identification and roles "root", "administrator" or "technician" -->
         <activity
             android:name=".presentation.profiles.ProfileActivity"
             android:screenOrientation="portrait" />

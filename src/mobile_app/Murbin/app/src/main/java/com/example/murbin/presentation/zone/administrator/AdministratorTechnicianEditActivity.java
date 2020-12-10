@@ -39,7 +39,7 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
     private String m_email;
     private String mMessage;
     private String mId;
-    private EditText m_et_name, m_et_surname, m_et_email;
+    private EditText m_et_name, m_et_surname, m_et_email, m_et_pass;
     private Button m_btn_cancel, m_btn_save;
     private UsersDatabaseCrud mUsersDatabaseCrud;
     private User mUser;
@@ -47,7 +47,7 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.administrator_technicians_edit_activity);
+        setContentView(R.layout.administrator_technicians_edit_formulary);
         initializeLayoutElements();
     }
 
@@ -56,7 +56,7 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_technicians_edit_activity_toolbar);
+        mToolbar = findViewById(R.id.administrator_technicians_edit_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -67,18 +67,19 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
 
         mContainer = findViewById(R.id.administrator_technicians_edit_activity_container);
 
-        m_et_name = findViewById(R.id.administrator_technicians_edit_activity_et_name);
-        m_et_surname = findViewById(R.id.administrator_technicians_edit_activity_et_surname);
-        m_et_email = findViewById(R.id.administrator_technicians_edit_activity_et_email);
+        m_et_name = findViewById(R.id.administrator_technicians_edit_et_name);
+        m_et_pass = findViewById(R.id.administrator_technicians_edit_et_location);
+        //m_et_surname = findViewById(R.id.administrator_technicians_edit_activity_et_surname);
+        //m_et_email = findViewById(R.id.administrator_technicians_edit_activity_et_email);
 
-        m_btn_cancel = findViewById(R.id.administrator_technicians_edit_activity_btn_cancel);
-        m_btn_save = findViewById(R.id.administrator_technicians_edit_activity_btn_save);
+        m_btn_cancel = findViewById(R.id.administrator_technicians_edit_btn_cancelar);
+        m_btn_save = findViewById(R.id.administrator_technicians_edit_btn_crear);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
 
         // BottomNavigationView menu
-        mBottomNavigationView = findViewById(R.id.administrator_technicians_edit_activity_bottom_navigation);
+        mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
         if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
             mBottomNavigationView.getMenu().clear();
             mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);
@@ -106,8 +107,8 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
         mUsersDatabaseCrud.read(mId, user -> {
             mUser = user;
             m_et_name.setText(user.getName());
-            m_et_surname.setText(user.getSurname());
-            m_et_email.setText(user.getEmail());
+            //m_et_surname.setText(user.getSurname());
+            //m_et_email.setText(user.getEmail());
         });
     }
 
@@ -190,7 +191,7 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.administrator_technicians_edit_activity_btn_cancel: {
+            case R.id.administrator_technicians_edit_btn_cancelar: {
                 Intent intent = new Intent(AdministratorTechnicianEditActivity.this, AdministratorTechnicianListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("message", "Acción cancelada.");
@@ -198,7 +199,7 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
 
                 break;
             }
-            case R.id.administrator_technicians_edit_activity_btn_save: {
+            case R.id.administrator_technicians_edit_btn_crear: {
                 if (checkForm()) {
                     User updatedUser = mUser;
                     updatedUser.setName(m_email);
@@ -264,21 +265,21 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
         boolean result = true;
 
         m_name = m_et_name.getText().toString();
-        m_surname = m_et_surname.getText().toString();
-        m_email = m_et_email.getText().toString();
+        //m_surname = m_et_surname.getText().toString();
+        //m_email = m_et_email.getText().toString();
 
         if (m_name.equals("") || m_name.length() < 3) {
             m_et_name.setError("Debes indicar un nombre y de al menos 3 carácteres.");
             result = false;
         }
-        if (m_surname.equals("") || m_surname.length() < 3) {
+        /*if (m_surname.equals("") || m_surname.length() < 3) {
             m_et_surname.setError("Debes indicar los apellidos y de al menos 3 carácteres.");
             result = false;
         }
         if (m_email.equals("") || !App.isValidEmail(m_email)) {
             m_et_email.setError("Debes indicar un m_email válido.");
             result = false;
-        }
+        }*/
 
         return result;
     }

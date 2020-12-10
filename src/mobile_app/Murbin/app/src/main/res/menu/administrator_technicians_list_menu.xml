@@ -10,7 +10,8 @@
     <item
         android:id="@+id/administrator_technicians_list_menu_create"
         android:orderInCategory="100"
-        android:title="@string/administrator_technicians_list_menu_create"
-        app:showAsAction="always" />
+        android:icon="@drawable/ic_plus"
+        app:showAsAction="always"
+        android:title="" />
 
 </menu>

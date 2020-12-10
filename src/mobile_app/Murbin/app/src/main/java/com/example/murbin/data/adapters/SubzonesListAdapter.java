@@ -41,7 +41,7 @@ public class SubzonesListAdapter extends FirestoreRecyclerAdapter<Subzone, Subzo
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(
-                        R.layout.administrator_subzones_list_recyclerview_element,
+                        R.layout.recycler_subzones_fragment_element,
                         parent,
                         false
                 );
@@ -109,7 +109,7 @@ public class SubzonesListAdapter extends FirestoreRecyclerAdapter<Subzone, Subzo
         public ViewHolder(View itemView) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.administrator_subzones_list_recyclerview_element_tv_name);
-            tv_status = itemView.findViewById(R.id.administrator_subzones_list_recyclerview_element_tv_status);
+            //tv_status = itemView.findViewById(R.id.administrator_subzones_list_recyclerview_element_tv_status);
         }
 
         /**
@@ -121,7 +121,7 @@ public class SubzonesListAdapter extends FirestoreRecyclerAdapter<Subzone, Subzo
             String name = subzone.getName();
             String status = (subzone.isStatus()) ? "Activada" : "Desactivada";
             tv_name.setText(name);
-            tv_status.setText(status);
+            //tv_status.setText(status);
         }
     }
 }

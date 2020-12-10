@@ -41,7 +41,7 @@ public class TechniciansListAdapter extends FirestoreRecyclerAdapter<User, Techn
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(
-                        R.layout.administrator_technicians_list_recyclerview_element,
+                        R.layout.recycler_fragment_element,
                         parent,
                         false
                 );
@@ -108,8 +108,8 @@ public class TechniciansListAdapter extends FirestoreRecyclerAdapter<User, Techn
          */
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_full_name = itemView.findViewById(R.id.administrator_technicians_list_recyclerview_element_tv_full_name);
-            tv_email = itemView.findViewById(R.id.administrator_technicians_list_recyclerview_element_tv_email);
+            tv_full_name = itemView.findViewById(R.id.administrator_subzones_list_recyclerview_element_tv_name);
+            //tv_email = itemView.findViewById(R.id.administrator_technicians_list_recyclerview_element_tv_email);
         }
 
         /**

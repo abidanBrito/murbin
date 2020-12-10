@@ -79,19 +79,19 @@ public class GeneralFragmentHome extends Fragment {
         String value = badFormatValue.replace("\n", "").replace("\r", "");
         switch (id) {
             case "brightness":
-                brightness.setText("Brillo: " + value + " %");
+                brightness.setText(value);
                 break;
             case "co2":
-                co2.setText("CO2: " + value + " %");
+                co2.setText(value);
                 break;
             case "noise":
-                noise.setText("Ruido: " + value + " db");
+                noise.setText(value);
                 break;
             case "temperature":
-                temperature.setText("Temperatura: " + value + "ºC");
+                temperature.setText(value);
                 break;
             case "humidity":
-                humidity.setText("Humedad: " + value + " %");
+                humidity.setText(value);
                 break;
         }
     }

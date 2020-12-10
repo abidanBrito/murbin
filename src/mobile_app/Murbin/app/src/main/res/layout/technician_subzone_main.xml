@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/technician_subzone_activity_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/technician_subzone_activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <TextView
+        android:id="@+id/technician_subzone_activity_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserratsemibold"
+        android:text="@string/technician_subzones_tv_title"
+        android:textColor="@color/negro"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/technician_subzone_activity_toolbar" />
+
+    <TextView
+        android:id="@+id/technician_subzone_activity_tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratmedium"
+        android:text="@string/administrator_fragment_large_frame_tv_subtitle"
+        android:textColor="@color/negro"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/technician_subzone_activity_tv_title" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/technician_subzone_activity_tv_subtitle">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/technician_subzone_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/technician_subzone_subzones_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_status_container">
+
+                <TextView
+                    android:id="@+id/technician_subzone_subzones_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_subzonas"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/technician_subzone_subzones"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/technician_subzone_status_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/technician_subzone_status_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/administrator_fragment_large_frame_tv_type"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/technician_subzone_status_tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserratlight"
+                    android:text="@string/administrator_fragment_large_frame_tv_status"
+                    android:textAlignment="center"
+                    android:textColor="@color/blanco"
+                    android:textSize="48sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/technician_subzone_status_iv_type"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:contentDescription="@string/administrator_fragment_large_frame_fragment_iv_type"
+                    android:rotation="-33"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_fragment_type_bell" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="75dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/technician_subzone_noise_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toStartOf="@+id/technician_subzone_temperature_container"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_subzones_container">
+
+                <TextView
+                    android:id="@+id/technician_subzone_noise_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_ruido"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/technician_subzone_noise"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/technician_subzone_temperature_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/technician_subzone_noise_container"
+                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_subzones_container">
+
+                <TextView
+                    android:id="@+id/technician_subzone_temperature_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_temperatura"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/technician_subzone_temperature"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/technician_subzone_humidity_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toStartOf="@+id/technician_subzone_co2_container"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_noise_container">
+
+                <TextView
+                    android:id="@+id/technician_subzone_humidity_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_humedad"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/technician_subzone_humidity"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/technician_subzone_co2_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/technician_subzone_humidity_container"
+                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_temperature_container">
+
+                <TextView
+                    android:id="@+id/technician_subzone_co2_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_co2"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/technician_subzone_co2"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/technician_subzone_bright_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="@+id/technician_subzone_co2_container"
+                app:layout_constraintStart_toStartOf="@+id/technician_subzone_humidity_container"
+                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_humidity_container">
+
+                <TextView
+                    android:id="@+id/technician_subzone_bright_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_brillo"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/technician_subzone_bright"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

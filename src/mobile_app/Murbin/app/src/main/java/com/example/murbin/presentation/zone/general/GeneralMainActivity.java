@@ -6,16 +6,21 @@
 
 package com.example.murbin.presentation.zone.general;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -25,6 +30,7 @@ import com.example.murbin.R;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.global.GlobalPreferencesActivity;
 import com.example.murbin.presentation.zone.general.fragments.GeneralFragmentHome;
+import com.example.murbin.presentation.zone.general.fragments.GeneralFragmentMap;
 import com.example.murbin.uses_cases.UsesCasesZoneGeneral;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -121,11 +127,12 @@ public class GeneralMainActivity extends BaseActivity {
     public void actionsBottomNavigationView() {
         // Actions when pressing an option in the lower navigation
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
+            //@SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.general_main_bottom_navigation_home:
+                switch (item.toString()) {
+                    //case R.id.general_main_bottom_navigation_home:
+                    case "Home":
                         fragment = new GeneralFragmentHome();
                         FragmentTransaction transaction_home = getSupportFragmentManager().beginTransaction();
                         transaction_home.replace(R.id.general_main_activity_fragment, fragment);
@@ -134,9 +141,11 @@ public class GeneralMainActivity extends BaseActivity {
 
                         break;
 
-                    case R.id.general_main_bottom_navigation_map:
+                    //case R.id.general_main_bottom_navigation_map:
+                    case "Mapa":
                         usesCasesZoneGeneral.checkPermissionLoadMap(GeneralMainActivity.this);
-
+                        //Toast.makeText(GeneralMainActivity.this, "Menú Histórico pulsado", Toast.LENGTH_SHORT).show();
+                        //checkPermissionLoadMap(GeneralMainActivity.this);
                         break;
                 }
 
@@ -164,4 +173,40 @@ public class GeneralMainActivity extends BaseActivity {
         });
     }
 
+    /*public void loadMap(Context context) {
+        Fragment fragment = new GeneralFragmentMap();
+        FragmentTransaction transaction_map = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+        transaction_map.replace(R.id.general_main_activity_fragment, fragment);
+        transaction_map.addToBackStack(null);
+        transaction_map.commit();
+        if (ActivityCompat.checkSelfPermission(GeneralMainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // Create new fragment and transaction
+            fragment = new GeneralFragmentMap();
+            FragmentTransaction transaction_map = getSupportFragmentManager().beginTransaction();
+            transaction_map.replace(R.id.general_main_activity_fragment, fragment);
+            transaction_map.addToBackStack(null);
+            transaction_map.commit();
+        } else {
+            App.getInstance().requestPermission(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    "Sin el permiso, no puedo mostrar el Mapa",
+                    App.PERMIT_REQUEST_CODE_ACCESS_FINE_LOCATION,
+                    GeneralMainActivity.this
+            );
+        }
+    }
+
+    public void checkPermissionLoadMap(Context context) {
+        if (ActivityCompat.checkSelfPermission(App.getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            loadMap(context);
+        } else {
+            App.getInstance().requestPermission(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    context.getString(R.string.UsesCasesZoneGeneral_permission_justification_map),
+                    App.PERMIT_REQUEST_CODE_ACCESS_FINE_LOCATION,
+                    (Activity) context
+            );
+        }
+    }*/
 }

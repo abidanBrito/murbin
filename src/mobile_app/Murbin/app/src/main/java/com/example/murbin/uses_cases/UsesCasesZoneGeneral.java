@@ -57,5 +57,6 @@ public class UsesCasesZoneGeneral {
         transaction_map.replace(R.id.general_main_activity_fragment, fragment);
         transaction_map.addToBackStack(null);
         transaction_map.commit();
+
     }
 }

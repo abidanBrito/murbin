@@ -25,13 +25,13 @@
     <!-- MENUS -->
 
     <!-- general_main_menu -->
-    <string name="general_main_menu_login">Login</string>
-    <string name="general_main_menu_settings">Ajustes</string>
-    <string name="general_main_menu_about_murbin">Sobre Murbin</string>
+    <string name="user_main_menu_login">Login</string>
+    <string name="user_main_menu_settings">Ajustes</string>
+    <string name="user_main_menu_about_murbin">Sobre Murbin</string>
     <!-- general_main_bottom_navigation -->
-    <string name="general_main_bottom_navigation_home">Home</string>
-    <string name="general_main_bottom_navigation_map">Mapa</string>
-    <string name="general_main_bottom_navigation_data">Histórico</string>
+    <string name="user_main_bottom_navigation_home">Home</string>
+    <string name="user_main_bottom_navigation_map">Mapa</string>
+    <string name="user_main_bottom_navigation_data">Histórico</string>
 
     <!-- administrator_main_menu -->
     <string name="administrator_main_menu_settings">Ajustes</string>
@@ -40,12 +40,13 @@
     <string name="administrator_main_bottom_navigation_dashboard">Home</string>
     <string name="administrator_main_bottom_navigation_subzones">Subzonas</string>
     <string name="administrator_main_bottom_navigation_technician">Técnicos</string>
+    <string name="administrator_main_bottom_navigation_config">Config</string>
 
     <!-- administrator_technician_main_menu -->
     <string name="administrator_technician_main_menu_settings">Ajustes</string>
     <string name="administrator_technician_main_menu_logout">Desconectarse</string>
     <!-- administrator_technicians_list_menu -->
-    <string name="administrator_technicians_list_menu_create">Nuevo</string>
+    <string name="administrator_technicians_list_menu_create">+</string>
     <!-- administrator_technicians_edit_menu -->
     <string name="administrator_technicians_edit_menu_delete">Eliminar</string>
 
@@ -53,7 +54,7 @@
     <string name="administrator_subzone_main_menu_settings">Ajustes</string>
     <string name="administrator_subzone_main_menu_logout">Desconectarse</string>
     <!-- administrator_subzones_list_menu -->
-    <string name="administrator_subzones_list_menu_create">Nuevo</string>
+    <string name="administrator_subzones_list_menu_create">+</string>
     <!-- administrator_subzones_edit_menu -->
     <string name="administrator_subzones_edit_menu_delete">Eliminar</string>
 
@@ -123,26 +124,111 @@
     <!-- UsesCasesZoneGeneral -->
     <string name="UsesCasesZoneGeneral_permission_justification_map">Se require el acceso a tu ubicación para poder mostrarte las farolas más cercanas.</string>
 
+    <!-- GeneralMainActivity -->
+    <!-- layout | general_fragment_home -->
+    <string name="general_fragment_home_old_tv_welcome">Bienvenido [Zone User]</string>
+    <string name="general_fragment_home_tv_title">Tu entorno</string>
+    <string name="general_main_bottom_navigation_map">Mapa</string>
+    <string name="general_main_bottom_navigation_home">Home</string>
+    <string name="general_main_menu_about_murbin">Sobre nosotros</string>
+    <string name="general_main_menu_settings">Configuración</string>
+    <string name="general_main_menu_login">Entrar</string>
+    <!-- layout | general_fragment_frame -->
+    <string name="general_fragment_frame_tv_value">103</string>
+    <string name="general_fragment_frame_tv_type">Ruido</string>
+    <string name="general_fragment_frame_tv_unit">dB</string>
+    <string name="recycler_fragment_element_tv_title">Nombre</string>
+    <string name="general_fragment_tv_ruido">Ruido (dB)</string>
+    <string name="general_fragment_tv_co2">CO2 (%)</string>
+    <string name="general_fragment_tv_temperatura">Temperatura (ºC)</string>
+    <string name="general_fragment_tv_humedad">Humedad (%)</string>
+    <string name="general_fragment_tv_brillo">Brillo (%)</string>
+    <string name="general_fragment_tv_subzonas">Subzonas</string>
+
+    <!-- ZONE TECHNICIAN -->
+
+    <!-- TechnicianMainActivity -->
+    <!-- layout | technician_main_activity -->
+    <string name="technician_main_activity_tv_welcome">Bienvenido/a [Zona Technical]</string>
+    <string name="technician_streetlight_create_tv_title">Crear farola</string>
+    <string name="technician_streetlight_create_name_hint">Nombre</string>
+    <string name="technician_streetlight_create_localization_hint">Localización</string>
+    <string name="technician_streetlight_create_btn_crear">Crear</string>
+    <string name="technician_streetlight_create_btn_cancelar">Cancelar</string>
+    <string name="technician_streetlight_edit_tv_title">Editar farola</string>
+    <string name="technician_streetlight_edit_tv_subtitle">Farola X</string>
+    <string name="technician_streetlight_edit_name_hint">Nombre</string>
+    <string name="technician_streetlight_edit_localization_hint">Localización</string>
+    <string name="technician_streetlight_edit_btn_guardar">Guardar</string>
+    <string name="technician_streetlight_edit_btn_cancelar">Cancelar</string>
+    <string name="technician_streetlight_edit_btn_on_off">On / Off</string>
+    <string name="technician_subzone_edit_btn_guardar">Guardar</string>
+    <string name="technician_subzone_edit_btn_cancelar">Cancelar</string>
+    <string name="technician_subzone_edit_tv_title">Editar subzona</string>
+    <string name="technician_subzone_edit_tv_subtitle">Nombre de la subzona</string>
+    <string name="technician_subzone_edit_name_hint">Nombre</string>
+    <string name="technician_subzone_edit_localization_hint">Localización</string>
+    <string name="technician_notification_list_tv_title">Notificaciones</string>
+    <string name="technician_streetlight_list_tv_title">Farolas</string>
+    <string name="technician_subzones_tv_title">Subzona X</string>
+    <string name="technician_main_tv_title">Bienvenido</string>
+    <string name="technician_main_tv_subtitle">Gandía</string>
+    <string name="technician_streetlight_tv_subtitle">Grao de Gandía</string>
+
+
     <!-- ZONE ADMINISTRATOR -->
 
     <!-- AdministratorMainActivity -->
     <!-- layout | administrator_main_activity -->
-    <string name="administrator_main_activity_tv_title">Hola</string>
+    <string name="administrator_main_activity_tv_title">Bienvenido</string>
     <!-- layout | administrator_fragment_large_frame -->
-    <string name="administrator_fragment_large_frame_tv_title">Hola</string>
-    <string name="administrator_fragment_large_frame_tv_subtitle">Zona: Gandía</string>
+    <string name="administrator_fragment_large_frame_tv_title">Bienvenido</string>
+    <string name="administrator_fragment_large_frame_tv_subtitle">Gandía</string>
     <string name="administrator_fragment_large_frame_tv_type">Estado</string>
-    <string name="administrator_fragment_large_frame_tv_status">On</string>
+    <string name="administrator_fragment_large_frame_tv_status">On/Off</string>
     <string name="administrator_fragment_large_frame_tv_number">0</string>
     <string name="administrator_fragment_large_frame_fragment_iv_type">Image</string>
     <string name="administrator_fragment_large_frame_btn_go">Ir</string>
     <!-- layout | administrator_fragment_medium_frame -->
+    <string name="administrator_fragment_medium_frame_tv_salutation">Hello blank fragment</string>
     <string name="administrator_fragment_medium_frame_tv_type">Subzonas</string>
     <string name="administrator_fragment_medium_frame_tv_type2">Técnicos</string>
     <!-- layout | administrator_fragment_small_frame -->
     <string name="administrator_fragment_small_frame_tv_noise">Ruido(dB)</string>
     <string name="administrator_fragment_small_frame_tv_temperature">Temp(Cº)</string>
     <string name="administrator_fragment_small_frame_tv_co2">CO2(ppm)</string>
+    <string name="administrator_technicians_list_tv_title">Técnicos</string>
+    <string name="administrator_technicians_edit_tv_title">Editar técnico</string>
+    <string name="administrator_technicians_edit_tv_subtitle">Nombre Apellido </string>
+    <string name="administrator_technicians_edit_name_hint">Nombre</string>
+    <string name="administrator_technicians_edit_password_hint">Contraseña</string>
+    <string name="administrator_technicians_edit_subzones_hint">Subzonas</string>
+    <string name="administrator_technicians_edit_btn_crear">Guardar</string>
+    <string name="administrator_technicians_edit_btn_cancelar">Cancelar</string>
+    <string name="administrator_technicians_create_tv_title">Crear técnico</string>
+    <string name="administrator_technicians_create_name_hint">Nombre</string>
+    <string name="administrator_technicians_create_password_hint">Contraseña</string>
+    <string name="administrator_technicians_create_subzones_hint">Subzonas</string>
+    <string name="administrator_technicians_create_btn_crear">Crear</string>
+    <string name="administrator_technicians_create_btn_cancelar">Cancelar</string>
+    <string name="administrator_subzone_list_tv_title">Subzonas</string>
+    <string name="administrator_subzone_edit_btn_guardar">Guardar</string>
+    <string name="administrator_subzone_edit_btn_cancelar">Cancelar</string>
+    <string name="administrator_subzone_edit_tv_title">Editar subzona</string>
+    <string name="administrator_subzone_edit_tv_subtitle">Nombre de la subzona</string>
+    <string name="administrator_subzone_edit_name_hint">Nombre</string>
+    <string name="administrator_subzone_edit_localization_hint">Localización</string>
+    <string name="administrator_subzone_create_btn_guardar">Crear</string>
+    <string name="administrator_subzone_create_btn_cancelar">Cancelar</string>
+    <string name="administrator_subzone_create_tv_title">Crear subzona</string>
+    <string name="administrator_subzone_create_name_hint">Nombre</string>
+    <string name="administrator_subzone_create_localization_hint">Localización</string>
+    <string name="administrator_zone_edit_btn_guardar">Guardar</string>
+    <string name="administrator_zone_edit_btn_cancelar">Cancelar</string>
+    <string name="administrator_zone_edit_tv_title">Editar zona</string>
+    <string name="administrator_zone_edit_tv_subtitle">Nombre de la zona</string>
+    <string name="administrator_zone_edit_name_hint">Nombre</string>
+    <string name="administrator_notification_list_tv_title">Notificaciones</string>
     <!-- AdministratorTechnicianListActivity -->
     <string name="AdministratorTechnicianListActivity_toolbar_title">Técnicos</string>
     <!-- AdministratorTechnicianEditActivity -->
@@ -171,7 +257,7 @@
     <string name="administrator_technicians_create_activity_btn_cancel">Cancelar</string>
     <string name="administrator_technicians_create_activity_btn_save">Guardar</string>
     <!-- AdministratorSubzoneListActivity -->
-    <string name="AdministratorSubzoneListActivity_toolbar_title">Subzonas</string>
+    <string name="AdministratorSubzoneListActivity_toolbar_title"></string>
     <!-- AdministratorSubzoneEditActivity -->
     <string name="AdministratorSubzoneEditActivity_alert_dialog_delete_title">Confirmación</string>
     <string name="AdministratorSubzoneEditActivity_alert_dialog_delete_message">Se va a proceder a eliminar la subzona, el proceso es irreversible. ¿Confirma la eliminación?</string>
@@ -218,12 +304,6 @@
     <string name="root_administrators_create_activity_et_email_hint">Introduce el email</string>
     <string name="root_administrators_create_activity_btn_cancel">Cancelar</string>
     <string name="root_administrators_create_activity_btn_save">Guardar</string>
-
-    <!-- ZONE TECHNICIAN -->
-
-    <!-- TechnicianMainActivity -->
-    <!-- layout | technician_main_activity -->
-    <string name="technician_main_activity_tv_welcome">Bienvenido/a [Zona Technician]</string>
 
     <!-- BackgroundMusicService -->
     <string name="BackgroundMusic_notification_channel_title">Reproduciendo música</string>

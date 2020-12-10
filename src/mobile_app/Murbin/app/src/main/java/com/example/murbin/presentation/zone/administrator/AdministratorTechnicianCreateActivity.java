@@ -31,7 +31,7 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
     private String mMessage;
-    private EditText m_et_name, m_et_surname, m_et_email;
+    private EditText m_et_name, m_et_surname, m_et_email, m_et_pass;
     private Button m_btn_cancel, m_btn_save;
     private UsersDatabaseCrud mUsersDatabaseCrud;
     private User mUser;
@@ -39,7 +39,7 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.administrator_technicians_create_activity);
+        setContentView(R.layout.administrator_technicians_create_formulary);
         initializeLayoutElements();
     }
 
@@ -48,7 +48,7 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_technicians_create_activity_toolbar);
+        mToolbar = findViewById(R.id.administrator_technicians_create_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,18 +59,18 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
 
         mContainer = findViewById(R.id.administrator_technicians_create_activity_container);
 
-        m_et_name = findViewById(R.id.administrator_technicians_create_activity_et_name);
-        m_et_surname = findViewById(R.id.administrator_technicians_create_activity_et_surname);
-        m_et_email = findViewById(R.id.administrator_technicians_create_activity_et_email);
+        m_et_name = findViewById(R.id.administrator_technicians_create_et_name);
+        //m_et_surname = findViewById(R.id.administrator_technicians_create_activity_et_surname);
+        m_et_pass = findViewById(R.id.administrator_technicians_create_et_location);
 
-        m_btn_cancel = findViewById(R.id.administrator_technicians_create_activity_btn_cancel);
-        m_btn_save = findViewById(R.id.administrator_technicians_create_activity_btn_save);
+        m_btn_cancel = findViewById(R.id.administrator_technicians_create_btn_crear);
+        m_btn_save = findViewById(R.id.administrator_technicians_create_btn_cancelar);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
 
         // BottomNavigationView menu
-        mBottomNavigationView = findViewById(R.id.administrator_technicians_create_activity_bottom_navigation);
+        mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
         if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
             mBottomNavigationView.getMenu().clear();
             mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);
@@ -154,7 +154,7 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.administrator_technicians_create_activity_btn_cancel: {
+            case R.id.administrator_technicians_create_btn_cancelar: {
                 Intent intent = new Intent(AdministratorTechnicianCreateActivity.this, AdministratorTechnicianListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("message", "Acción cancelada.");
@@ -162,7 +162,7 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
 
                 break;
             }
-            case R.id.administrator_technicians_create_activity_btn_save: {
+            case R.id.administrator_technicians_create_btn_crear: {
                 if (checkForm()) {
                     String name = m_et_name.getText().toString();
                     String surname = m_et_surname.getText().toString();
@@ -202,21 +202,21 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
         boolean result = true;
 
         String name = m_et_name.getText().toString();
-        String surname = m_et_surname.getText().toString();
-        String email = m_et_email.getText().toString();
+        //String surname = m_et_surname.getText().toString();
+        //String email = m_et_email.getText().toString();
 
         if (name.equals("") || name.length() < 3) {
             m_et_name.setError("Debes indicar un nombre y de al menos 3 carácteres.");
             result = false;
         }
-        if (surname.equals("") || surname.length() < 3) {
+        /*if (surname.equals("") || surname.length() < 3) {
             m_et_surname.setError("Debes indicar los apellidos y de al menos 3 carácteres.");
             result = false;
         }
         if (email.equals("") || !App.isValidEmail(email)) {
             m_et_email.setError("Debes indicar un email válido.");
             result = false;
-        }
+        }*/
 
         return result;
     }

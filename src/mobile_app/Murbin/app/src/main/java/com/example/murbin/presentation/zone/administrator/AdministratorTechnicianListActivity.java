@@ -34,7 +34,7 @@ public class AdministratorTechnicianListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.administrator_technicians_activity);
+        setContentView(R.layout.administrator_technicians_list);
         initializeLayoutElements();
     }
 
@@ -43,16 +43,16 @@ public class AdministratorTechnicianListActivity extends BaseActivity {
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_technicians_activity_toolbar);
+        mToolbar = findViewById(R.id.administrator_technicians_list_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getString(R.string.AdministratorTechnicianListActivity_toolbar_title));
         }
 
-        mContainer = findViewById(R.id.administrator_technicians_activity_container);
+        mContainer = findViewById(R.id.administrator_technicians_list_container);
 
         // BottomNavigationView menu
-        mBottomNavigationView = findViewById(R.id.administrator_technicians_activity_bottom_navigation);
+        mBottomNavigationView = findViewById(R.id.administrator_technicians_list_bottom_navigation);
         if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
             mBottomNavigationView.getMenu().clear();
             mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);

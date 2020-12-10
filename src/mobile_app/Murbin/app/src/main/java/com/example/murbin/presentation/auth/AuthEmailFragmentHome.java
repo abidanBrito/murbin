@@ -4,7 +4,7 @@
  * Last modified 23/11/20 10:55
  */
 
-package com.example.murbin.presentation.auth.fragments;
+package com.example.murbin.presentation.auth;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -20,10 +20,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
+import com.example.murbin.presentation.auth.fragments.AuthEmalFragmentRecoveryPassword;
 import com.example.murbin.presentation.zone.general.GeneralMainActivity;
 
 public class AuthEmailFragmentHome extends Fragment implements View.OnClickListener {

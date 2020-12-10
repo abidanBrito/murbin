@@ -34,7 +34,7 @@ public class AdministratorSubzoneListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.administrator_subzones_activity);
+        setContentView(R.layout.administrator_subzone_list);
         initializeLayoutElements();
     }
 

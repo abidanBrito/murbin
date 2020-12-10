@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/administrator_main_activity_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,20 +11,22 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/administrator_main_activity_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
         android:id="@+id/administrator_main_activity_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/montserratsemibold"
         android:text="@string/administrator_main_activity_tv_title"
         android:textColor="@color/negro"
-        android:textSize="32sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_toolbar" />
@@ -41,96 +44,300 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_tv_title" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/administrator_main_activity_bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_tv_subtitle"
-        app:layout_constraintVertical_bias="0.32999998">
+        app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_tv_subtitle">
 
-        <!-- Status -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/administrator_main_activity_large_frame_fragment"
-            class="com.example.murbin.presentation.zone.administrator.fragments.LargeFrameFragment"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/administrator_main_home_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
-        <!-- Noise -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/administrator_main_activity_noise_fragment"
-            class="com.example.murbin.presentation.zone.administrator.fragments.SmallFrameFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/administrator_main_activity_co2_fragment"
-            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_large_frame_fragment" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/administrator_main_home_status_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <!-- CO2 -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/administrator_main_activity_co2_fragment"
-            class="com.example.murbin.presentation.zone.administrator.fragments.SmallFrameFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/administrator_main_activity_noise_fragment"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/administrator_main_activity_temperature_fragment"
-            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_large_frame_fragment" />
+                <TextView
+                    android:id="@+id/administrator_main_home_status_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/administrator_fragment_large_frame_tv_type"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Temperature -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/administrator_main_activity_temperature_fragment"
-            class="com.example.murbin.presentation.zone.administrator.fragments.SmallFrameFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/administrator_main_activity_co2_fragment"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_large_frame_fragment" />
+                <TextView
+                    android:id="@+id/administrator_main_home_status_tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserratlight"
+                    android:text="@string/administrator_fragment_large_frame_tv_status"
+                    android:textAlignment="center"
+                    android:textColor="@color/blanco"
+                    android:textSize="48sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Subzones -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/administrator_main_activity_subzones_fragment"
-            class="com.example.murbin.presentation.zone.administrator.fragments.MediumFrameFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/administrator_main_activity_technicians_fragment"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_temperature_fragment" />
+                <ImageView
+                    android:id="@+id/administrator_main_home_status_iv_type"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:contentDescription="@string/administrator_fragment_large_frame_fragment_iv_type"
+                    android:rotation="-33"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_fragment_type_bell" />
 
-        <!-- Technicians -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/administrator_main_activity_technicians_fragment"
-            class="com.example.murbin.presentation.zone.administrator.fragments.MediumFrameFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/administrator_main_activity_subzones_fragment"
-            app:layout_constraintTop_toBottomOf="@+id/administrator_main_activity_noise_fragment" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="75dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/administrator_main_home_noise_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toStartOf="@+id/administrator_main_home_temperature_container"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_status_container">
+
+                <TextView
+                    android:id="@+id/administrator_main_home_noise_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_ruido"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/administrator_main_home_noise"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/administrator_main_home_temperature_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/administrator_main_home_noise_container"
+                app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_status_container">
+
+                <TextView
+                    android:id="@+id/administrator_main_home_temperature_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_temperatura"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/administrator_main_home_temperature"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/administrator_main_home_humidity_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toStartOf="@+id/administrator_main_home_co2_container"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_noise_container">
+
+                <TextView
+                    android:id="@+id/administrator_main_home_humidity_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_humedad"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/administrator_main_home_humidity"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/administrator_main_home_co2_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/administrator_main_home_humidity_container"
+                app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_temperature_container">
+
+                <TextView
+                    android:id="@+id/administrator_main_home_co2_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_co2"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/administrator_main_home_co2"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/administrator_main_home_bright_container"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/style_large_frame"
+                app:layout_constraintEnd_toEndOf="@+id/administrator_main_home_co2_container"
+                app:layout_constraintStart_toStartOf="@+id/administrator_main_home_humidity_container"
+                app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_humidity_container">
+
+                <TextView
+                    android:id="@+id/administrator_main_home_bright_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/general_fragment_tv_brillo"
+                    android:textColor="@color/blanco"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/administrator_main_home_bright"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/montserratlight"
+                    android:foregroundGravity="center"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/administrator_fragment_large_frame_tv_number"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/blanco"
+                    android:textSize="56sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/administrator_main_activity_bottom_navigation"

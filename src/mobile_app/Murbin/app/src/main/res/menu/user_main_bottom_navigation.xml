@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Francisco Javier Paños Madrona on 14/11/20 16:37
+  ~ Copyright (c) 2020 . All rights reserved.
+  ~ Last modified 14/11/20 16:37
+  -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/user_main_bottom_navigation_home"
+        android:icon="@drawable/ic_dashboard"
+        android:orderInCategory="100"
+        android:title="@string/user_main_bottom_navigation_home" />
+
+    <item
+        android:id="@+id/user_main_bottom_navigation_map"
+        android:icon="@drawable/ic_map"
+        android:orderInCategory="101"
+        android:title="@string/user_main_bottom_navigation_map" />
+
+    <item
+        android:id="@+id/user_main_bottom_navigation_data"
+        android:icon="@drawable/ic_data"
+        android:orderInCategory="102"
+        android:title="@string/user_main_bottom_navigation_data" />
+
+</menu>

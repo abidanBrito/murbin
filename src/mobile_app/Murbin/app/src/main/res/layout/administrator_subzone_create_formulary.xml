@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/administrator_subzone_create_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/administrator_subzone_create_error_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserratmedium"
+        android:textColor="@color/error"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/administrator_subzone_create_et_name"
+        app:layout_constraintStart_toStartOf="@+id/administrator_subzone_create_et_name"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_name" />
+
+    <TextView
+        android:id="@+id/administrator_subzone_create_error_localization"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserratmedium"
+        android:textColor="@color/error"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/administrator_subzone_create_et_location"
+        app:layout_constraintStart_toStartOf="@+id/administrator_subzone_create_et_location"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_location" />
+
+    <Button
+        android:id="@+id/administrator_subzone_create_btn_guardar"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/main_button"
+        android:fontFamily="@font/montserratmedium"
+        android:shadowColor="@null"
+        android:shadowRadius="0"
+        android:text="@string/administrator_subzone_create_btn_guardar"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_location" />
+
+    <Button
+        android:id="@+id/administrator_subzone_create_btn_cancelar"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/accent_button"
+        android:fontFamily="@font/montserratmedium"
+        android:shadowColor="@null"
+        android:shadowRadius="0"
+        android:text="@string/administrator_subzone_create_btn_cancelar"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_btn_guardar" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/administrator_subzone_create_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <TextView
+        android:id="@+id/administrator_subzone_create_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserratsemibold"
+        android:text="@string/administrator_subzone_create_tv_title"
+        android:textColor="@color/negro"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_toolbar" />
+
+    <EditText
+        android:id="@+id/administrator_subzone_create_et_name"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/input_formulary"
+        android:drawablePadding="8dp"
+        android:ems="0"
+        android:fontFamily="@font/montserratmedium"
+        android:hint="@string/administrator_subzone_create_name_hint"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:textColor="@color/negro"
+        android:textColorHighlight="@color/principal"
+        android:textColorLink="@color/principal_variante"
+        android:textCursorDrawable="@color/principal"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_tv_title" />
+
+    <EditText
+        android:id="@+id/administrator_subzone_create_et_location"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/input_formulary"
+        android:drawablePadding="8dp"
+        android:ems="0"
+        android:fontFamily="@font/montserratmedium"
+        android:hint="@string/administrator_subzone_create_localization_hint"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:textColor="@color/negro"
+        android:textColorHighlight="@color/principal"
+        android:textColorLink="@color/principal_variante"
+        android:textCursorDrawable="@color/principal"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_name" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/administrator_main_activity_bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/administrator_main_bottom_navigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

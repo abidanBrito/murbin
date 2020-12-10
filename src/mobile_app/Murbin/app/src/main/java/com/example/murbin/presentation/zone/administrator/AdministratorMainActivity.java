@@ -9,20 +9,30 @@ package com.example.murbin.presentation.zone.administrator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
+import com.example.murbin.comun.Mqtt;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.global.GlobalPreferencesActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import com.example.murbin.comun.Mqtt;
 
 public class AdministratorMainActivity extends BaseActivity {
 
@@ -32,12 +42,40 @@ public class AdministratorMainActivity extends BaseActivity {
     private BottomNavigationView mBottomNavigationView;
     private ViewGroup mContainer;
     private String mMessage;
+    public static MqttClient client = null;
+    private ConstraintLayout botonOnOff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrator_main_activity);
         initializeLayoutElements();
+
+        // MQTT
+        try {
+            Log.i(Mqtt.TAG, "Conectando al broker " + Mqtt.broker);
+            client = new MqttClient(Mqtt.broker, Mqtt.clientId,
+                    new MemoryPersistence());
+            client.connect();
+        } catch (MqttException e) {
+            Log.e(Mqtt.TAG, "Error al conectar.", e);
+        }
+
+        botonOnOff = findViewById(R.id.administrator_main_home_status_container);
+        botonOnOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Log.i(Mqtt.TAG, "Cambiar estado de la farola: " + "TOGGLE");
+                    MqttMessage message = new MqttMessage("TOGGLE".getBytes());
+                    message.setQos(Mqtt.qos);
+                    message.setRetained(false);
+                    client.publish(Mqtt.topicRoot+"TOGGLE", message);
+                } catch (MqttException e) {
+                    Log.e(Mqtt.TAG, "Error al publicar.", e);
+                }
+            }
+        });
     }
 
     /**
@@ -159,4 +197,13 @@ public class AdministratorMainActivity extends BaseActivity {
         });
     }
 
+    @Override public void onDestroy() {
+        try {
+            Log.i(Mqtt.TAG, "Desconectado");
+            client.disconnect();
+        } catch (MqttException e) {
+            Log.e(Mqtt.TAG, "Error al desconectar.", e);
+        }
+        super.onDestroy();
+    }
 }

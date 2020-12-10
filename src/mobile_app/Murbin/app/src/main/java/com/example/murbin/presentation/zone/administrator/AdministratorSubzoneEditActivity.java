@@ -44,7 +44,7 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.administrator_subzones_edit_activity);
+        setContentView(R.layout.administrator_subzone_edit_formulary);
         initializeLayoutElements();
     }
 
@@ -53,7 +53,7 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_subzones_edit_activity_toolbar);
+        mToolbar = findViewById(R.id.administrator_subzone_edit_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,16 +64,16 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
 
         mContainer = findViewById(R.id.administrator_subzones_edit_activity_container);
 
-        m_et_name = findViewById(R.id.administrator_subzones_edit_activity_et_name);
+        m_et_name = findViewById(R.id.administrator_subzone_edit_et_name);
 
-        m_btn_cancel = findViewById(R.id.administrator_subzones_edit_activity_btn_cancel);
-        m_btn_save = findViewById(R.id.administrator_subzones_edit_activity_btn_save);
+        m_btn_cancel = findViewById(R.id.administrator_subzone_edit_btn_cancelar);
+        m_btn_save = findViewById(R.id.administrator_subzone_edit_btn_guardar);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
 
         // BottomNavigationView menu
-        mBottomNavigationView = findViewById(R.id.administrator_subzones_edit_activity_bottom_navigation);
+        mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
         if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
             mBottomNavigationView.getMenu().clear();
             mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);
@@ -183,7 +183,7 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.administrator_subzones_edit_activity_btn_cancel: {
+            case R.id.administrator_subzone_edit_btn_cancelar: {
                 Intent intent = new Intent(AdministratorSubzoneEditActivity.this, AdministratorSubzoneListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("message", "Acción cancelada.");
@@ -191,7 +191,7 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
 
                 break;
             }
-            case R.id.administrator_subzones_edit_activity_btn_save: {
+            case R.id.administrator_subzone_edit_btn_guardar: {
                 if (checkForm()) {
                     Subzone updatedSubzone = mSubzone;
                     updatedSubzone.setName(m_name);

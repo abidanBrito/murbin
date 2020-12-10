@@ -14,7 +14,7 @@
     android:paddingBottom="8dp">
 
     <TextView
-        android:id="@+id/administrator_subzones_list_recyclerview_element_tv_name"
+        android:id="@+id/administrator_subzones_list_recyclerview_element_tv_name2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"

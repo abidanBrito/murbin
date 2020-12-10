@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +23,7 @@ import com.example.murbin.App;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
+import com.example.murbin.presentation.auth.AuthEmailFragmentHome;
 
 public class AuthEmalFragmentRecoveryPassword extends Fragment implements View.OnClickListener {
 
