@@ -22,10 +22,13 @@ import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.data.UsersDatabaseCrud;
+import com.example.murbin.firebase.Auth;
 import com.example.murbin.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdministratorTechnicianCreateActivity extends BaseActivity implements View.OnClickListener {
+
+    private final Auth mAuth = new Auth(this);
 
     private ViewGroup mContainer;
     private Toolbar mToolbar;

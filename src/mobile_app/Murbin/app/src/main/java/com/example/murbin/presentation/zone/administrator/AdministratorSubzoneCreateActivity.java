@@ -9,6 +9,7 @@ package com.example.murbin.presentation.zone.administrator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +30,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class AdministratorSubzoneCreateActivity extends BaseActivity implements View.OnClickListener {
 
     private final Auth mAuth = new Auth(this);
+
     private ViewGroup mContainer;
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
     private String mMessage;
-    private EditText m_et_name;
-    private Button m_btn_cancel, m_btn_save;
+    private EditText m_et_name, m_et_location;
+    private Button m_btn_location, m_btn_cancel, m_btn_save;
     private SubzonesDatabaseCrud mSubzonesDatabaseCrud;
     private Subzone mSubzone;
 
@@ -62,10 +64,13 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
         mContainer = findViewById(R.id.administrator_subzone_create_container);
 
         m_et_name = findViewById(R.id.administrator_subzone_create_et_name);
+        m_et_location = findViewById(R.id.administrator_subzone_create_et_location);
+        m_btn_location = findViewById(R.id.location);
 
         m_btn_cancel = findViewById(R.id.administrator_subzone_create_btn_cancelar);
         m_btn_save = findViewById(R.id.administrator_subzone_create_btn_guardar);
 
+        m_btn_location.setOnClickListener(this);
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
 
@@ -109,7 +114,7 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
                     intent = new Intent(AdministratorSubzoneCreateActivity.this, AdministratorMainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                }else if (id == R.id.administrator_main_bottom_navigation_subzones
+                } else if (id == R.id.administrator_main_bottom_navigation_subzones
                         || id == R.id.root_main_bottom_navigation_subzones) {
                     // Empty action
                 } else if (id == R.id.administrator_main_bottom_navigation_technician
@@ -136,7 +141,7 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
                 if (id == R.id.administrator_main_bottom_navigation_home
                         || id == R.id.root_main_bottom_navigation_home) {
                     // Empty action
-                }else if (id == R.id.administrator_main_bottom_navigation_subzones
+                } else if (id == R.id.administrator_main_bottom_navigation_subzones
                         || id == R.id.root_main_bottom_navigation_subzones) {
                     // Empty action
                 } else if (id == R.id.administrator_main_bottom_navigation_technician
@@ -154,6 +159,12 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
+            case R.id.location: {
+                Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
+                showMapDialogFragment();
+
+                break;
+            }
             case R.id.administrator_subzone_create_btn_cancelar: {
                 Intent intent = new Intent(AdministratorSubzoneCreateActivity.this, AdministratorSubzoneListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

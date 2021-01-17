@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
 import com.example.murbin.presentation.global.fragments.DialogFragment;
+import com.example.murbin.presentation.global.fragments.MapDialogFragment;
 import com.example.murbin.services.BackgroundMusicService;
 
 /**
@@ -106,6 +107,15 @@ public class BaseActivity extends AppCompatActivity {
         DialogFragment dialogFragment = DialogFragment.newInstance(title, message);
         dialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.StyleDialogFragment);
         dialogFragment.show(fm, "dialog_fragment");
+    }
+
+    /**
+     * Shows the Map Dialog
+     */
+    protected void showMapDialogFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        MapDialogFragment mapDialogFragment = new MapDialogFragment();
+        mapDialogFragment.show(fm, "map_dialog_fragment");
     }
 
 }

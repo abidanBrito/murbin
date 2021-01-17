@@ -6,11 +6,8 @@
 
 package com.example.murbin.data;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
-import com.example.murbin.App;
 import com.example.murbin.data.repositories.SubzonesDatabaseCrudRepository;
 import com.example.murbin.models.Subzone;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,11 +25,25 @@ public class SubzonesDatabaseCrud implements SubzonesDatabaseCrudRepository {
 
     /**
      * Constructor
+     *
+     * Default zone Gandia
      */
     public SubzonesDatabaseCrud() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         subzones = db.collection("zones")
                 .document("Gandia")
+                .collection("subzones");
+    }
+
+    /**
+     * Constructor
+     *
+     * @param idDocumentZone Id Name of the document indicating the zone
+     */
+    public SubzonesDatabaseCrud(String idDocumentZone) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        subzones = db.collection("zones")
+                .document(idDocumentZone)
                 .collection("subzones");
     }
 
@@ -61,23 +72,13 @@ public class SubzonesDatabaseCrud implements SubzonesDatabaseCrudRepository {
     public void update(String id, Map<String, Object> data, UpdateListener updateListener) {
         subzones.document(id).update(data).addOnSuccessListener(aVoid -> {
             updateListener.onResponse(true);
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                updateListener.onResponse(false);
-            }
-        });
+        }).addOnFailureListener(e -> updateListener.onResponse(false));
     }
 
     @Override
     public void delete(String id, DeleteListener deleteListener) {
         subzones.document(id).delete().addOnSuccessListener(aVoid -> {
             deleteListener.onResponse(true);
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                deleteListener.onResponse(false);
-            }
-        });
+        }).addOnFailureListener(e -> deleteListener.onResponse(false));
     }
 }

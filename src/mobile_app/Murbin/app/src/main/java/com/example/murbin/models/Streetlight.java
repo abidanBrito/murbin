@@ -6,7 +6,6 @@
 
 package com.example.murbin.models;
 
-
 public class Streetlight {
 
     private String parentSubzoneID;
@@ -26,6 +25,20 @@ public class Streetlight {
      *
      * @param parentSubzoneID Name of the parent subzone [parent_ID]
      * @param name            Subzone name [ID]
+     * @param status          Streetlight status [On/Off]
+     */
+    public Streetlight(String parentSubzoneID, String name, boolean status) {
+        this.parentSubzoneID = parentSubzoneID;
+        this.name = name;
+        this.status = status;
+    }
+
+    /**
+     * Constructor
+     *
+     * @param parentSubzoneID Name of the parent subzone [parent_ID]
+     * @param name            Subzone name [ID]
+     * @param geoPoint
      * @param status          Streetlight status [On/Off]
      */
     public Streetlight(String parentSubzoneID, String name, GeoPoint geoPoint, boolean status) {

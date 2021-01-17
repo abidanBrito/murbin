@@ -6,13 +6,13 @@
 
 package com.example.murbin;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.ViewGroup;
@@ -33,11 +33,15 @@ import com.google.android.material.snackbar.Snackbar;
 public class App extends Application {
 
     public static final String DEFAULT_TAG = "APP_MURBIN";
-    public static final int PERMIT_REQUEST_CODE_ACCESS_FINE_LOCATION = 3001;
-
+    public static final int PERMIT_REQUEST_CODE_LOAD_MAP = 3010;
     public static final String ROLE_ROOT = "root";
     public static final String ROLE_ADMINISTRATOR = "administrator";
     public static final String ROLE_TECHNICIAN = "technician";
+    public static String[] ARRAY_PERMISSIONS_LOAD_MAP = {
+            Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
     private static App instance;
     private static User currentUser = null;
 
@@ -75,27 +79,41 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         // Runs only when you start the application for the first time
-//        toZoneUserLogged();
     }
 
     /**
-     * @param permission    Permission requested
+     * Check if you have all the permissions received in the array of strings.
+     *
+     * @param context     Context of the caller
+     * @param permissions Permissions array string
+     * @return boolean
+     */
+    public boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * It checks if the required permissions have been granted and if not, it asks the user for
+     * them, indicating the reason.
+     *
+     * @param permissions   Permissions requested
      * @param justification Justification message for requesting permission
      * @param requestCode   Response code
      * @param activity      Activity
      */
-    public void requestPermission(final String permission, String justification, final int requestCode, final Activity activity) {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
-            new AlertDialog.Builder(activity).
-                    setTitle(R.string.permissions_message_title).
-                    setMessage(justification).
-                    setPositiveButton(R.string.permissions_message_action, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
-                        }
-                    }).show();
-        } else {
-            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+    public void requestPermission(final Activity activity, String justification,
+                                  final int requestCode, final String... permissions) {
+        if (!hasPermissions(this, permissions)) {
+            ActivityCompat.requestPermissions(activity, permissions, requestCode);
         }
     }
 
@@ -145,7 +163,7 @@ public class App extends Application {
      * @param context The context
      */
     public void snackMessage(ViewGroup cl, int color, String message, Context context) {
-        Snackbar sb = Snackbar.make(cl, message, BaseTransientBottomBar.LENGTH_SHORT);
+        Snackbar sb = Snackbar.make(cl, message, BaseTransientBottomBar.LENGTH_LONG);
         sb.getView().setBackgroundColor(ContextCompat.getColor(context, color));
         sb.show();
     }

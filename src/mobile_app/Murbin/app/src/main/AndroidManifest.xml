@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.TIC" />
 
@@ -22,16 +23,17 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_api_key" />
 
         <!-- Services -->
+        <service android:name=".services.GpsTrackerService" />
         <service android:name=".services.BackgroundMusicService" />
         <service android:name=".services.StreetlightWarningService" />
 
         <!-- Receivers -->
-        <receiver android:name=".receivers.WarningReceiver" >
+        <receiver android:name=".receivers.WarningReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.ACTION_TIME_TICK"/>
+                <action android:name="android.intent.action.ACTION_TIME_TICK" />
             </intent-filter>
         </receiver>
 

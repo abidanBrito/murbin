@@ -125,8 +125,8 @@ public class AuthEmailFragmentHome extends Fragment implements View.OnClickListe
     private boolean checkForm() {
         boolean result = true;
 
-        m_email = m_et_email.getText().toString();
-        m_password = m_et_password.getText().toString();
+        m_email = m_et_email.getText().toString().trim();
+        m_password = m_et_password.getText().toString().trim();
 
         if (m_email.equals("")) {
             m_et_email.setError("Debes indicar un email.");

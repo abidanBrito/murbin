@@ -25,13 +25,22 @@
     <!-- MENUS -->
 
     <!-- general_main_menu -->
-    <string name="user_main_menu_login">Login</string>
-    <string name="user_main_menu_settings">Ajustes</string>
-    <string name="user_main_menu_about_murbin">Sobre Murbin</string>
+    <string name="general_main_menu_login">Login</string>
+    <string name="general_main_menu_settings">Ajustes</string>
+    <string name="general_main_menu_about_murbin">Sobre Murbin</string>
     <!-- general_main_bottom_navigation -->
-    <string name="user_main_bottom_navigation_home">Home</string>
-    <string name="user_main_bottom_navigation_map">Mapa</string>
-    <string name="user_main_bottom_navigation_data">Histórico</string>
+    <string name="general_main_bottom_navigation_home">Home</string>
+    <string name="general_main_bottom_navigation_map">Mapa</string>
+    <string name="general_main_bottom_navigation_data">Histórico</string>
+
+    <!-- general_map_menu -->
+    <string name="general_map_menu_login">Login</string>
+    <string name="general_map_menu_settings">Ajustes</string>
+    <string name="general_map_menu_about_murbin">Sobre Murbin</string>
+    <!-- general_main_bottom_navigation -->
+    <string name="general_map_bottom_navigation_home">Home</string>
+    <string name="general_map_bottom_navigation_map">Mapa</string>
+    <string name="general_map_bottom_navigation_data">Histórico</string>
 
     <!-- administrator_main_menu -->
     <string name="administrator_main_menu_settings">Ajustes</string>
@@ -120,19 +129,14 @@
     <!-- ZONE GENERAL -->
 
     <!-- GeneralMainActivity -->
-    <string name="GeneralMainActivity_permission_error_1">Denegaste el permiso, no puedo mostrar las farolas de tu ubicación.</string>
+    <string name="GeneralMainActivity_permission_error_1">No has concedido acceso a tu ubicación, por eso se muestran todas las farolas de la zona.</string>
     <!-- UsesCasesZoneGeneral -->
-    <string name="UsesCasesZoneGeneral_permission_justification_map">Se require el acceso a tu ubicación para poder mostrarte las farolas más cercanas.</string>
+    <string name="UsesCasesZoneGeneral_permission_justification_map">Se require el acceso a tu ubicación para poder mostrarte sólo las farolas más cercanas.</string>
 
     <!-- GeneralMainActivity -->
     <!-- layout | general_fragment_home -->
     <string name="general_fragment_home_old_tv_welcome">Bienvenido [Zone User]</string>
     <string name="general_fragment_home_tv_title">Tu entorno</string>
-    <string name="general_main_bottom_navigation_map">Mapa</string>
-    <string name="general_main_bottom_navigation_home">Home</string>
-    <string name="general_main_menu_about_murbin">Sobre nosotros</string>
-    <string name="general_main_menu_settings">Configuración</string>
-    <string name="general_main_menu_login">Entrar</string>
     <!-- layout | general_fragment_frame -->
     <string name="general_fragment_frame_tv_value">103</string>
     <string name="general_fragment_frame_tv_type">Ruido</string>
@@ -174,7 +178,6 @@
     <string name="technician_main_tv_title">Bienvenido</string>
     <string name="technician_main_tv_subtitle">Gandía</string>
     <string name="technician_streetlight_tv_subtitle">Grao de Gandía</string>
-
 
     <!-- ZONE ADMINISTRATOR -->
 

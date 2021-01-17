@@ -81,32 +81,30 @@ public class Auth {
      * @param password User's validated password
      */
     public void signInWithEmailAndPassword(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    if (isLogged()) {
-                        mFirebaseUser = mAuth.getCurrentUser();
-                        userCrud.read(mFirebaseUser.getUid(), user -> {
-                            Log.d(App.DEFAULT_TAG, mFirebaseUser.getUid());
-                            App.setCurrentUser(user);
-                            // Update lastAccess field
-                            user.setLastAccess(new Date(System.currentTimeMillis()));
-                            userCrud.update(user.getUid(), user.parseToMap(), response -> {
-                                if (response) {
-                                    checkRole(App.getCurrentUser().getRole());
-                                } else {
-                                    Intent intent = new Intent(App.getContext(), GeneralMainActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intent.putExtra("message", "No se ha podido verificar tu identidad correctamente.");
-                                    App.getContext().startActivity(intent);
-                                }
-                            });
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (isLogged()) {
+                    mFirebaseUser = mAuth.getCurrentUser();
+                    userCrud.read(mFirebaseUser.getUid(), user -> {
+//                        Log.d(App.DEFAULT_TAG, mFirebaseUser.getUid());
+                        App.setCurrentUser(user);
+                        Log.d(App.DEFAULT_TAG, "App.getCurrentUser(): " + App.getCurrentUser());
+                        // Update lastAccess field
+                        user.setLastAccess(new Date(System.currentTimeMillis()));
+                        userCrud.update(user.getUid(), user.parseToMap(), response -> {
+                            if (response) {
+                                checkRole(App.getCurrentUser().getRole());
+                            } else {
+                                Intent intent = new Intent(App.getContext(), GeneralMainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("message", "No se ha podido verificar tu identidad correctamente.");
+                                App.getContext().startActivity(intent);
+                            }
                         });
-                    }
-                } else {
-                    App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.black, "Datos de acceso incorrectos.", App.getContext());
+                    });
                 }
+            } else {
+                App.getInstance().snackMessage(activity.findViewById(R.id.auth_email_activity_container), R.color.black, "Datos de acceso incorrectos.", App.getContext());
             }
         });
     }
@@ -162,13 +160,13 @@ public class Auth {
      * @param activity Activity where it will be redirected
      */
     public void redirectActivity(Class<?> activity) {
-        Intent i;
-        i = new Intent(App.getContext(), activity);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+        Intent intent;
+        intent = new Intent(App.getContext(), activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
         );
-        App.getContext().startActivity(i);
+        App.getContext().startActivity(intent);
     }
 
 }

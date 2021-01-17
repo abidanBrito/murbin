@@ -2,9 +2,18 @@ plugins {
     id 'com.android.application'
 }
 
+// Set the properties within `local.properties` into a `Properties` class so
+// that values within `local.properties` (e.g. Maps API key) are accessible in
+// this file.
+Properties properties = new Properties()
+if (rootProject.file("local.properties").exists()) {
+    properties.load(rootProject.file("local.properties").newDataInputStream())
+}
+def mapsApiKey = properties.getProperty("GOOGLE_MAPS_API_KEY", "")
+
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.murbin"
@@ -15,6 +24,14 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        // Read the API key from local.properties into R.string.google_maps_api_key
+        resValue "string", "google_maps_api_key", mapsApiKey
+
+        // To add your Maps API key to this project:
+        // 1. Open the root project's local.properties file
+        // 2. Add this line, where YOUR_API_KEY is your API key:
+        //        MAPS_API_KEY=YOUR_API_KEY
     }
 
     buildTypes {
