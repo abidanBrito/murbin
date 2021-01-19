@@ -9,11 +9,15 @@ package com.example.murbin.presentation.zone.administrator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -34,8 +38,9 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
     private String mMessage;
-    private EditText m_et_name, m_et_surname, m_et_email, m_et_pass;
-    private Button m_btn_cancel, m_btn_save;
+    private EditText m_et_name, m_et_email, m_et_pass;
+    private Button m_btn_cancel, m_btn_save, m_btn_spinner;
+    private Spinner m_spinner_subzone;
     private UsersDatabaseCrud mUsersDatabaseCrud;
     private User mUser;
 
@@ -44,6 +49,21 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrator_technicians_create_formulary);
         initializeLayoutElements();
+
+        m_spinner_subzone.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                m_spinner_subzone.setVisibility(View.GONE);
+                Log.e("Spinner:", "Testing 1");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                m_spinner_subzone.setVisibility(View.GONE);
+                Log.e("Spinner:", "Testing 2");
+            }
+
+        });
     }
 
     /**
@@ -63,14 +83,19 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
         mContainer = findViewById(R.id.administrator_technicians_create_activity_container);
 
         m_et_name = findViewById(R.id.administrator_technicians_create_et_name);
-        //m_et_surname = findViewById(R.id.administrator_technicians_create_activity_et_surname);
-        m_et_pass = findViewById(R.id.administrator_technicians_create_et_location);
+        m_et_email = findViewById(R.id.administrator_technicians_create_et_email);
+        m_et_pass = findViewById(R.id.administrator_technicians_create_et_pass);
 
         m_btn_cancel = findViewById(R.id.administrator_technicians_create_btn_crear);
         m_btn_save = findViewById(R.id.administrator_technicians_create_btn_cancelar);
+        // Al hacer click sobre este boton se abre el spinner.
+        m_btn_spinner = findViewById(R.id.administrator_technicians_create_spinner_subzones);
+
+        m_spinner_subzone = findViewById(R.id.administrator_technicians_spinner_subzones);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
+        m_btn_spinner.setOnClickListener(this);
 
         // BottomNavigationView menu
         mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
@@ -168,9 +193,10 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
             case R.id.administrator_technicians_create_btn_crear: {
                 if (checkForm()) {
                     String name = m_et_name.getText().toString();
-                    String surname = m_et_surname.getText().toString();
                     String email = m_et_email.getText().toString();
-                    mUser = new User(App.ROLE_TECHNICIAN, "", name, surname, email, null);
+                    String pass = m_et_pass.getText().toString();
+                    String subzone = m_spinner_subzone.getSelectedItem().toString();
+                    mUser = new User(App.ROLE_TECHNICIAN, "", name, email, pass, subzone, null);
                     mUsersDatabaseCrud.create(mUser, documentId -> {
                         mUser.setUid(documentId);
                         mUsersDatabaseCrud.update(documentId, mUser.parseToMap(), response -> {
@@ -190,6 +216,16 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
                         });
                     });
                 }
+
+                break;
+            }
+            case R.id.administrator_technicians_create_spinner_subzones: {
+                // Set subzone spinner entries
+                String[] subzoneArray = {"Grau", "Platja"}; // Array with the all the subzones
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subzoneArray );
+                m_spinner_subzone.setAdapter(spinnerArrayAdapter);
+                m_spinner_subzone.setVisibility(View.VISIBLE);
+                m_spinner_subzone.performClick();
 
                 break;
             }

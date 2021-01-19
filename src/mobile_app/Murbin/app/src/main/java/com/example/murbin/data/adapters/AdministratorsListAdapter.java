@@ -118,7 +118,7 @@ public class AdministratorsListAdapter extends FirestoreRecyclerAdapter<User, Ad
          * @param user User
          */
         public void customizeView(User user) {
-            String full_name = user.getName() + " " + user.getSurname();
+            String full_name = user.getName();// + " " + user.getSurname();
             tv_full_name.setText(full_name);
             //tv_email.setText(user.getEmail());
         }

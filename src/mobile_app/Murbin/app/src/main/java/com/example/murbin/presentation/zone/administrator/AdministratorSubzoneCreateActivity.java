@@ -35,7 +35,7 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
     private String mMessage;
-    private EditText m_et_name, m_et_location;
+    private EditText m_et_name;
     private Button m_btn_location, m_btn_cancel, m_btn_save;
     private SubzonesDatabaseCrud mSubzonesDatabaseCrud;
     private Subzone mSubzone;
@@ -64,8 +64,7 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
         mContainer = findViewById(R.id.administrator_subzone_create_container);
 
         m_et_name = findViewById(R.id.administrator_subzone_create_et_name);
-        m_et_location = findViewById(R.id.administrator_subzone_create_et_location);
-        m_btn_location = findViewById(R.id.location);
+        m_btn_location = findViewById(R.id.administrator_subzone_create_btn_location);
 
         m_btn_cancel = findViewById(R.id.administrator_subzone_create_btn_cancelar);
         m_btn_save = findViewById(R.id.administrator_subzone_create_btn_guardar);
@@ -159,7 +158,7 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.location: {
+            case R.id.administrator_subzone_create_btn_location: {
                 Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
                 showMapDialogFragment();
 

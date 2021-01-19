@@ -28,9 +28,9 @@
         android:textColor="@color/error"
         android:textSize="12sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/administrator_subzone_edit_et_location"
-        app:layout_constraintStart_toStartOf="@+id/administrator_subzone_edit_et_location"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_edit_et_location" />
+        app:layout_constraintEnd_toEndOf="@+id/administrator_subzone_edit_btn_location"
+        app:layout_constraintStart_toStartOf="@+id/administrator_subzone_edit_btn_location"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_edit_btn_location" />
 
     <Button
         android:id="@+id/administrator_subzone_edit_btn_guardar"
@@ -49,7 +49,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_edit_et_location" />
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_edit_btn_location" />
 
     <Button
         android:id="@+id/administrator_subzone_edit_btn_cancelar"
@@ -94,19 +94,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_edit_toolbar" />
 
-    <TextView
-        android:id="@+id/administrator_subzone_edit_tv_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserratregular"
-        android:text="@string/administrator_subzone_edit_tv_subtitle"
-        android:textColor="@color/negro"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_edit_tv_title" />
-
     <EditText
         android:id="@+id/administrator_subzone_edit_et_name"
         android:layout_width="match_parent"
@@ -128,10 +115,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_edit_tv_subtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_edit_tv_title" />
 
-    <EditText
-        android:id="@+id/administrator_subzone_edit_et_location"
+    <Button
+        android:id="@+id/administrator_subzone_edit_btn_location"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
@@ -149,6 +136,9 @@
         android:textColorLink="@color/principal_variante"
         android:textCursorDrawable="@color/principal"
         android:textSize="14sp"
+        app:backgroundTint="@null"
+        style="?android:attr/borderlessButtonStyle"
+        android:gravity="left|center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

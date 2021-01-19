@@ -10,7 +10,8 @@
     <item
         android:id="@+id/administrator_technicians_edit_menu_delete"
         android:orderInCategory="100"
-        android:title="@string/administrator_technicians_edit_menu_delete"
+        android:title=""
+        android:icon="@drawable/ic_erase"
         app:showAsAction="always" />
 
 </menu>

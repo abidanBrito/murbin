@@ -10,12 +10,16 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -40,7 +44,8 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
     private String mMessage;
     private String mId;
     private EditText m_et_name, m_et_surname, m_et_email, m_et_pass;
-    private Button m_btn_cancel, m_btn_save;
+    private Button m_btn_cancel, m_btn_save, m_btn_spinner;
+    private Spinner m_spinner_subzone;
     private UsersDatabaseCrud mUsersDatabaseCrud;
     private User mUser;
 
@@ -49,6 +54,21 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrator_technicians_edit_formulary);
         initializeLayoutElements();
+
+        m_spinner_subzone.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                m_spinner_subzone.setVisibility(View.GONE);
+                Log.e("Spinner:", "Testing 1");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                m_spinner_subzone.setVisibility(View.GONE);
+                Log.e("Spinner:", "Testing 2");
+            }
+
+        });
     }
 
     /**
@@ -68,15 +88,19 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
         mContainer = findViewById(R.id.administrator_technicians_edit_activity_container);
 
         m_et_name = findViewById(R.id.administrator_technicians_edit_et_name);
-        m_et_pass = findViewById(R.id.administrator_technicians_edit_et_location);
-        //m_et_surname = findViewById(R.id.administrator_technicians_edit_activity_et_surname);
-        //m_et_email = findViewById(R.id.administrator_technicians_edit_activity_et_email);
+        m_et_pass = findViewById(R.id.administrator_technicians_edit_et_pass);
+        m_et_email = findViewById(R.id.administrator_technicians_edit_et_email);
 
         m_btn_cancel = findViewById(R.id.administrator_technicians_edit_btn_cancelar);
         m_btn_save = findViewById(R.id.administrator_technicians_edit_btn_crear);
+        // Al hacer click sobre este boton se abre el spinner.
+        m_btn_spinner = findViewById(R.id.administrator_technicians_edit_spinner_subzones);
+
+        m_spinner_subzone = findViewById(R.id.administrator_technicians_spinner_subzones_edit);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
+        m_btn_spinner.setOnClickListener(this);
 
         // BottomNavigationView menu
         mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
@@ -105,7 +129,6 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
         mUsersDatabaseCrud.read(mId, user -> {
             mUser = user;
             m_et_name.setText(user.getName());
-            m_et_surname.setText(user.getSurname());
             m_et_email.setText(user.getEmail());
         });
     }
@@ -201,7 +224,6 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
                 if (checkForm()) {
                     User updatedUser = mUser;
                     updatedUser.setName(m_email);
-                    updatedUser.setSurname(m_surname);
                     updatedUser.setEmail(m_email);
                     updatedUser.setLastAccess(new Date(System.currentTimeMillis()));
                     mUsersDatabaseCrud.update(mId, updatedUser.parseToMap(), response -> {
@@ -222,6 +244,16 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
                     // Update variable with changes
                     mUser = updatedUser;
                 }
+
+                break;
+            }
+            case R.id.administrator_technicians_edit_spinner_subzones: {
+                // Set subzone spinner entries
+                String[] subzoneArray = {"Grau", "Platja"}; // Array with the all the subzones
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subzoneArray );
+                m_spinner_subzone.setAdapter(spinnerArrayAdapter);
+                m_spinner_subzone.setVisibility(View.VISIBLE);
+                m_spinner_subzone.performClick();
 
                 break;
             }

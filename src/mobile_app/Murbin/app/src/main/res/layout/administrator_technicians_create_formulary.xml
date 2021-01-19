@@ -28,9 +28,9 @@
         android:textColor="@color/error"
         android:textSize="12sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/administrator_technicians_create_et_location"
-        app:layout_constraintStart_toStartOf="@+id/administrator_technicians_create_et_location"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_location" />
+        app:layout_constraintEnd_toEndOf="@+id/administrator_technicians_create_et_pass"
+        app:layout_constraintStart_toStartOf="@+id/administrator_technicians_create_et_pass"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_pass" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/administrator_technicians_create_toolbar"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/input_formulary"
         android:drawablePadding="8dp"
@@ -79,7 +79,30 @@
         app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_tv_title" />
 
     <EditText
-        android:id="@+id/administrator_technicians_create_et_location"
+        android:id="@+id/administrator_technicians_create_et_email"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/input_formulary"
+        android:drawablePadding="8dp"
+        android:ems="0"
+        android:fontFamily="@font/montserratmedium"
+        android:hint="@string/administrator_technicians_create_email_hint"
+        android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:textColor="@color/negro"
+        android:textColorHighlight="@color/principal"
+        android:textColorLink="@color/principal_variante"
+        android:textCursorDrawable="@color/principal"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_name" />
+
+    <EditText
+        android:id="@+id/administrator_technicians_create_et_pass"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
@@ -90,7 +113,7 @@
         android:ems="0"
         android:fontFamily="@font/montserratmedium"
         android:hint="@string/administrator_technicians_create_password_hint"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:paddingStart="12dp"
         android:textColor="@color/negro"
         android:textColorHighlight="@color/principal"
@@ -100,10 +123,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_name" />
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_email" />
 
-    <EditText
-        android:id="@+id/administrator_technicians_create_et_location3"
+    <Button
+        android:id="@+id/administrator_technicians_create_spinner_subzones"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
@@ -121,19 +144,22 @@
         android:textColorLink="@color/principal_variante"
         android:textCursorDrawable="@color/principal"
         android:textSize="14sp"
+        app:backgroundTint="@null"
+        style="?android:attr/borderlessButtonStyle"
+        android:gravity="left|center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_location" />
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_pass" />
 
     <Spinner
         android:id="@+id/administrator_technicians_spinner_subzones"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/administrator_technicians_create_et_location3"
-        app:layout_constraintStart_toStartOf="@+id/administrator_technicians_create_et_location3"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_location3" />
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/administrator_technicians_create_spinner_subzones"
+        app:layout_constraintStart_toStartOf="@+id/administrator_technicians_create_spinner_subzones"
+        app:layout_constraintTop_toTopOf="@+id/administrator_technicians_create_spinner_subzones" />
 
     <Button
         android:id="@+id/administrator_technicians_create_btn_cancelar"
@@ -161,7 +187,7 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/main_button"
         android:fontFamily="@font/montserratmedium"
@@ -172,7 +198,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_location3" />
+        app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_spinner_subzones" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/administrator_main_activity_bottom_navigation"

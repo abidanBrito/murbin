@@ -4,7 +4,7 @@
  * Last modified 23/11/20 10:55
  */
 
-package com.example.murbin.presentation.auth;
+package com.example.murbin.presentation.auth.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

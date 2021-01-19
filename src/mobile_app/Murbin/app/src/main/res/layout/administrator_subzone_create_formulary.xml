@@ -7,80 +7,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/administrator_subzone_create_error_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/montserratmedium"
-        android:textColor="@color/error"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/administrator_subzone_create_et_name"
-        app:layout_constraintStart_toStartOf="@+id/administrator_subzone_create_et_name"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_name" />
-
-    <TextView
-        android:id="@+id/administrator_subzone_create_error_localization"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/montserratmedium"
-        android:textColor="@color/error"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/administrator_subzone_create_et_location"
-        app:layout_constraintStart_toStartOf="@+id/administrator_subzone_create_et_location"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_location" />
-
-    <Button
-        android:id="@+id/administrator_subzone_create_btn_guardar"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/main_button"
-        android:fontFamily="@font/montserratmedium"
-        android:shadowColor="@null"
-        android:shadowRadius="0"
-        android:text="@string/administrator_subzone_create_btn_guardar"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
-
-    <Button
-        android:id="@+id/administrator_subzone_create_btn_cancelar"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/accent_button"
-        android:fontFamily="@font/montserratmedium"
-        android:shadowColor="@null"
-        android:shadowRadius="0"
-        android:text="@string/administrator_subzone_create_btn_cancelar"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:backgroundTint="@color/accent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_btn_guardar" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/administrator_subzone_create_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@null"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-    <TextView
         android:id="@+id/administrator_subzone_create_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,8 +42,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_tv_title" />
 
-    <EditText
-        android:id="@+id/administrator_subzone_create_et_location"
+    <Button
+        android:id="@+id/administrator_subzone_create_btn_location"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
@@ -127,6 +54,7 @@
         android:drawablePadding="8dp"
         android:ems="0"
         android:fontFamily="@font/montserratmedium"
+        android:gravity="left|center_vertical"
         android:hint="@string/administrator_subzone_create_localization_hint"
         android:inputType="text"
         android:paddingStart="12dp"
@@ -135,10 +63,86 @@
         android:textColorLink="@color/principal_variante"
         android:textCursorDrawable="@color/principal"
         android:textSize="14sp"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_name" />
+
+    <TextView
+        android:id="@+id/administrator_subzone_create_error_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserratmedium"
+        android:textColor="@color/error"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/administrator_subzone_create_et_name"
+        app:layout_constraintStart_toStartOf="@+id/administrator_subzone_create_et_name"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_name" />
+
+    <TextView
+        android:id="@+id/administrator_subzone_create_error_localization"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserratmedium"
+        android:textColor="@color/error"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/administrator_subzone_create_btn_location"
+        app:layout_constraintStart_toStartOf="@+id/administrator_subzone_create_btn_location"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_btn_location" />
+
+    <Button
+        android:id="@+id/administrator_subzone_create_btn_guardar"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/main_button"
+        android:fontFamily="@font/montserratmedium"
+        android:shadowColor="@null"
+        android:shadowRadius="0"
+        android:text="@string/administrator_subzone_create_btn_guardar"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_btn_location" />
+
+    <Button
+        android:id="@+id/administrator_subzone_create_btn_cancelar"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/accent_button"
+        android:fontFamily="@font/montserratmedium"
+        android:shadowColor="@null"
+        android:shadowRadius="0"
+        android:text="@string/administrator_subzone_create_btn_cancelar"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_btn_guardar" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/administrator_subzone_create_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/administrator_main_activity_bottom_navigation"
@@ -149,14 +153,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/administrator_main_bottom_navigation" />
-
-    <Button
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administrator_subzone_create_et_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

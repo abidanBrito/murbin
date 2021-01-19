@@ -204,12 +204,14 @@
     <string name="administrator_technicians_edit_tv_title">Editar técnico</string>
     <string name="administrator_technicians_edit_tv_subtitle">Nombre Apellido </string>
     <string name="administrator_technicians_edit_name_hint">Nombre</string>
+    <string name="administrator_technicians_edit_email_hint">Email</string>
     <string name="administrator_technicians_edit_password_hint">Contraseña</string>
     <string name="administrator_technicians_edit_subzones_hint">Subzonas</string>
     <string name="administrator_technicians_edit_btn_crear">Guardar</string>
     <string name="administrator_technicians_edit_btn_cancelar">Cancelar</string>
     <string name="administrator_technicians_create_tv_title">Crear técnico</string>
     <string name="administrator_technicians_create_name_hint">Nombre</string>
+    <string name="administrator_technicians_create_email_hint">Email</string>
     <string name="administrator_technicians_create_password_hint">Contraseña</string>
     <string name="administrator_technicians_create_subzones_hint">Subzonas</string>
     <string name="administrator_technicians_create_btn_crear">Crear</string>

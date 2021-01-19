@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +38,7 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
     private String mMessage;
     private String mId;
     private EditText m_et_name;
-    private Button m_btn_cancel, m_btn_save;
+    private Button m_btn_cancel, m_btn_save, m_btn_location;
     private SubzonesDatabaseCrud mSubzonesDatabaseCrud;
     private Subzone mSubzone;
 
@@ -68,9 +69,12 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
 
         m_btn_cancel = findViewById(R.id.administrator_subzone_edit_btn_cancelar);
         m_btn_save = findViewById(R.id.administrator_subzone_edit_btn_guardar);
+        m_btn_location = findViewById(R.id.administrator_subzone_edit_btn_location);
+
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
+        m_btn_location.setOnClickListener(this);
 
         // BottomNavigationView menu
         mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
@@ -183,6 +187,12 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
+            case R.id.administrator_subzone_edit_btn_location: {
+                Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
+                showMapDialogFragment();
+
+                break;
+            }
             case R.id.administrator_subzone_edit_btn_cancelar: {
                 Intent intent = new Intent(AdministratorSubzoneEditActivity.this, AdministratorSubzoneListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

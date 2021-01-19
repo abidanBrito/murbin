@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -33,8 +34,9 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
     private String mMessage;
-    private EditText m_et_name, m_et_surname, m_et_email, m_et_pass;
-    private Button m_btn_cancel, m_btn_save;
+    private EditText m_et_name, m_et_email, m_et_pass;
+    private Button m_btn_cancel, m_btn_save, m_btn_spinner;
+    private Spinner m_spinner_subzone;
     private UsersDatabaseCrud mUsersDatabaseCrud;
     private User mUser;
 
@@ -63,7 +65,6 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
 
         m_et_name = findViewById(R.id.administrator_technicians_create_et_name);
         m_et_pass = findViewById(R.id.administrator_technicians_create_et_name);
-        //m_et_surname = findViewById(R.id.administrator_technicians_create_activity_et_surname);
         //m_et_email = findViewById(R.id.administrator_technicians_create_activity_et_email);
 
         m_btn_cancel = findViewById(R.id.administrator_technicians_create_btn_cancelar);
@@ -166,9 +167,10 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
             case R.id.administrator_technicians_create_btn_crear: {
                 if (checkForm()) {
                     String name = m_et_name.getText().toString();
-                    String surname = m_et_surname.getText().toString();
                     String email = m_et_email.getText().toString();
-                    mUser = new User(App.ROLE_TECHNICIAN, "", name, surname, email, null);
+                    String pass = m_et_pass.getText().toString();
+                    String subzone = m_spinner_subzone.toString();
+                    mUser = new User(App.ROLE_TECHNICIAN, "", name, email, pass, subzone, null);
                     mUsersDatabaseCrud.create(mUser, documentId -> {
                         mUser.setUid(documentId);
                         mUsersDatabaseCrud.update(documentId, mUser.parseToMap(), response -> {
@@ -203,15 +205,10 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
         boolean result = true;
 
         String name = m_et_name.getText().toString();
-        String surname = m_et_surname.getText().toString();
         String email = m_et_email.getText().toString();
 
         if (name.equals("") || name.length() < 3) {
             m_et_name.setError("Debes indicar un nombre y de al menos 3 carácteres.");
-            result = false;
-        }
-        if (surname.equals("") || surname.length() < 3) {
-            m_et_surname.setError("Debes indicar los apellidos y de al menos 3 carácteres.");
             result = false;
         }
         if (email.equals("") || !App.isValidEmail(email)) {

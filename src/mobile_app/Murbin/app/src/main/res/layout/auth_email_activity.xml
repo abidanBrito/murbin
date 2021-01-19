@@ -14,7 +14,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/auth_email_activity_fragment"
-        class="com.example.murbin.presentation.auth.AuthEmailFragmentHome"
+        class="com.example.murbin.presentation.auth.fragments.AuthEmailFragmentHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

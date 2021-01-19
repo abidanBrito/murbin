@@ -42,12 +42,13 @@ public class ProfileFragment extends Fragment {
                 providers.append(provider.getProviderId()).append(", ");
             }
 
-            User user = new User(
+            User user = new User( // No se la funcion de la password ni de la idSubzone
                     "user",
                     firebaseUser.getUid(),
                     firebaseUser.getDisplayName(),
-                    null,
                     firebaseUser.getEmail(),
+                    null,
+                    null,
                     null
             );
 

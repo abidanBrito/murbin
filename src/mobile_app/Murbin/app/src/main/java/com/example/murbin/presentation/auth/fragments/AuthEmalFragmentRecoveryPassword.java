@@ -23,7 +23,6 @@ import com.example.murbin.App;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
-import com.example.murbin.presentation.auth.AuthEmailFragmentHome;
 
 public class AuthEmalFragmentRecoveryPassword extends Fragment implements View.OnClickListener {
 

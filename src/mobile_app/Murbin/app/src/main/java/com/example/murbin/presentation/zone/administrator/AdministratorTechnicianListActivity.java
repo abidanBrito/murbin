@@ -46,7 +46,7 @@ public class AdministratorTechnicianListActivity extends BaseActivity {
         mToolbar = findViewById(R.id.administrator_technicians_list_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(getString(R.string.AdministratorTechnicianListActivity_toolbar_title));
+            getSupportActionBar().setTitle("");
         }
 
         mContainer = findViewById(R.id.administrator_technicians_list_container);
