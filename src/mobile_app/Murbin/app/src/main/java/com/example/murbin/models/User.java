@@ -9,8 +9,10 @@ package com.example.murbin.models;
 import com.google.firebase.Timestamp;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -22,14 +24,14 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String idSubzone;
+    private List<String> listSubzones;
     private Date lastAccess;
 
     /**
      * Constructor Default
      */
     public User() {
-        // Empty
+        listSubzones = new ArrayList<>();
     }
 
     /**
@@ -41,13 +43,13 @@ public class User {
      * @param email      User email
      * @param lastAccess Last access user timestamp
      */
-    public User(String role, String uid, String name, String email, String password, String idSubzone, Timestamp lastAccess) {
+    public User(String role, String uid, String name, String email, String password, List<String> idSubzone, Timestamp lastAccess) {
         this.role = ((role != null && !role.equals("")) ? role : DEFAULT_ROLE);
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.idSubzone = idSubzone;
+        this.listSubzones = idSubzone;
         this.lastAccess = (lastAccess != null) ? lastAccess.toDate() : new Date(System.currentTimeMillis());
     }
 
@@ -95,12 +97,12 @@ public class User {
         this.password = password;
     }
 
-    public String getIdSubzone() {
-        return idSubzone;
+    public List<String> getListSubzones() {
+        return listSubzones;
     }
 
-    public void setIdSubzone(String idSubzone) {
-        this.idSubzone = idSubzone;
+    public void setListSubzones(List<String> listSubzones) {
+        this.listSubzones = listSubzones;
     }
 
     public Date getLastAccess() {
@@ -122,7 +124,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", idSubzone='" + idSubzone + '\'' +
+                ", listSubzones='" + listSubzones.toString() + '\'' +
                 ", lastAccess=" + lastAccess_formatted +
                 '}';
     }
@@ -140,7 +142,7 @@ public class User {
         userMap.put("name", this.getName());
         userMap.put("email", this.getEmail());
         userMap.put("password", this.getPassword());
-        userMap.put("idSubzone", this.getIdSubzone());
+        userMap.put("listSubzones", this.getListSubzones());
         userMap.put("lastAccess", new Timestamp(this.getLastAccess()));
 
         return userMap;

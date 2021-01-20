@@ -14,7 +14,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -80,5 +82,13 @@ public class SubzonesDatabaseCrud implements SubzonesDatabaseCrudRepository {
         subzones.document(id).delete().addOnSuccessListener(aVoid -> {
             deleteListener.onResponse(true);
         }).addOnFailureListener(e -> deleteListener.onResponse(false));
+    }
+
+    public CollectionReference getSubzones() {
+        return subzones;
+    }
+
+    public Query getSubzonesFromTechnicians(List<String> listSubzones) {
+        return subzones.whereIn("name", listSubzones);
     }
 }

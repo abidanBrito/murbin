@@ -50,7 +50,7 @@ public class TechnicianMainActivity extends BaseActivity {
             getSupportActionBar().setTitle("");
         }
 
-        mContainer = findViewById(R.id.technician_main_activity_toolbar);
+        mContainer = findViewById(R.id.technician_main_activity_container);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

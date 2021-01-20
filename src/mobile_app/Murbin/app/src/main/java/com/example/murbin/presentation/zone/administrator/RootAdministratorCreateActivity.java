@@ -27,6 +27,9 @@ import com.example.murbin.firebase.Auth;
 import com.example.murbin.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RootAdministratorCreateActivity extends BaseActivity implements View.OnClickListener {
 
     private final Auth mAuth = new Auth(this);
@@ -169,8 +172,9 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
                     String name = m_et_name.getText().toString();
                     String email = m_et_email.getText().toString();
                     String pass = m_et_pass.getText().toString();
-                    String subzone = m_spinner_subzone.toString();
-                    mUser = new User(App.ROLE_TECHNICIAN, "", name, email, pass, subzone, null);
+                    //String subzone = m_spinner_subzone.toString();
+                    List<String> listSubzones = new ArrayList<>();
+                    mUser = new User(App.ROLE_TECHNICIAN, "", name, email, pass, listSubzones, null);
                     mUsersDatabaseCrud.create(mUser, documentId -> {
                         mUser.setUid(documentId);
                         mUsersDatabaseCrud.update(documentId, mUser.parseToMap(), response -> {

@@ -13,6 +13,7 @@ import com.example.murbin.models.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.Map;
 import java.util.Objects;
@@ -72,5 +73,9 @@ public class UsersDatabaseCrud implements UsersDatabaseCrudRepository {
                 deleteListener.onResponse(false);
             }
         });
+    }
+
+    public Query getByRole(String role){
+        return users.whereEqualTo("role", role);
     }
 }

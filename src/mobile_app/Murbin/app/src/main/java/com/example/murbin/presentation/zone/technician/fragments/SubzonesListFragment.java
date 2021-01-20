@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.murbin.App;
 import com.example.murbin.R;
+import com.example.murbin.data.SubzonesDatabaseCrud;
 import com.example.murbin.data.adapters.SubzonesListAdapter;
 import com.example.murbin.data.adapters.TechniciansListAdapter;
 import com.example.murbin.models.Subzone;
@@ -31,15 +32,19 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.List;
+
 public class SubzonesListFragment extends Fragment {
 
     public SubzonesListAdapter subzonesListAdapter;
 
     private RecyclerView recyclerView;
+    private SubzonesDatabaseCrud subzonesDatabaseCrud;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        subzonesDatabaseCrud = new SubzonesDatabaseCrud();
         setHasOptionsMenu(true); // For onOptionsItemSelected to work
     }
 
@@ -75,22 +80,19 @@ public class SubzonesListFragment extends Fragment {
      * @param view View
      */
     private void initializeLayoutElements(View view) {
-        Query query = FirebaseFirestore.getInstance().collection("zones")
-                .document("Gandia").collection("subzones");
+        //String uidUser = App.getCurrentUser().getUid();
+        List<String> listSubzones = App.getCurrentUser().getListSubzones();
 
         FirestoreRecyclerOptions<Subzone> options = new FirestoreRecyclerOptions.Builder<Subzone>()
-                .setQuery(query, Subzone.class).build();
+                .setQuery(subzonesDatabaseCrud.getSubzonesFromTechnicians(listSubzones), Subzone.class).build();
 
         subzonesListAdapter = new SubzonesListAdapter(options, getContext());
-        subzonesListAdapter.setOnItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = recyclerView.getChildAdapterPosition(v);
-                String id = subzonesListAdapter.getId(position);
-                Intent intent = new Intent(App.getContext(), TechnicianSubzoneActivity.class);
-                intent.putExtra("id", id);
-                startActivity(intent);
-            }
+        subzonesListAdapter.setOnItemClickListener(v -> {
+            int position = recyclerView.getChildAdapterPosition(v);
+            String id = subzonesListAdapter.getId(position);
+            Intent intent = new Intent(App.getContext(), TechnicianSubzoneActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
         });
 
         recyclerView = view.findViewById(R.id.global_recyclerview);

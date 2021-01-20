@@ -31,7 +31,9 @@ import com.example.murbin.data.UsersDatabaseCrud;
 import com.example.murbin.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AdministratorTechnicianEditActivity extends BaseActivity implements View.OnClickListener {
 
@@ -227,11 +229,12 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
                     String name = m_et_name.getText().toString();
                     String email = m_et_email.getText().toString();
                     String pass = m_et_pass.getText().toString();
-                    String subzone = m_spinner_subzone.getSelectedItem().toString();
+                    //String subzone = m_spinner_subzone.getSelectedItem().toString();
+                    List<String> listSubzones = new ArrayList<>();
                     User updatedUser = mUser;
                     updatedUser.setName(name);
                     updatedUser.setEmail(email);
-                    updatedUser.setIdSubzone(subzone);
+                    updatedUser.setListSubzones(listSubzones);
                     if(pass != null && !pass.isEmpty()){
                         updatedUser.setPassword(pass);
                     }

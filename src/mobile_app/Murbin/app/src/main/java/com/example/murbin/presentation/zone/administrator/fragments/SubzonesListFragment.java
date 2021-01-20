@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.murbin.App;
 import com.example.murbin.R;
+import com.example.murbin.data.SubzonesDatabaseCrud;
 import com.example.murbin.data.adapters.SubzonesListAdapter;
 import com.example.murbin.data.adapters.TechniciansListAdapter;
 import com.example.murbin.models.Subzone;
@@ -35,10 +36,12 @@ public class SubzonesListFragment extends Fragment {
     public SubzonesListAdapter subzonesListAdapter;
 
     private RecyclerView recyclerView;
+    private SubzonesDatabaseCrud subzonesDatabaseCrud;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        subzonesDatabaseCrud = new SubzonesDatabaseCrud();
         setHasOptionsMenu(true); // For onOptionsItemSelected to work
     }
 
@@ -74,11 +77,8 @@ public class SubzonesListFragment extends Fragment {
      * @param view View
      */
     private void initializeLayoutElements(View view) {
-        Query query = FirebaseFirestore.getInstance().collection("zones")
-                .document("Gandia").collection("subzones");
-
         FirestoreRecyclerOptions<Subzone> options = new FirestoreRecyclerOptions.Builder<Subzone>()
-                .setQuery(query, Subzone.class).build();
+                .setQuery(subzonesDatabaseCrud.getSubzones(), Subzone.class).build();
 
         subzonesListAdapter = new SubzonesListAdapter(options, getContext());
         subzonesListAdapter.setOnItemClickListener(new View.OnClickListener() {
