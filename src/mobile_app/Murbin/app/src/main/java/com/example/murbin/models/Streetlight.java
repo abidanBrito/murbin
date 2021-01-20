@@ -6,6 +6,9 @@
 
 package com.example.murbin.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Streetlight {
 
     private String parentSubzoneID;
@@ -88,5 +91,14 @@ public class Streetlight {
                 ", geoPoint=" + geoPoint +
                 ", status=" + status +
                 '}';
+    }
+
+    public Map<String, Object> parseToMap() {
+        Map<String, Object> streetlightMap = new HashMap<>();
+
+        streetlightMap.put("name", this.getName());
+        streetlightMap.put("subzone", this.getParentSubzoneID());
+
+        return streetlightMap;
     }
 }

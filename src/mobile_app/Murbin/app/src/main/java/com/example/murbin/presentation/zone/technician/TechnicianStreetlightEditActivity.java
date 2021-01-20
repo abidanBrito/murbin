@@ -30,13 +30,12 @@ import com.example.murbin.presentation.zone.administrator.AdministratorTechnicia
 import com.example.murbin.presentation.zone.administrator.RootAdministratorListActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class TechnicianStreetlightCreateActivity extends BaseActivity implements View.OnClickListener {
+public class TechnicianStreetlightEditActivity extends BaseActivity implements View.OnClickListener {
 
     private final Auth mAuth = new Auth(this);
 
     private ViewGroup mContainer;
     private Toolbar mToolbar;
-    private BottomNavigationView mBottomNavigationView;
     private String mMessage;
     private Button m_btn_cancel, m_btn_save, m_btn_location;
     private StreetlightsDatabaseCrud mStreetlightsDatabaseCrud;
@@ -45,7 +44,7 @@ public class TechnicianStreetlightCreateActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.technician_streetlight_create_formulary);
+        setContentView(R.layout.technician_streetlight_edit_formulary);
         initializeLayoutElements();
     }
 
@@ -56,9 +55,9 @@ public class TechnicianStreetlightCreateActivity extends BaseActivity implements
 
         mContainer = findViewById(R.id.technician_streetlight_create_container);
 
-        m_btn_cancel = findViewById(R.id.technician_streetlight_create_btn_cancelar);
-        m_btn_save = findViewById(R.id.technician_streetlight_create_btn_crear);
-        m_btn_location = findViewById(R.id.technician_streetlight_create_btn_location);
+        m_btn_cancel = findViewById(R.id.technician_streetlight_edit_btn_cancelar);
+        m_btn_save = findViewById(R.id.technician_streetlight_edit_btn_guardar);
+        m_btn_location = findViewById(R.id.technician_streetlight_edit_btn_location);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
@@ -82,18 +81,18 @@ public class TechnicianStreetlightCreateActivity extends BaseActivity implements
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.technician_streetlight_create_btn_location: {
+            case R.id.technician_streetlight_edit_btn_location: {
                 Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
                 showMapDialogFragment();
 
                 break;
             }
 
-            case R.id.technician_streetlight_create_btn_cancelar: {
+            case R.id.technician_streetlight_edit_btn_cancelar: {
                 finish();
                 break;
             }
-            case R.id.technician_streetlight_create_btn_crear: {
+            case R.id.technician_streetlight_edit_btn_guardar: {
                 /*if (checkForm()) {
                     mUser = new User(App.ROLE_TECHNICIAN, "", name, email, pass, subzone, null);
                     mUsersDatabaseCrud.create(mUser, documentId -> {

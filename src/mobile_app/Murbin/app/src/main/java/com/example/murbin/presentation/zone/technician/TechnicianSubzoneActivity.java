@@ -19,13 +19,21 @@ import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.comun.Mqtt;
 import com.example.murbin.firebase.Auth;
+import com.example.murbin.models.Streetlight;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.global.GlobalPreferencesActivity;
 import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
 import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneListActivity;
 import com.example.murbin.presentation.zone.administrator.AdministratorTechnicianListActivity;
 import com.example.murbin.presentation.zone.administrator.RootAdministratorListActivity;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -38,11 +46,12 @@ public class TechnicianSubzoneActivity extends BaseActivity {
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
     private ViewGroup mContainer;
-    private TextView mTitle;
+    private TextView mTitle, mCount;
     private ConstraintLayout mStreetlights;
     private String mMessage, mId;
     public static MqttClient client = null;
     private ConstraintLayout botonOnOff;
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +89,7 @@ public class TechnicianSubzoneActivity extends BaseActivity {
         mStreetlights.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TechnicianStreetlightsActivity.class);
+                Intent intent = new Intent(App.getContext(), TechnicianStreetlightsActivity.class);
                 intent.putExtra("id", mId);
                 startActivity(intent);
             }
@@ -115,14 +124,32 @@ public class TechnicianSubzoneActivity extends BaseActivity {
             if (extras.containsKey("id")) {
                 mId = extras.getString("id", "");
                 mTitle.setText(mId);
+                Log.e("mId", mId);
             }
         }
+
+        Task<QuerySnapshot> query = FirebaseFirestore.getInstance().collection("zones")
+                .document("Gandia").collection("subzones")
+                .document(mId).collection("streetlights").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                count++;
+                            }
+                            mCount = findViewById(R.id.technician_subzone_streetlights);
+                            mCount.setText(String.valueOf(count));
+                        }
+                    }
+                });
+        query.isSuccessful();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.technician_menu, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 

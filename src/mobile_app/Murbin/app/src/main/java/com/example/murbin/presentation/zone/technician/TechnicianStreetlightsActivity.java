@@ -9,11 +9,13 @@ package com.example.murbin.presentation.zone.technician;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.murbin.App;
@@ -26,13 +28,13 @@ import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneCr
 import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneListActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class TechnicianStreetlightsActivity extends BaseActivity {
+public class TechnicianStreetlightsActivity extends AppCompatActivity {
 
     private final Auth mAuth = new Auth(this);
 
     private Toolbar mToolbar;
     private ViewGroup mContainer;
-    private String mMessage;
+    private String mMessage, mId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,10 @@ public class TechnicianStreetlightsActivity extends BaseActivity {
                 }
             }
         }
+        if (extras.containsKey("id")) {
+            mId = extras.getString("id", "");
+            Log.e("mId", mId);
+        }
     }
 
     @Override
@@ -75,7 +81,6 @@ public class TechnicianStreetlightsActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -84,6 +89,9 @@ public class TechnicianStreetlightsActivity extends BaseActivity {
                 startActivity(intent);
 
                 break;
+            }
+            default: {
+                finish();
             }
         }
 

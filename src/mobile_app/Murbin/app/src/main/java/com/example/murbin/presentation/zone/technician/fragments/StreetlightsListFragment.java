@@ -25,8 +25,7 @@ import com.example.murbin.data.adapters.TechniciansListAdapter;
 import com.example.murbin.models.Streetlight;
 import com.example.murbin.models.Subzone;
 import com.example.murbin.models.User;
-import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneEditActivity;
-import com.example.murbin.presentation.zone.administrator.AdministratorTechnicianEditActivity;
+import com.example.murbin.presentation.zone.technician.TechnicianStreetlightEditActivity;
 import com.example.murbin.presentation.zone.technician.TechnicianSubzoneActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -91,8 +90,8 @@ public class StreetlightsListFragment extends Fragment {
             public void onClick(View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
                 String id = streetlightsListAdapter.getId(position);
-                Intent intent = new Intent(getContext(), TechnicianSubzoneActivity.class);
-                intent.putExtra("id", id);
+                Intent intent = new Intent(getContext(), TechnicianStreetlightEditActivity.class);
+                intent.putExtra("id", position);
                 startActivity(intent);
             }
         });

@@ -53,7 +53,7 @@ public class StreetlightsListAdapter extends FirestoreRecyclerAdapter<Streetligh
 
     @Override
     protected void onBindViewHolder(@NonNull StreetlightsListAdapter.ViewHolder holder, int position, @NonNull Streetlight streetlight) {
-        holder.customizeView(streetlight);
+        holder.customizeView(streetlight, position);
         holder.itemView.setTag(position);
     }
 
@@ -116,8 +116,8 @@ public class StreetlightsListAdapter extends FirestoreRecyclerAdapter<Streetligh
          * Customize a View elements from a User
          *
          */
-        public void customizeView(Streetlight streetlight) {
-            String full_name = streetlight.getName();
+        public void customizeView(Streetlight streetlight , int position) {
+            String full_name = "Farola "+position;
             tv_full_name.setText(full_name);
         }
     }

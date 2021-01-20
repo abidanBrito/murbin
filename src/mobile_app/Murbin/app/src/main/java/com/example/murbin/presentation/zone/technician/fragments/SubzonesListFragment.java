@@ -87,7 +87,7 @@ public class SubzonesListFragment extends Fragment {
             public void onClick(View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
                 String id = subzonesListAdapter.getId(position);
-                Intent intent = new Intent(getContext(), TechnicianSubzoneActivity.class);
+                Intent intent = new Intent(App.getContext(), TechnicianSubzoneActivity.class);
                 intent.putExtra("id", id);
                 startActivity(intent);
             }

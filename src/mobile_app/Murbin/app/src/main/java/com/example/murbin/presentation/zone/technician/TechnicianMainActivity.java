@@ -44,12 +44,9 @@ public class TechnicianMainActivity extends BaseActivity {
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_subzone_edit_toolbar);
+        mToolbar = findViewById(R.id.technician_main_activity_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
             getSupportActionBar().setTitle("");
         }
 
@@ -86,7 +83,7 @@ public class TechnicianMainActivity extends BaseActivity {
 
             case R.id.technician_main_menu_logout: {
                 mAuth.signOut();
-                Intent intent = new Intent(TechnicianMainActivity.this, AuthEmailActivity.class);
+                Intent intent = new Intent(this, AuthEmailActivity.class);
                 startActivity(intent);
 
                 break;

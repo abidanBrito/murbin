@@ -17,19 +17,6 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
-        android:id="@+id/technician_streetlight_edit_error_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/montserratmedium"
-        android:textColor="@color/error"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/technician_streetlight_edit_et_name"
-        app:layout_constraintStart_toStartOf="@+id/technician_streetlight_edit_et_name"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_et_name" />
-
-    <TextView
         android:id="@+id/technician_streetlight_edit_error_localization"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -38,9 +25,9 @@
         android:textColor="@color/error"
         android:textSize="12sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/technician_streetlight_edit_et_location"
-        app:layout_constraintStart_toStartOf="@+id/technician_streetlight_edit_et_location"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_et_location" />
+        app:layout_constraintEnd_toEndOf="@+id/technician_streetlight_edit_btn_location"
+        app:layout_constraintStart_toStartOf="@+id/technician_streetlight_edit_btn_location"
+        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_btn_location" />
 
     <Button
         android:id="@+id/technician_streetlight_edit_btn_guardar"
@@ -59,7 +46,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_et_location" />
+        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_btn_location" />
 
     <Button
         android:id="@+id/technician_streetlight_edit_btn_cancelar"
@@ -94,43 +81,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_toolbar" />
 
-    <EditText
-        android:id="@+id/technician_streetlight_edit_et_name"
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/input_formulary"
-        android:drawablePadding="8dp"
-        android:ems="0"
-        android:fontFamily="@font/montserratmedium"
-        android:hint="@string/technician_streetlight_edit_name_hint"
-        android:inputType="text"
-        android:paddingStart="12dp"
-        android:textColor="@color/negro"
-        android:textColorHighlight="@color/principal"
-        android:textColorLink="@color/principal_variante"
-        android:textCursorDrawable="@color/principal"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_btn_onoff" />
-
     <Button
-        android:id="@+id/technician_streetlight_edit_et_location"
+        android:id="@+id/technician_streetlight_edit_btn_location"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/input_formulary"
         android:drawablePadding="8dp"
         android:ems="0"
         android:fontFamily="@font/montserratmedium"
         android:gravity="left|center_vertical"
-        android:hint="@string/administrator_subzone_edit_localization_hint"
+        android:hint="@string/technician_streetlight_create_localization_hint"
         android:inputType="text"
         android:paddingStart="12dp"
         android:textColor="@color/negro"
@@ -141,25 +105,6 @@
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_et_name" />
-
-    <Button
-        android:id="@+id/technician_streetlight_edit_btn_onoff"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/input_formulary"
-        android:fontFamily="@font/montserratmedium"
-        android:shadowColor="@android:color/transparent"
-        android:shadowRadius="0"
-        android:text="@string/technician_streetlight_edit_btn_on_off"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:backgroundTint="#F2F2F2"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_tv_title" />
 

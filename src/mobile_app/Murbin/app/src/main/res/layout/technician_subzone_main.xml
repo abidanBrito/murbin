@@ -34,7 +34,7 @@
         android:id="@+id/technician_subzone_activity_tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserratmedium"
+        android:fontFamily="@font/montserratregular"
         android:text="@string/administrator_fragment_large_frame_tv_subtitle"
         android:textColor="@color/negro"
         android:textSize="20sp"

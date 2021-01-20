@@ -123,11 +123,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.zone.technician.TechnicianStreetlightsActivity"
-            android:parentActivityName=".presentation.zone.technician.TechnicianMainActivity"
             android:screenOrientation="portrait" />
+            <!--android:parentActivityName=".presentation.zone.technician.TechnicianSubzoneActivity"-->
+
         <activity
             android:name=".presentation.zone.technician.TechnicianStreetlightCreateActivity"
-            android:parentActivityName=".presentation.zone.technician.TechnicianMainActivity"
+            android:parentActivityName=".presentation.zone.technician.TechnicianStreetlightsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.technician.TechnicianStreetlightEditActivity"
+            android:parentActivityName=".presentation.zone.technician.TechnicianStreetlightsActivity"
             android:screenOrientation="portrait" />
     </application>
 

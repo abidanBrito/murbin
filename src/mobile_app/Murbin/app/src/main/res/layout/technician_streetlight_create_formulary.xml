@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/technician_streetlight_create_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,19 +18,6 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
-        android:id="@+id/technician_streetlight_create_error_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/montserratmedium"
-        android:textColor="@color/error"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/technician_streetlight_create_et_name"
-        app:layout_constraintStart_toStartOf="@+id/technician_streetlight_create_et_name"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_et_name" />
-
-    <TextView
         android:id="@+id/technician_streetlight_create_error_localization"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -38,9 +26,9 @@
         android:textColor="@color/error"
         android:textSize="12sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/technician_streetlight_create_et_location"
-        app:layout_constraintStart_toStartOf="@+id/technician_streetlight_create_et_location"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_et_location" />
+        app:layout_constraintEnd_toEndOf="@+id/technician_streetlight_create_btn_location"
+        app:layout_constraintStart_toStartOf="@+id/technician_streetlight_create_btn_location"
+        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_btn_location" />
 
     <Button
         android:id="@+id/technician_streetlight_create_btn_crear"
@@ -59,7 +47,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_et_location" />
+        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_btn_location" />
 
     <Button
         android:id="@+id/technician_streetlight_create_btn_cancelar"
@@ -94,35 +82,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_toolbar" />
 
-    <EditText
-        android:id="@+id/technician_streetlight_create_et_name"
+    <Button
+        android:id="@+id/technician_streetlight_create_btn_location"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/input_formulary"
-        android:drawablePadding="8dp"
-        android:ems="0"
-        android:fontFamily="@font/montserratmedium"
-        android:hint="@string/technician_streetlight_create_name_hint"
-        android:inputType="text"
-        android:paddingStart="12dp"
-        android:textColor="@color/negro"
-        android:textColorHighlight="@color/principal"
-        android:textColorLink="@color/principal_variante"
-        android:textCursorDrawable="@color/principal"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_tv_title" />
-
-    <EditText
-        android:id="@+id/technician_streetlight_create_et_location"
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/input_formulary"
         android:drawablePadding="8dp"
@@ -136,9 +101,12 @@
         android:textColorLink="@color/principal_variante"
         android:textCursorDrawable="@color/principal"
         android:textSize="14sp"
+        app:backgroundTint="@null"
+        android:gravity="left|center_vertical"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_et_name" />
+        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_create_tv_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
