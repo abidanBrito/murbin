@@ -117,7 +117,18 @@
         <activity
             android:name=".presentation.zone.technician.TechnicianMainActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".presentation.zone.technician.TechnicianSubzoneActivity"
+            android:parentActivityName=".presentation.zone.technician.TechnicianMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.technician.TechnicianStreetlightsActivity"
+            android:parentActivityName=".presentation.zone.technician.TechnicianMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.technician.TechnicianStreetlightCreateActivity"
+            android:parentActivityName=".presentation.zone.technician.TechnicianMainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

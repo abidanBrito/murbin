@@ -6,6 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/technician_streetlight_edit_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     <TextView
         android:id="@+id/technician_streetlight_edit_error_name"
         android:layout_width="0dp"
@@ -71,16 +81,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_btn_guardar" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/technician_streetlight_edit_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@null"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
     <TextView
         android:id="@+id/technician_streetlight_edit_tv_title"
         android:layout_width="wrap_content"
@@ -94,25 +94,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_toolbar" />
 
-    <TextView
-        android:id="@+id/technician_streetlight_edit_tv_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserratregular"
-        android:text="@string/technician_streetlight_edit_tv_subtitle"
-        android:textColor="@color/negro"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_tv_title" />
-
     <EditText
         android:id="@+id/technician_streetlight_edit_et_name"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/input_formulary"
         android:drawablePadding="8dp"
@@ -130,18 +117,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_btn_onoff" />
 
-    <EditText
+    <Button
         android:id="@+id/technician_streetlight_edit_et_location"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/input_formulary"
         android:drawablePadding="8dp"
         android:ems="0"
         android:fontFamily="@font/montserratmedium"
-        android:hint="@string/technician_streetlight_edit_localization_hint"
+        android:gravity="left|center_vertical"
+        android:hint="@string/administrator_subzone_edit_localization_hint"
         android:inputType="text"
         android:paddingStart="12dp"
         android:textColor="@color/negro"
@@ -149,6 +138,7 @@
         android:textColorLink="@color/principal_variante"
         android:textCursorDrawable="@color/principal"
         android:textSize="14sp"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +149,7 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/input_formulary"
         android:fontFamily="@font/montserratmedium"
         android:shadowColor="@android:color/transparent"
@@ -171,6 +161,6 @@
         app:backgroundTint="#F2F2F2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_tv_subtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/technician_streetlight_edit_tv_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

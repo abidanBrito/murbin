@@ -22,9 +22,11 @@ import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.global.GlobalPreferencesActivity;
+import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneCreateActivity;
+import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneListActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class TechnicianMainActivity extends BaseActivity {
+public class TechnicianStreetlightsActivity extends BaseActivity {
 
     private final Auth mAuth = new Auth(this);
 
@@ -35,7 +37,7 @@ public class TechnicianMainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.technician_main_activity);
+        setContentView(R.layout.technician_streetlight_list);
         initializeLayoutElements();
     }
 
@@ -44,7 +46,7 @@ public class TechnicianMainActivity extends BaseActivity {
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_subzone_edit_toolbar);
+        mToolbar = findViewById(R.id.technician_subzone_activity_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -53,7 +55,7 @@ public class TechnicianMainActivity extends BaseActivity {
             getSupportActionBar().setTitle("");
         }
 
-        mContainer = findViewById(R.id.technician_main_activity_toolbar);
+        mContainer = findViewById(R.id.technician_subzone_activity_toolbar);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -68,7 +70,7 @@ public class TechnicianMainActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.technician_main_menu, menu);
+        getMenuInflater().inflate(R.menu.administrator_subzones_list_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -77,16 +79,8 @@ public class TechnicianMainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.technician_main_menu_settings: {
-                Intent intent = new Intent(this, GlobalPreferencesActivity.class);
-                startActivity(intent);
-
-                break;
-            }
-
-            case R.id.technician_main_menu_logout: {
-                mAuth.signOut();
-                Intent intent = new Intent(TechnicianMainActivity.this, AuthEmailActivity.class);
+            case R.id.administrator_subzones_list_menu_create: {
+                Intent intent = new Intent(this, TechnicianStreetlightCreateActivity.class);
                 startActivity(intent);
 
                 break;

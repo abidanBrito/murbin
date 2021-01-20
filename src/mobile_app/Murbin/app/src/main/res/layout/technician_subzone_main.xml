@@ -60,7 +60,7 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/technician_subzone_subzones_container"
+                android:id="@+id/technician_subzone_streetlights_container"
                 android:layout_width="0dp"
                 android:layout_height="110dp"
                 android:layout_marginStart="16dp"
@@ -72,12 +72,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/technician_subzone_status_container">
 
                 <TextView
-                    android:id="@+id/technician_subzone_subzones_tv_type"
+                    android:id="@+id/technician_subzone_streetlights_tv_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserratsemibold"
-                    android:text="@string/general_fragment_tv_subzonas"
+                    android:text="@string/technician_streetlight_list_tv_title"
                     android:textColor="@color/blanco"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +85,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/technician_subzone_subzones"
+                    android:id="@+id/technician_subzone_streetlights"
                     android:layout_width="40dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
@@ -172,7 +172,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/technician_subzone_temperature_container"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_subzones_container">
+                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_streetlights_container">
 
                 <TextView
                     android:id="@+id/technician_subzone_noise_tv_type"
@@ -216,7 +216,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/technician_subzone_noise_container"
-                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_subzones_container">
+                app:layout_constraintTop_toBottomOf="@+id/technician_subzone_streetlights_container">
 
                 <TextView
                     android:id="@+id/technician_subzone_temperature_tv_type"

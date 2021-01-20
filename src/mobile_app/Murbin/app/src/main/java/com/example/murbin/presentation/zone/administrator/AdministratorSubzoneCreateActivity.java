@@ -47,6 +47,16 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
         initializeLayoutElements();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     /**
      * Method to start the layout elements
      */
