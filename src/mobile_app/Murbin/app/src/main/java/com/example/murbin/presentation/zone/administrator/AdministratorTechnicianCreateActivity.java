@@ -52,21 +52,6 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrator_technicians_create_formulary);
         initializeLayoutElements();
-
-        m_spinner_subzone.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                m_spinner_subzone.setVisibility(View.GONE);
-                Log.e("Spinner:", "Testing 1");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                m_spinner_subzone.setVisibility(View.GONE);
-                Log.e("Spinner:", "Testing 2");
-            }
-
-        });
     }
 
     /**
@@ -93,8 +78,6 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
         m_btn_save = findViewById(R.id.administrator_technicians_create_btn_cancelar);
         // Al hacer click sobre este boton se abre el spinner.
         m_btn_spinner = findViewById(R.id.administrator_technicians_create_spinner_subzones);
-
-        m_spinner_subzone = findViewById(R.id.administrator_technicians_spinner_subzones);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
@@ -225,11 +208,13 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
             }
             case R.id.administrator_technicians_create_spinner_subzones: {
                 // Set subzone spinner entries
-                String[] subzoneArray = {"Grau", "Platja"}; // Array with the all the subzones
+                /*String[] subzoneArray = {"Grau", "Platja"}; // Array with the all the subzones
                 ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subzoneArray );
                 m_spinner_subzone.setAdapter(spinnerArrayAdapter);
                 m_spinner_subzone.setVisibility(View.VISIBLE);
-                m_spinner_subzone.performClick();
+                m_spinner_subzone.performClick();*/
+                Intent intent = new Intent(AdministratorTechnicianCreateActivity.this, AdministratorSubzoneSelectActivity.class);
+                startActivity(intent);
 
                 break;
             }

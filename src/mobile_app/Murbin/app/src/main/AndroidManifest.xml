@@ -103,6 +103,9 @@
             android:name=".presentation.zone.administrator.AdministratorSubzoneCreateActivity"
             android:parentActivityName=".presentation.zone.administrator.AdministratorSubzoneListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.zone.administrator.AdministratorSubzoneSelectActivity"
+            android:screenOrientation="portrait" />
 
         <!-- CRUD ADMINISTRATORS -->
         <activity

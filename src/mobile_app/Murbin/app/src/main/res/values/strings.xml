@@ -201,6 +201,7 @@
     <string name="administrator_fragment_small_frame_tv_temperature">Temp(Cº)</string>
     <string name="administrator_fragment_small_frame_tv_co2">CO2(ppm)</string>
     <string name="administrator_technicians_list_tv_title">Técnicos</string>
+    <string name="administrator_select_tv_title">Seleccionar subzonas</string>
     <string name="administrator_technicians_edit_tv_title">Editar técnico</string>
     <string name="administrator_technicians_edit_tv_subtitle">Nombre Apellido </string>
     <string name="administrator_technicians_edit_name_hint">Nombre</string>

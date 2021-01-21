@@ -142,15 +142,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_edit_et_pass" />
 
-            <Spinner
-                android:id="@+id/administrator_technicians_spinner_subzones_edit"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/administrator_technicians_edit_spinner_subzones"
-                app:layout_constraintStart_toStartOf="@+id/administrator_technicians_edit_spinner_subzones"
-                app:layout_constraintTop_toTopOf="@+id/administrator_technicians_edit_spinner_subzones" />
-
             <Button
                 android:id="@+id/administrator_technicians_edit_btn_cancelar"
                 style="?android:attr/borderlessButtonStyle"

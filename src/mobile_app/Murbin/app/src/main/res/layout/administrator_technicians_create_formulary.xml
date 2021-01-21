@@ -115,15 +115,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/administrator_technicians_create_et_name" />
 
-            <Spinner
-                android:id="@+id/administrator_technicians_spinner_subzones"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/administrator_technicians_create_spinner_subzones"
-                app:layout_constraintStart_toStartOf="@+id/administrator_technicians_create_spinner_subzones"
-                app:layout_constraintTop_toTopOf="@+id/administrator_technicians_create_spinner_subzones" />
-
             <EditText
                 android:id="@+id/administrator_technicians_create_et_pass"
                 android:layout_width="match_parent"

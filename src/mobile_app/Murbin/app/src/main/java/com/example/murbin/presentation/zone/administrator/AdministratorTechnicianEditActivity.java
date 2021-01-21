@@ -56,21 +56,6 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrator_technicians_edit_formulary);
         initializeLayoutElements();
-
-        m_spinner_subzone.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                m_spinner_subzone.setVisibility(View.GONE);
-                Log.e("Spinner:", "Testing 1");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                m_spinner_subzone.setVisibility(View.GONE);
-                Log.e("Spinner:", "Testing 2");
-            }
-
-        });
     }
 
     /**
@@ -97,8 +82,6 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
         m_btn_save = findViewById(R.id.administrator_technicians_edit_btn_crear);
         // Al hacer click sobre este boton se abre el spinner.
         m_btn_spinner = findViewById(R.id.administrator_technicians_edit_spinner_subzones);
-
-        m_spinner_subzone = findViewById(R.id.administrator_technicians_spinner_subzones_edit);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
@@ -261,12 +244,14 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
                 break;
             }
             case R.id.administrator_technicians_edit_spinner_subzones: {
-                // Set subzone spinner entries
-                String[] subzoneArray = {"Grau", "Platja"}; // Array with the all the subzones
-                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subzoneArray );
-                m_spinner_subzone.setAdapter(spinnerArrayAdapter);
-                m_spinner_subzone.setVisibility(View.VISIBLE);
-                m_spinner_subzone.performClick();
+//                // Set subzone spinner entries
+//                String[] subzoneArray = {"Grau", "Platja"}; // Array with the all the subzones
+//                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subzoneArray );
+//                m_spinner_subzone.setAdapter(spinnerArrayAdapter);
+//                m_spinner_subzone.setVisibility(View.VISIBLE);
+//                m_spinner_subzone.performClick();
+                Intent intent = new Intent(AdministratorTechnicianEditActivity.this, AdministratorSubzoneSelectActivity.class);
+                startActivity(intent);
 
                 break;
             }
