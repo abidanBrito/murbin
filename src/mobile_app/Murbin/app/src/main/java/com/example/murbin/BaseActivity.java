@@ -8,6 +8,8 @@ package com.example.murbin;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -116,6 +118,43 @@ public class BaseActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         MapDialogFragment mapDialogFragment = new MapDialogFragment();
         mapDialogFragment.show(fm, "map_dialog_fragment");
+    }
+
+    /**
+     * Change the location input
+     * @param mapStatus -> If the map was acepted: true, and if the map was rejected: false
+     * @param createOrEdit -> If the function is called in a create or in a edit activity ("create", "edit")
+     * @param userType -> If the function is called in the admin dashboard or the technician dashboard ("administrator", "technician")
+     **/
+    protected void changeLocationInput(boolean mapStatus, String createOrEdit, String userType){
+        Button locationBtn = null;
+        switch(createOrEdit){
+            case "create": {
+                if (userType == "administrator"){ // AdministratorSubzoneCreate
+                    locationBtn = findViewById(R.id.administrator_subzone_create_btn_location);
+                } else if(userType == "technician"){ // TechnicianStreetlightCreate
+                    locationBtn = findViewById(R.id.technician_streetlight_create_btn_location);
+                }
+            }
+            case "edit": {
+                if (userType == "administrator"){ // AdministratorSubzoneEdit
+                    locationBtn = findViewById(R.id.administrator_subzone_edit_btn_location);
+                } else if(userType == "technician"){ // TechnicianStreetlightEdit
+                    locationBtn = findViewById(R.id.technician_streetlight_edit_btn_location);
+                }
+            }
+        }
+
+        if(mapStatus == true){
+            if(userType == "administrator"){
+                locationBtn.setHint("Subzona marcada");
+            } else if (userType == "technician"){
+                locationBtn.setHint("Farola marcada");
+            }
+        } else {
+            locationBtn.setHint("Localización");
+        }
+
     }
 
 }
