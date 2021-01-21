@@ -96,13 +96,11 @@ void interr_task_noise(void *pvParameter)
   while(1) {
     if(xSemaphoreTake(xSemaphore_Noise,portMAX_DELAY)){
       if (xSemaphoreTake( xSemaphore_PaintLeds, portMAX_DELAY )){
-        
-      
-       while(analogRead(sensorLUM)> 3000){
+       while(analogRead(sensorRUIDO)> 3000){
         Serial.println("INTR NOISE: ");
         pixels.clear();
-        Serial.print(analogRead(sensorLUM));
-        value = analogRead(sensorLUM);
+        Serial.print(analogRead(sensorRUIDO));
+        value = analogRead(sensorRUIDO);
         limit = 4095;
         int bright_value = (value * 255) / limit;
         int pin_value = round((value * 24) / limit);
@@ -285,6 +283,7 @@ if(udp.listen(1234)) {
   // Configurando los pines de entrada y salida
   pinMode(sensorCO2, INPUT);       // Sensor CO2
   pinMode(sensorLUM, INPUT);       // Sensor LUZ
+  pinMode(sensorRUIDO, INPUT);       // Sensor LUZ
   pinMode(DHTPin, INPUT);          // Sensor de Temperatura y Humedad
   detectar_movimiento();           // Llama a la funcion para programar la interrupcion del sensor de movimiento.
 
@@ -470,10 +469,7 @@ void sendMqtt(String sensor,int v)
 
     // send message, the Print interface can be used to set the message contents
     mqttClient.beginMessage(topicSend);
-    mqttClient.print("value: ");
     mqttClient.println(v);
-    mqttClient.print("Time: ");
-    mqttClient.print(currentMillis);
     mqttClient.endMessage();
 
     Serial.println(" ");
