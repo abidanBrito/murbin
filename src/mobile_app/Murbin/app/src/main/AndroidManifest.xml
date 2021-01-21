@@ -47,6 +47,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".presentation.zone.general.SplashActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
         <!-- LOGIN -->
 
         <activity
