@@ -20,30 +20,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.murbin.App;
 import com.example.murbin.R;
+import com.example.murbin.data.StreetlightsDatabaseCrud;
 import com.example.murbin.data.adapters.StreetlightsListAdapter;
-import com.example.murbin.data.adapters.TechniciansListAdapter;
 import com.example.murbin.models.Streetlight;
-import com.example.murbin.models.Subzone;
-import com.example.murbin.models.User;
 import com.example.murbin.presentation.zone.technician.TechnicianStreetlightEditActivity;
-import com.example.murbin.presentation.zone.technician.TechnicianSubzoneActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 public class StreetlightsListFragment extends Fragment {
 
     public StreetlightsListAdapter streetlightsListAdapter;
 
-    private String mId;
+    private String mIdSubzone;
     private RecyclerView recyclerView;
+    private StreetlightsDatabaseCrud streetlightsDatabaseCrud;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true); // For onOptionsItemSelected to work
-
-
     }
 
     @Override
@@ -78,22 +72,17 @@ public class StreetlightsListFragment extends Fragment {
      * @param view View
      */
     private void initializeLayoutElements(View view) {
-        Query query = FirebaseFirestore.getInstance().collection("zones")
-                .document("Gandia").collection("subzones").document("Grao de Gandia").collection("streetlights");
-
         FirestoreRecyclerOptions<Streetlight> options = new FirestoreRecyclerOptions.Builder<Streetlight>()
-                .setQuery(query, Streetlight.class).build();
+                .setQuery(streetlightsDatabaseCrud.getStreetlights(), Streetlight.class).build();
 
         streetlightsListAdapter = new StreetlightsListAdapter(options, getContext());
-        streetlightsListAdapter.setOnItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = recyclerView.getChildAdapterPosition(v);
-                String id = streetlightsListAdapter.getId(position);
-                Intent intent = new Intent(getContext(), TechnicianStreetlightEditActivity.class);
-                intent.putExtra("id", position);
-                startActivity(intent);
-            }
+        streetlightsListAdapter.setOnItemClickListener(v -> {
+            int position = recyclerView.getChildAdapterPosition(v);
+            String idStreetlight = streetlightsListAdapter.getId(position);
+            Intent intent = new Intent(getContext(), TechnicianStreetlightEditActivity.class);
+            intent.putExtra("idSubzone", mIdSubzone);
+            intent.putExtra("idStreetlight", idStreetlight);
+            startActivity(intent);
         });
 
         recyclerView = view.findViewById(R.id.global_recyclerview);
@@ -102,5 +91,14 @@ public class StreetlightsListFragment extends Fragment {
         recyclerView.setAdapter(streetlightsListAdapter);
 
         streetlightsListAdapter.startListening();
+    }
+
+    /**
+     * @param idSubzoneP Id from parent Subzone
+     */
+    public void settings(String idSubzoneP) {
+//        Log.d(App.DEFAULT_TAG, "Recibido idSubzone: " + mIdSubzone);
+        mIdSubzone = idSubzoneP;
+        streetlightsDatabaseCrud = new StreetlightsDatabaseCrud(mIdSubzone);
     }
 }

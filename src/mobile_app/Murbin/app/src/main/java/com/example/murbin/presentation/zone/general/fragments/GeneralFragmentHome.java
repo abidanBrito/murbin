@@ -69,7 +69,7 @@ public class GeneralFragmentHome extends Fragment {
                     setValueSensor(document.getId(), value);
                 }
             } else {
-                Log.d(App.DEFAULT_TAG, "Error getting documents.", task.getException());
+//                Log.d(App.DEFAULT_TAG, "Error getting documents.", task.getException());
             }
         });
 

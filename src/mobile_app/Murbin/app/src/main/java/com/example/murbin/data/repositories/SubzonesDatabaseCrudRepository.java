@@ -21,6 +21,15 @@ public interface SubzonesDatabaseCrudRepository {
     void create(Subzone subzone, CreateListener createListener);
 
     /**
+     * Create a subzone in the database with custom id
+     *
+     * @param idDoc          String
+     * @param subzone        Subzone
+     * @param createListener Listener to get response asynchronously
+     */
+    void create(String idDoc, Subzone subzone, CreateListener createListener);
+
+    /**
      * Read a subzone from the database
      *
      * @param id           Id from subzone

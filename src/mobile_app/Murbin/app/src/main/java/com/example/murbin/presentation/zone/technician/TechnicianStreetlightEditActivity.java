@@ -4,31 +4,20 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.data.StreetlightsDatabaseCrud;
-import com.example.murbin.data.UsersDatabaseCrud;
 import com.example.murbin.firebase.Auth;
+import com.example.murbin.models.GeoPoint;
+import com.example.murbin.models.Streetlight;
 import com.example.murbin.models.User;
-import com.example.murbin.presentation.zone.administrator.AdministratorMainActivity;
-import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneListActivity;
-import com.example.murbin.presentation.zone.administrator.AdministratorTechnicianListActivity;
-import com.example.murbin.presentation.zone.administrator.RootAdministratorListActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class TechnicianStreetlightEditActivity extends BaseActivity implements View.OnClickListener {
 
@@ -36,13 +25,16 @@ public class TechnicianStreetlightEditActivity extends BaseActivity implements V
 
     private ViewGroup mContainer;
     private Toolbar mToolbar;
-    private String mMessage;
+    private String mMessage, mIdStreetlight, mIdSubzone;;
     private Button m_btn_cancel, m_btn_save, m_btn_location;
     private StreetlightsDatabaseCrud mStreetlightsDatabaseCrud;
+    private GeoPoint location;
     private User mUser;
+    private Streetlight mStreetlight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(App.DEFAULT_TAG, "TechnicianStreetlightEditActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.technician_streetlight_edit_formulary);
         initializeLayoutElements();
@@ -71,9 +63,17 @@ public class TechnicianStreetlightEditActivity extends BaseActivity implements V
                     App.getInstance().snackMessage(mContainer, R.color.black, mMessage, this);
                 }
             }
+            if (extras.containsKey("idSubzone")) {
+                mIdSubzone = extras.getString("idSubzone", "");
+//                Log.d("mIdSubzone", mIdSubzone);
+            }
+            if (extras.containsKey("idStreetlight")) {
+                mIdStreetlight = extras.getString("idStreetlight", "");
+//                Log.d("mIdStreetlight", mIdStreetlight);
+            }
         }
 
-        mStreetlightsDatabaseCrud = new StreetlightsDatabaseCrud();
+        mStreetlightsDatabaseCrud = new StreetlightsDatabaseCrud(mIdSubzone);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -82,9 +82,8 @@ public class TechnicianStreetlightEditActivity extends BaseActivity implements V
         int id = v.getId();
         switch (id) {
             case R.id.technician_streetlight_edit_btn_location: {
-                Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
-                showMapDialogFragment();
-
+//                Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
+                showMapDialogFragment("location", "TechnicianStreetlightEditActivity");
                 break;
             }
 
@@ -93,27 +92,24 @@ public class TechnicianStreetlightEditActivity extends BaseActivity implements V
                 break;
             }
             case R.id.technician_streetlight_edit_btn_guardar: {
-                /*if (checkForm()) {
-                    mUser = new User(App.ROLE_TECHNICIAN, "", name, email, pass, subzone, null);
-                    mUsersDatabaseCrud.create(mUser, documentId -> {
-                        mUser.setUid(documentId);
-                        mUsersDatabaseCrud.update(documentId, mUser.parseToMap(), response -> {
-                            if (response) {
-                                Intent intent = new Intent(this, AdministratorTechnicianListActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.putExtra("message", "Técnico creado correctamente.");
-                                startActivity(intent);
-                            } else {
-                                App.getInstance().snackMessage(
-                                        mContainer,
-                                        R.color.black,
-                                        "Error desconocido al crear el técnico.",
-                                        this
-                                );
-                            }
-                        });
+                if (checkForm()) {
+                    mStreetlight = new Streetlight(this.location, true);
+                    mStreetlightsDatabaseCrud.update(mIdStreetlight, mStreetlight.parseToMap(), response -> {
+                        if (response) {
+                            Intent intent = new Intent(TechnicianStreetlightEditActivity.this, TechnicianStreetlightsActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("message", "Farola creada correctamente.");
+                            startActivity(intent);
+                        } else {
+                            App.getInstance().snackMessage(
+                                    mContainer,
+                                    R.color.black,
+                                    "Error desconocido al crear la farola.",
+                                    TechnicianStreetlightEditActivity.this
+                            );
+                        }
                     });
-                }*/
+                }
 
                 break;
             }
@@ -129,5 +125,19 @@ public class TechnicianStreetlightEditActivity extends BaseActivity implements V
         boolean result = true;
 
         return result;
+    }
+
+    /**
+     * Sets the location of the Streetlight with the received Geoppoint as a parameter.
+     *
+     * @param location Geopoint
+     */
+    public void setLocationStreetlight(GeoPoint location) {
+        this.location = location;
+        if (location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
+            m_btn_location.setHint(location.getLatitude() + "" + location.getLongitude());
+        } else {
+            m_btn_location.setHint(R.string.global_string_location);
+        }
     }
 }

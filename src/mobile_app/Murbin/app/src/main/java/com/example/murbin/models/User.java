@@ -43,13 +43,13 @@ public class User {
      * @param email      User email
      * @param lastAccess Last access user timestamp
      */
-    public User(String role, String uid, String name, String email, String password, List<String> idSubzone, Timestamp lastAccess) {
+    public User(String role, String uid, String name, String email, String password, List<String> listSubzones, Timestamp lastAccess) {
         this.role = ((role != null && !role.equals("")) ? role : DEFAULT_ROLE);
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.listSubzones = idSubzone;
+        this.listSubzones = listSubzones;
         this.lastAccess = (lastAccess != null) ? lastAccess.toDate() : new Date(System.currentTimeMillis());
     }
 

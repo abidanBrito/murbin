@@ -85,7 +85,7 @@ public class AdministratorTechnicianCreateActivity extends BaseActivity implemen
 
         // BottomNavigationView menu
         mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
-        if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
+        if (App.getInstance().getCurrentUser() != null && App.getInstance().getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
             mBottomNavigationView.getMenu().clear();
             mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);
             mBottomNavigationView.setSelectedItemId(R.id.root_main_bottom_navigation_technician);

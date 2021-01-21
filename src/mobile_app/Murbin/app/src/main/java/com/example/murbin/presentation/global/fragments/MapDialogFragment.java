@@ -6,6 +6,7 @@
 
 package com.example.murbin.presentation.global.fragments;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,14 +18,25 @@ import androidx.annotation.Nullable;
 
 import com.example.murbin.App;
 import com.example.murbin.R;
+import com.example.murbin.models.Area;
 import com.example.murbin.models.GeoPoint;
+import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneCreateActivity;
+import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneEditActivity;
+import com.example.murbin.presentation.zone.technician.TechnicianStreetlightCreateActivity;
+import com.example.murbin.presentation.zone.technician.TechnicianStreetlightEditActivity;
 import com.example.murbin.uses_cases.UsesCasesZoneAdministrator;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * DialogFragment
@@ -33,25 +45,36 @@ import com.google.android.gms.maps.model.Polygon;
 public class MapDialogFragment extends androidx.fragment.app.DialogFragment
         implements OnMapReadyCallback, GoogleMap.OnPolygonClickListener, View.OnClickListener {
 
+    private final List<GeoPoint> listGeoPoints;
+    private final String originActivity;
+    private final String action;
     private SupportMapFragment mMapView;
-    private Button m_btn_validate;
+    private Button m_btn_validate, m_btn_cancel;
     private GoogleMap mMap;
+    private Area areaSubzone;
+    private GeoPoint location;
+    private Polygon polygon;
 
-    public MapDialogFragment() {
-        // Empty constructor is required for DialogFragment
-        // Make sure not to add arguments to the constructor
-        // Use `newInstance` instead as shown below
+    /**
+     * Constructor
+     */
+    public MapDialogFragment(String action, String originActivity) {
+        listGeoPoints = new ArrayList<>();
+        this.action = action;
+        this.originActivity = originActivity;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.administrator_diaglog_fragment_map, container, false);
+        View view = inflater.inflate(R.layout.administrator_dialog_fragment_map, container, false);
 
-        mMapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.administrator_diaglog_fragment_map_mapview);
+        mMapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.administrator_dialog_fragment_map_mapview);
         mMapView.getMapAsync(this);
 
-        m_btn_validate = view.findViewById(R.id.administrator_diaglog_fragment_map_btn_validate);
+        m_btn_validate = view.findViewById(R.id.administrator_dialog_fragment_map_btn_validate);
         m_btn_validate.setOnClickListener(this);
+        m_btn_cancel = view.findViewById(R.id.administrator_dialog_fragment_map_btn_cancel);
+        m_btn_cancel.setOnClickListener(this);
 
         return view;
     }
@@ -116,50 +139,119 @@ public class MapDialogFragment extends androidx.fragment.app.DialogFragment
             geoPoint = new GeoPoint();
         }
 
-        Log.d(App.DEFAULT_TAG, "geoPoint:" + geoPoint.toString());
-
+        //Log.d(App.DEFAULT_TAG, "geoPoint:" + geoPoint.toString());
 
         mMap = googleMap;
+
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.style_google_map)
+            );
+            if (!success) {
+//                Log.d(App.DEFAULT_TAG, "Error al analizar el estilo.");
+            }
+        } catch (Resources.NotFoundException e) {
+//            Log.d(App.DEFAULT_TAG, "No encuentro el estilo. Error: ", e);
+        }
+
         LatLng centerPoint = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerPoint, 12));
 
         mMap.setOnMapClickListener(
-                latLng -> Log.d(App.DEFAULT_TAG, "Latitude:" + latLng.latitude + " - Longitude: " + latLng.longitude)
+                latLng -> {
+//                    Log.d(App.DEFAULT_TAG, "Latitude:" + latLng.latitude + " - Longitude: " + latLng.longitude);
+                    switch (action) {
+                        case "polygon": {
+                            listGeoPoints.add(new GeoPoint(latLng.latitude, latLng.longitude));
+//                    Log.d(App.DEFAULT_TAG, "List:" + listGeoPoints.toString());
+                            areaSubzone = new Area(listGeoPoints);
+                            polygon = null;
+                            polygon = googleMap.addPolygon(new PolygonOptions()
+                                    .addAll(areaSubzone.convertToLatLngList()));
+                            polygon.setTag("subzone");
+                            mMap.addMarker(new MarkerOptions().position(latLng));
+                            break;
+                        }
+                        case "location": {
+                            location = new GeoPoint(latLng.latitude, latLng.longitude);
+                            mMap.addMarker(new MarkerOptions().position(latLng));
+                            break;
+                        }
+                    }
+                }
         );
-
-//        ZonesDatabaseCrud zdc = new ZonesDatabaseCrud();
-//        // Retrieve the zone from firestore
-//        zdc.read("Gandia3", zone -> {
-//            mMap = googleMap;
-//
-//            Area area = new Area(zone.getFormattedArea());
-//            GeoPoint centerZone = area.getCenterArea();
-//            LatLng centerPoint = new LatLng(centerZone.getLatitude(), centerZone.getLongitude());
-//
-//            Polygon polygon = mMap.addPolygon(new PolygonOptions()
-//                    .clickable(true)
-//                    .addAll(
-//                            area.convertToLatLngList()
-//                    )
-//            );
-//            polygon.setTag("Gandia");
-//            polygon.setStrokeColor(R.color.black);
-//            polygon.setFillColor(R.color.black);
-//
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerPoint, 12));
-//            mMap.setOnPolygonClickListener(AdministratorDialogFragmentMap.this);
-//
-//            mMap.setOnMapClickListener(
-//                    latLng -> Log.d(App.DEFAULT_TAG, "Latitude:" + latLng.latitude + " - Longitude: " + latLng.longitude)
-//            );
-//        });
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.administrator_diaglog_fragment_map_btn_validate) {
-            Log.d(App.DEFAULT_TAG, "Pulsado:" + "administrator_diaglog_fragment_map_btn_validate");
+        if (id == R.id.administrator_dialog_fragment_map_btn_validate) {
+//            Log.d(App.DEFAULT_TAG, "Pulsado:" + "administrator_dialog_fragment_map_btn_validate");
+//            Log.d(App.DEFAULT_TAG, "List end:" + listGeoPoints.toString());
+//            Log.d(App.DEFAULT_TAG, "Area end:" + areaSubzone.toString());
+            switch (action) {
+                case "polygon": {
+                    callSetAreaSubzoneCorrectly();
+                    break;
+                }
+                case "location": {
+                    callSetLocationStreetlightCorrectly();
+                    break;
+                }
+            }
+            dismiss();
+        }
+        if (id == R.id.administrator_dialog_fragment_map_btn_cancel) {
+//            Log.d(App.DEFAULT_TAG, "Pulsado:" + "administrator_dialog_fragment_map_btn_cancel");
+            listGeoPoints.clear();
+            areaSubzone = new Area();
+            switch (action) {
+                case "polygon": {
+                    callSetAreaSubzoneCorrectly();
+                    break;
+                }
+                case "location": {
+                    callSetLocationStreetlightCorrectly();
+                    break;
+                }
+            }
+            dismiss();
+        }
+    }
+
+    /**
+     *
+     */
+    private void callSetAreaSubzoneCorrectly() {
+        switch (this.originActivity) {
+            case "AdministratorSubzoneCreateActivity": {
+//                Log.d(App.DEFAULT_TAG, String.valueOf(areaSubzone.getArea().size()));
+                ((AdministratorSubzoneCreateActivity) getActivity()).setAreaSubzone(areaSubzone);
+                break;
+            }
+            case "AdministratorSubzoneEditActivity": {
+//                Log.d(App.DEFAULT_TAG, String.valueOf(areaSubzone.getArea().size()));
+                ((AdministratorSubzoneEditActivity) getActivity()).setAreaSubzone(areaSubzone);
+                break;
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    private void callSetLocationStreetlightCorrectly() {
+        switch (this.originActivity) {
+            case "TechnicianStreetlightCreateActivity": {
+                ((TechnicianStreetlightCreateActivity) getActivity()).setLocationStreetlight(location);
+                break;
+            }
+            case "TechnicianStreetlightEditActivity": {
+                ((TechnicianStreetlightEditActivity) getActivity()).setLocationStreetlight(location);
+                break;
+            }
         }
     }
 }

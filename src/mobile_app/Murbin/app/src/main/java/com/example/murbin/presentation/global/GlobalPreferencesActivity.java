@@ -56,7 +56,7 @@ public class GlobalPreferencesActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            User user = App.getCurrentUser();
+            User user = App.getInstance().getCurrentUser();
             Class<?> redirectActivityClass = GeneralMainActivity.class;
 
             if (user != null) {

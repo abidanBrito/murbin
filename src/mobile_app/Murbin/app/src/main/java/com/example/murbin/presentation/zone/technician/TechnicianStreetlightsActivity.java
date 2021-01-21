@@ -14,19 +14,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.murbin.App;
-import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
-import com.example.murbin.presentation.auth.AuthEmailActivity;
-import com.example.murbin.presentation.global.GlobalPreferencesActivity;
-import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneCreateActivity;
-import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneListActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.murbin.presentation.zone.technician.fragments.StreetlightsListFragment;
+import com.example.murbin.presentation.zone.technician.fragments.SubzonesListFragment;
 
 public class TechnicianStreetlightsActivity extends AppCompatActivity {
 
@@ -34,13 +30,20 @@ public class TechnicianStreetlightsActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private ViewGroup mContainer;
-    private String mMessage, mId;
+    private String mMessage, mIdSubzone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(App.DEFAULT_TAG, "TechnicianStreetlightsActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.technician_streetlight_list);
         initializeLayoutElements();
+        if (savedInstanceState == null) {
+            StreetlightsListFragment subzonesListFragment = new StreetlightsListFragment();
+            subzonesListFragment.settings(mIdSubzone);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.technician_streetlight_fragment, subzonesListFragment);
+        }
     }
 
     /**
@@ -57,7 +60,7 @@ public class TechnicianStreetlightsActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("");
         }
 
-        mContainer = findViewById(R.id.technician_subzone_activity_toolbar);
+        mContainer = findViewById(R.id.technician_subzone_activity_container);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -67,11 +70,17 @@ public class TechnicianStreetlightsActivity extends AppCompatActivity {
                     App.getInstance().snackMessage(mContainer, R.color.black, mMessage, this);
                 }
             }
+            if (extras.containsKey("idSubzone")) {
+                mIdSubzone = extras.getString("idSubzone", "");
+            }
         }
-        if (extras.containsKey("id")) {
-            mId = extras.getString("id", "");
-            Log.e("mId", mId);
-        }
+
+        StreetlightsListFragment streetlightsListFragment = new StreetlightsListFragment();
+        streetlightsListFragment.settings(mIdSubzone);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.technician_streetlight_fragment, streetlightsListFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
@@ -81,11 +90,13 @@ public class TechnicianStreetlightsActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.administrator_subzones_list_menu_create: {
                 Intent intent = new Intent(this, TechnicianStreetlightCreateActivity.class);
+                intent.putExtra("mIdSubzone", mIdSubzone);
                 startActivity(intent);
 
                 break;

@@ -9,7 +9,6 @@ package com.example.murbin.presentation.zone.administrator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.data.SubzonesDatabaseCrud;
 import com.example.murbin.firebase.Auth;
+import com.example.murbin.models.Area;
 import com.example.murbin.models.Subzone;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -37,6 +37,7 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
     private String mMessage;
     private EditText m_et_name;
     private Button m_btn_location, m_btn_cancel, m_btn_save;
+    private Area areaSubzone = new Area();
     private SubzonesDatabaseCrud mSubzonesDatabaseCrud;
     private Subzone mSubzone;
 
@@ -85,7 +86,7 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
 
         // BottomNavigationView menu
         mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
-        if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
+        if (App.getInstance().getCurrentUser() != null && App.getInstance().getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
             mBottomNavigationView.getMenu().clear();
             mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);
             mBottomNavigationView.setSelectedItemId(R.id.root_main_bottom_navigation_subzones);
@@ -169,8 +170,8 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
         int id = v.getId();
         switch (id) {
             case R.id.administrator_subzone_create_btn_location: {
-                Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
-                showMapDialogFragment();
+//                Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
+                showMapDialogFragment("polygon", "AdministratorSubzoneCreateActivity");
 
                 break;
             }
@@ -185,24 +186,21 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
             case R.id.administrator_subzone_create_btn_guardar: {
                 if (checkForm()) {
                     String name = m_et_name.getText().toString();
-//                    String status = m_et_status.getText().toString();
-                    mSubzone = new Subzone(name, true);
-                    mSubzonesDatabaseCrud.create(mSubzone, documentId -> {
-                        mSubzonesDatabaseCrud.update(documentId, mSubzone.parseToMap(), response -> {
-                            if (response) {
-                                Intent intent = new Intent(AdministratorSubzoneCreateActivity.this, AdministratorSubzoneListActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.putExtra("message", "Subzona creada correctamente.");
-                                startActivity(intent);
-                            } else {
-                                App.getInstance().snackMessage(
-                                        mContainer,
-                                        R.color.black,
-                                        "Error desconocido al crear la subzona.",
-                                        AdministratorSubzoneCreateActivity.this
-                                );
-                            }
-                        });
+                    mSubzone = new Subzone(name, true, areaSubzone.convertToFirestoreGeoPoint());
+                    mSubzonesDatabaseCrud.create(name, mSubzone, documentId -> {
+                        if (!documentId.isEmpty()) {
+                            Intent intent = new Intent(AdministratorSubzoneCreateActivity.this, AdministratorSubzoneListActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("message", "Subzona creada correctamente.");
+                            startActivity(intent);
+                        } else {
+                            App.getInstance().snackMessage(
+                                    mContainer,
+                                    R.color.black,
+                                    "Error desconocido al crear la subzona.",
+                                    AdministratorSubzoneCreateActivity.this
+                            );
+                        }
                     });
                 }
 
@@ -227,5 +225,19 @@ public class AdministratorSubzoneCreateActivity extends BaseActivity implements 
         }
 
         return result;
+    }
+
+    /**
+     * Sets the area of the subzone with the received area as a parameter.
+     *
+     * @param area Area
+     */
+    public void setAreaSubzone(Area area) {
+        this.areaSubzone = area;
+        if (!area.getArea().isEmpty()) {
+            m_btn_location.setHint(R.string.AdministratorSubzoneCreateActivity_alert_dialog_location_message);
+        } else {
+            m_btn_location.setHint(R.string.global_string_location);
+        }
     }
 }

@@ -9,20 +9,22 @@ package com.example.murbin.presentation.zone.technician;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
+import com.example.murbin.models.User;
 import com.example.murbin.presentation.auth.AuthEmailActivity;
 import com.example.murbin.presentation.global.GlobalPreferencesActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.murbin.presentation.zone.technician.fragments.SubzonesListFragment;
 
 public class TechnicianMainActivity extends BaseActivity {
 
@@ -31,12 +33,20 @@ public class TechnicianMainActivity extends BaseActivity {
     private Toolbar mToolbar;
     private ViewGroup mContainer;
     private String mMessage;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(App.DEFAULT_TAG, "TechnicianMainActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.technician_main_activity);
         initializeLayoutElements();
+        if (savedInstanceState == null) {
+            SubzonesListFragment subzonesListFragment = new SubzonesListFragment();
+            subzonesListFragment.settings(App.getInstance().getCurrentUser());
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.technician_subzone_fragment, subzonesListFragment);
+        }
     }
 
     /**

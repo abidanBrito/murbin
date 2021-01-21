@@ -6,11 +6,8 @@
 
 package com.example.murbin.data;
 
-import androidx.annotation.NonNull;
-
 import com.example.murbin.data.repositories.SubzonesDatabaseCrudRepository;
 import com.example.murbin.models.Subzone;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,7 +24,7 @@ public class SubzonesDatabaseCrud implements SubzonesDatabaseCrudRepository {
 
     /**
      * Constructor
-     *
+     * <p>
      * Default zone Gandia
      */
     public SubzonesDatabaseCrud() {
@@ -53,6 +50,15 @@ public class SubzonesDatabaseCrud implements SubzonesDatabaseCrudRepository {
     public void create(Subzone subzone, CreateListener createListener) {
         subzones.add(subzone.parseToMap()).addOnSuccessListener(documentReference -> {
             createListener.onResponse(documentReference.getId());
+        }).addOnFailureListener(e -> {
+            createListener.onResponse("");
+        });
+    }
+
+    @Override
+    public void create(String idDoc, Subzone subzone, CreateListener createListener) {
+        subzones.document(idDoc).set(subzone.parseToMap()).addOnSuccessListener(documentReference -> {
+            createListener.onResponse(idDoc);
         }).addOnFailureListener(e -> {
             createListener.onResponse("");
         });

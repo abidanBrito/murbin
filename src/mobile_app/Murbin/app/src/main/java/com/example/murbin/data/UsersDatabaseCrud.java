@@ -16,7 +16,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class UsersDatabaseCrud implements UsersDatabaseCrudRepository {
 
@@ -75,7 +74,7 @@ public class UsersDatabaseCrud implements UsersDatabaseCrudRepository {
         });
     }
 
-    public Query getByRole(String role){
+    public Query getByRole(String role) {
         return users.whereEqualTo("role", role);
     }
 }

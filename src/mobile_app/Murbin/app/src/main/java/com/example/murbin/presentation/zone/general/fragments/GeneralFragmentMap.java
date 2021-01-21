@@ -6,12 +6,14 @@
 
 package com.example.murbin.presentation.zone.general.fragments;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +25,14 @@ import com.example.murbin.R;
 import com.example.murbin.data.ZonesDatabaseCrud;
 import com.example.murbin.models.Area;
 import com.example.murbin.models.GeoPoint;
-import com.example.murbin.uses_cases.UsesCasesZoneAdministrator;
+import com.example.murbin.services.GpsTrackerService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -98,38 +101,46 @@ public class GeneralFragmentMap extends Fragment implements
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-//        GeoPoint geoPoint;
-//        if (App.getInstance().hasPermissions(getContext(), App.ARRAY_PERMISSIONS_LOAD_MAP)){
-//            UsesCasesZoneAdministrator icza = new UsesCasesZoneAdministrator();
-//            geoPoint = icza.getCurrentLocation(getContext());
-//        }else{
-//            geoPoint = new GeoPoint();
-//        }
-
-
-//        ZonesDatabaseCrud zdcr = new ZonesDatabaseCrud();
-
-//        UsesCasesZoneGeneral usesCasesZoneGeneral = new UsesCasesZoneGeneral();
-//        Area area1 = usesCasesZoneGeneral.getExampleZone();
-//        Zone zone1 = new Zone();
-//        zone1.setName("Gandia");
-//        zone1.setStatus(true);
-//        zone1.setArea(area1.convertToFirestoreGeoPoint());
-//
-//
-//        zdcr.create("Gandia", zone1, response -> {
-//            Log.d(App.DEFAULT_TAG, "Create response: " + response);
-//        });
-
         ZonesDatabaseCrud zdc = new ZonesDatabaseCrud();
         // Retrieve the zone from firestore
         zdc.read("Gandia", zone -> {
+            boolean hasLocalizationActivated = false;
+            GpsTrackerService gpsTrackerService = new GpsTrackerService(getContext());
+
+            if (App.getInstance().hasPermissions(getContext(), App.ARRAY_PERMISSIONS_LOAD_MAP)) {
+//                Log.d(App.DEFAULT_TAG, "Latitude: " + gpsTrackerService.getLatitude());
+//                Log.d(App.DEFAULT_TAG, "Longitude: " + gpsTrackerService.getLongitude());
+                hasLocalizationActivated = true;
+                if(gpsTrackerService.getLatitude() == 0.0 && gpsTrackerService.getLongitude() == 0.0){
+                    hasLocalizationActivated = false;
+                    gpsTrackerService.showSettingsAlert();
+                }
+            }
+
             if (zone != null) {
                 if (!zone.getArea().isEmpty()) {
                     mMap = googleMap;
 
+                    try {
+                        // Customise the styling of the base map using a JSON object defined
+                        // in a raw resource file.
+                        boolean success = mMap.setMapStyle(
+                                MapStyleOptions.loadRawResourceStyle(
+                                        getContext(), R.raw.style_google_map));
+                        if (!success) {
+//                            Log.d(App.DEFAULT_TAG, "Error al analizar el estilo.");
+                        }
+                    } catch (Resources.NotFoundException e) {
+//                        Log.d(App.DEFAULT_TAG, "No encuentro el estilo. Error: ", e);
+                    }
+
                     Area area = new Area(zone.getFormattedArea());
-                    GeoPoint centerZone = area.getCenterArea();
+                    GeoPoint centerZone;
+                    if (!hasLocalizationActivated) {
+                        centerZone = area.getCenterArea();
+                    } else {
+                        centerZone = new GeoPoint(gpsTrackerService.getLatitude(), gpsTrackerService.getLongitude());
+                    }
                     LatLng centerPoint = new LatLng(centerZone.getLatitude(), centerZone.getLongitude());
 
                     Polygon polygon = mMap.addPolygon(new PolygonOptions()
@@ -138,7 +149,7 @@ public class GeneralFragmentMap extends Fragment implements
                                     area.convertToLatLngList()
                             )
                     );
-                    polygon.setTag("Gandia");
+                    polygon.setTag(zone.getName());
                     polygon.setStrokeColor(R.color.white);
                     polygon.setFillColor(R.color.white);
 
@@ -155,7 +166,7 @@ public class GeneralFragmentMap extends Fragment implements
 
                     // modify canvas
                     canvas1.drawBitmap(BitmapFactory.decodeResource(getResources(),
-                            R.drawable.farola), 0,0, color);
+                            R.drawable.farola), 0, 0, color);
                     canvas1.drawText("1", 30, 40, color);
 
                     mMap.addMarker(new MarkerOptions()

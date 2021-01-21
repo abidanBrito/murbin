@@ -22,15 +22,10 @@ import com.example.murbin.App;
 import com.example.murbin.R;
 import com.example.murbin.data.SubzonesDatabaseCrud;
 import com.example.murbin.data.adapters.SubzonesListAdapter;
-import com.example.murbin.data.adapters.TechniciansListAdapter;
 import com.example.murbin.models.Subzone;
 import com.example.murbin.models.User;
-import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneEditActivity;
-import com.example.murbin.presentation.zone.administrator.AdministratorTechnicianEditActivity;
 import com.example.murbin.presentation.zone.technician.TechnicianSubzoneActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import java.util.List;
 
@@ -40,12 +35,13 @@ public class SubzonesListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private SubzonesDatabaseCrud subzonesDatabaseCrud;
+    private User mUser = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        subzonesDatabaseCrud = new SubzonesDatabaseCrud();
         setHasOptionsMenu(true); // For onOptionsItemSelected to work
+        subzonesDatabaseCrud = new SubzonesDatabaseCrud();
     }
 
     @Override
@@ -59,19 +55,25 @@ public class SubzonesListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        subzonesListAdapter.startListening();
+        if (subzonesListAdapter != null) {
+            subzonesListAdapter.startListening();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        subzonesListAdapter.stopListening();
+        if (subzonesListAdapter != null) {
+            subzonesListAdapter.stopListening();
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        subzonesListAdapter.stopListening();
+        if (subzonesListAdapter != null) {
+            subzonesListAdapter.stopListening();
+        }
     }
 
     /**
@@ -80,18 +82,17 @@ public class SubzonesListFragment extends Fragment {
      * @param view View
      */
     private void initializeLayoutElements(View view) {
-        //String uidUser = App.getCurrentUser().getUid();
-        List<String> listSubzones = App.getCurrentUser().getListSubzones();
+        List<String> listSubzones = App.getInstance().getCurrentUser().getListSubzones();
 
         FirestoreRecyclerOptions<Subzone> options = new FirestoreRecyclerOptions.Builder<Subzone>()
                 .setQuery(subzonesDatabaseCrud.getSubzonesFromTechnicians(listSubzones), Subzone.class).build();
 
         subzonesListAdapter = new SubzonesListAdapter(options, getContext());
-        subzonesListAdapter.setOnItemClickListener(v -> {
-            int position = recyclerView.getChildAdapterPosition(v);
-            String id = subzonesListAdapter.getId(position);
+        subzonesListAdapter.setOnItemClickListener(item -> {
+            int position = recyclerView.getChildAdapterPosition(item);
+            String idSubzone = subzonesListAdapter.getId(position);
             Intent intent = new Intent(App.getContext(), TechnicianSubzoneActivity.class);
-            intent.putExtra("id", id);
+            intent.putExtra("idSubzone", idSubzone);
             startActivity(intent);
         });
 
@@ -102,4 +103,12 @@ public class SubzonesListFragment extends Fragment {
 
         subzonesListAdapter.startListening();
     }
+
+    /**
+     * @param user User logged
+     */
+    public void settings(User user) {
+        mUser = user;
+    }
+
 }

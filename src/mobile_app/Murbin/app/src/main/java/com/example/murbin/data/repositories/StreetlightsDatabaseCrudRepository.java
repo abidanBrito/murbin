@@ -8,10 +8,19 @@ public interface StreetlightsDatabaseCrudRepository {
     /**
      * Create a subzone in the database
      *
-     * @param streetlight Streetlight
+     * @param streetlight    Streetlight
      * @param createListener Listener to get response asynchronously
      */
     void create(Streetlight streetlight, StreetlightsDatabaseCrudRepository.CreateListener createListener);
+
+    /**
+     * Create a subzone in the database with custom id
+     *
+     * @param idDoc          String
+     * @param streetlight    Streetlight
+     * @param createListener Listener to get response asynchronously
+     */
+    void create(String idDoc, Streetlight streetlight, StreetlightsDatabaseCrudRepository.CreateListener createListener);
 
     /**
      * Read a subzone from the database

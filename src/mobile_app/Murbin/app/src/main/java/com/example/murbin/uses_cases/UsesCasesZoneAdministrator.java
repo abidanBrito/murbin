@@ -6,6 +6,7 @@
 
 package com.example.murbin.uses_cases;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -41,6 +42,20 @@ public class UsesCasesZoneAdministrator {
     }
 
     /**
+     * It checks if permission has been granted for geolocation, if permission has been given,
+     * it is shown, if it is not requested again or a message appears for the user to give it
+     * manually.
+     */
+    public void checkPermissionLoadMap(Context context) {
+        App.getInstance().requestPermission(
+                (Activity) context,
+                context.getString(R.string.UsesCasesZoneGeneral_permission_justification_map),
+                App.PERMIT_REQUEST_CODE_LOAD_MAP,
+                App.ARRAY_PERMISSIONS_LOAD_MAP
+        );
+    }
+
+    /**
      * Get the current location GeoPoint or Geopoint(0,0) if not location.
      *
      * @param context Context of the caller
@@ -52,7 +67,7 @@ public class UsesCasesZoneAdministrator {
         if (gpsTrackerService.canGetLocation()) {
             double latitude = gpsTrackerService.getLatitude();
             double longitude = gpsTrackerService.getLongitude();
-            Log.d(App.DEFAULT_TAG, "Location: lat->" + latitude + " lng->" + longitude);
+            //Log.d(App.DEFAULT_TAG, "Location: lat->" + latitude + " lng->" + longitude);
             geoPoint = new GeoPoint(latitude, longitude);
         } else {
             geoPoint = new GeoPoint();

@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.ViewGroup;
 
@@ -23,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import com.example.murbin.data.UsersDatabaseCrud;
 import com.example.murbin.firebase.Auth;
 import com.example.murbin.models.User;
+import com.example.murbin.presentation.zone.general.GeneralMainActivity;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -57,11 +59,11 @@ public class App extends Application {
         return instance.getApplicationContext();
     }
 
-    public static User getCurrentUser() {
+    public User getCurrentUser() {
         return currentUser;
     }
 
-    public static void setCurrentUser(User user) {
+    public void setCurrentUser(User user) {
         currentUser = user;
     }
 
@@ -177,11 +179,28 @@ public class App extends Application {
             UsersDatabaseCrud mUsersDatabaseCrud = new UsersDatabaseCrud();
             mUsersDatabaseCrud.read(mAuth.getCurrentUser().getUid(), user -> {
                 if (user != null) {
-                    App.setCurrentUser(user);
-                    mAuth.checkRole(App.getCurrentUser().getRole());
+                    App.getInstance().setCurrentUser(user);
+                    mAuth.checkRole(App.getInstance().getCurrentUser().getRole());
                 }
             });
+        } else {
+            redirectActivity(GeneralMainActivity.class);
         }
+    }
+
+    /**
+     * Redirect to corresponding activity
+     *
+     * @param activity Activity where it will be redirected
+     */
+    public void redirectActivity(Class<?> activity) {
+        Intent intent;
+        intent = new Intent(getContext(), activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
+        getContext().startActivity(intent);
     }
 
 }

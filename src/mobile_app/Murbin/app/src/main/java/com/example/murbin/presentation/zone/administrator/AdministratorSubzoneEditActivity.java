@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +24,9 @@ import com.example.murbin.App;
 import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.data.SubzonesDatabaseCrud;
+import com.example.murbin.models.Area;
 import com.example.murbin.models.Subzone;
+import com.example.murbin.uses_cases.UsesCasesZoneAdministrator;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdministratorSubzoneEditActivity extends BaseActivity implements View.OnClickListener {
@@ -41,11 +42,14 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
     private Button m_btn_cancel, m_btn_save, m_btn_location;
     private SubzonesDatabaseCrud mSubzonesDatabaseCrud;
     private Subzone mSubzone;
+    private Area areaSubzone;
+    private UsesCasesZoneAdministrator usesCasesZoneAdministrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrator_subzone_edit_formulary);
+        usesCasesZoneAdministrator = new UsesCasesZoneAdministrator();
         initializeLayoutElements();
     }
 
@@ -78,7 +82,7 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
 
         // BottomNavigationView menu
         mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
-        if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
+        if (App.getInstance().getCurrentUser() != null && App.getInstance().getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
             mBottomNavigationView.getMenu().clear();
             mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);
             mBottomNavigationView.setSelectedItemId(R.id.root_main_bottom_navigation_subzones);
@@ -104,6 +108,7 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
         mSubzonesDatabaseCrud = new SubzonesDatabaseCrud();
         mSubzonesDatabaseCrud.read(mId, subzone -> {
             mSubzone = subzone;
+            areaSubzone = new Area(subzone.getFormattedArea());
             m_et_name.setText(subzone.getName());
         });
     }
@@ -188,8 +193,8 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
         int id = v.getId();
         switch (id) {
             case R.id.administrator_subzone_edit_btn_location: {
-                Log.d(App.DEFAULT_TAG, "Pulsado: " + id);
-                showMapDialogFragment();
+                usesCasesZoneAdministrator.checkPermissionLoadMap(AdministratorSubzoneEditActivity.this);
+                showMapDialogFragment("polygon","AdministratorSubzoneEditActivity");
 
                 break;
             }
@@ -206,6 +211,7 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
                     Subzone updatedSubzone = mSubzone;
                     updatedSubzone.setName(m_name);
                     updatedSubzone.setStatus(true);
+                    updatedSubzone.setArea(areaSubzone.convertToFirestoreGeoPoint());
                     mSubzonesDatabaseCrud.update(mId, updatedSubzone.parseToMap(), response -> {
                         if (response) {
                             Intent intent = new Intent(AdministratorSubzoneEditActivity.this, AdministratorSubzoneListActivity.class);
@@ -271,5 +277,19 @@ public class AdministratorSubzoneEditActivity extends BaseActivity implements Vi
         }
 
         return result;
+    }
+
+    /**
+     * Sets the area of the subzone with the received area as a parameter.
+     *
+     * @param area Area
+     */
+    public void setAreaSubzone(Area area) {
+        this.areaSubzone = area;
+        if (!area.getArea().isEmpty()) {
+            m_btn_location.setHint(R.string.AdministratorSubzoneEditActivity_alert_dialog_location_message);
+        } else {
+            m_btn_location.setHint(R.string.global_string_location);
+        }
     }
 }

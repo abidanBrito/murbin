@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/technician_main_tv_title" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/technician_subzone_fragment"
         class="com.example.murbin.presentation.zone.technician.fragments.SubzonesListFragment"
         android:layout_width="match_parent"

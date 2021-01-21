@@ -53,12 +53,12 @@ public class AdministratorMainActivity extends BaseActivity {
 
         // MQTT
         try {
-            Log.i(Mqtt.TAG, "Conectando al broker " + Mqtt.broker);
+//            Log.d(Mqtt.TAG, "Conectando al broker " + Mqtt.broker);
             client = new MqttClient(Mqtt.broker, Mqtt.clientId,
                     new MemoryPersistence());
             client.connect();
         } catch (MqttException e) {
-            Log.e(Mqtt.TAG, "Error al conectar.", e);
+//            Log.d(Mqtt.TAG, "Error al conectar.", e);
         }
 
         botonOnOff = findViewById(R.id.administrator_main_home_status_container);
@@ -66,13 +66,13 @@ public class AdministratorMainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Log.i(Mqtt.TAG, "Cambiar estado de la farola: " + "TOGGLE");
+//                    Log.d(Mqtt.TAG, "Cambiar estado de la farola: " + "TOGGLE");
                     MqttMessage message = new MqttMessage("TOGGLE".getBytes());
                     message.setQos(Mqtt.qos);
                     message.setRetained(false);
                     client.publish(Mqtt.topicRoot+"TOGGLE", message);
                 } catch (MqttException e) {
-                    Log.e(Mqtt.TAG, "Error al publicar.", e);
+//                    Log.d(Mqtt.TAG, "Error al publicar.", e);
                 }
             }
         });
@@ -89,11 +89,11 @@ public class AdministratorMainActivity extends BaseActivity {
             getSupportActionBar().setTitle("");
         }
 
-        mContainer = findViewById(R.id.administrator_main_activity_toolbar);
+        mContainer = findViewById(R.id.administrator_main_activity_container);
 
         // BottomNavigationView menu
         mBottomNavigationView = findViewById(R.id.administrator_main_activity_bottom_navigation);
-        if (App.getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
+        if (App.getInstance().getCurrentUser() != null && App.getInstance().getCurrentUser().getRole().equals(App.ROLE_ROOT)) {
             mBottomNavigationView.getMenu().clear();
             mBottomNavigationView.inflateMenu(R.menu.root_main_bottom_navigation);
         }
@@ -199,10 +199,10 @@ public class AdministratorMainActivity extends BaseActivity {
 
     @Override public void onDestroy() {
         try {
-            Log.i(Mqtt.TAG, "Desconectado");
+//            Log.d(Mqtt.TAG, "Desconectado");
             client.disconnect();
         } catch (MqttException e) {
-            Log.e(Mqtt.TAG, "Error al desconectar.", e);
+//            Log.d(Mqtt.TAG, "Error al desconectar.", e);
         }
         super.onDestroy();
     }

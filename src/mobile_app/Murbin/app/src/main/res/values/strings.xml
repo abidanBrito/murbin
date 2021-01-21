@@ -7,6 +7,7 @@
 
     <!-- Global -->
     <string name="app_name" translatable="false">Murbin</string>
+    <string name="global_string_location">Localización</string>
 
     <!-- PREFERENCES -->
 
@@ -129,9 +130,9 @@
     <!-- ZONE GENERAL -->
 
     <!-- GeneralMainActivity -->
-    <string name="GeneralMainActivity_permission_error_1">No has concedido acceso a tu ubicación, por eso se muestran todas las farolas de la zona.</string>
+    <string name="GeneralMainActivity_permission_error_1">No has concedido acceso a tu ubicación, se ubicará tu posición en el centro de la zona.</string>
     <!-- UsesCasesZoneGeneral -->
-    <string name="UsesCasesZoneGeneral_permission_justification_map">Se require el acceso a tu ubicación para poder mostrarte sólo las farolas más cercanas.</string>
+    <string name="UsesCasesZoneGeneral_permission_justification_map">Se require el acceso a tu ubicación para poder mostrarte tu ubicación real aproximada.</string>
 
     <!-- GeneralMainActivity -->
     <!-- layout | general_fragment_home -->
@@ -264,11 +265,14 @@
     <string name="administrator_technicians_create_activity_btn_save">Guardar</string>
     <!-- AdministratorSubzoneListActivity -->
     <string name="AdministratorSubzoneListActivity_toolbar_title"></string>
+    <!-- AdministratorSubzoneCreateActivity -->
+    <string name="AdministratorSubzoneCreateActivity_alert_dialog_location_message">Area marcada</string>
     <!-- AdministratorSubzoneEditActivity -->
     <string name="AdministratorSubzoneEditActivity_alert_dialog_delete_title">Confirmación</string>
     <string name="AdministratorSubzoneEditActivity_alert_dialog_delete_message">Se va a proceder a eliminar la subzona, el proceso es irreversible. ¿Confirma la eliminación?</string>
     <string name="AdministratorSubzoneEditActivity_alert_dialog_confirm_text">Sí</string>
     <string name="AdministratorSubzoneEditActivity_alert_dialog_cancel_text">Cancelar</string>
+    <string name="AdministratorSubzoneEditActivity_alert_dialog_location_message">Area marcada</string>
     <!-- layout | administrator_subzones_edit_activity -->
     <string name="administrator_subzones_edit_activity_tv_title">Editar Subzona</string>
     <string name="administrator_subzones_edit_activity_tv_name">Nombre</string>
@@ -314,5 +318,11 @@
     <!-- BackgroundMusicService -->
     <string name="BackgroundMusic_notification_channel_title">Reproduciendo música</string>
     <string name="BackgroundMusic_notification_channel_description">Disfruta de buena música con Murbin App</string>
+
+    <!-- GpsTrackerService -->
+    <string name="GpsTrackerService_alert_dialog_title">Configuración del GPS</string>
+    <string name="GpsTrackerService_alert_dialog_message">El GPS no está habilitado. ¿Quieres ir al menú de configuración?</string>
+    <string name="GpsTrackerService_alert_dialog_btn_success">Sí</string>
+    <string name="GpsTrackerService_alert_dialog_btn_cancel">No</string>
 
 </resources>

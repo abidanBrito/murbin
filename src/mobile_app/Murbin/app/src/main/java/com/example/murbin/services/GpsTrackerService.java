@@ -25,23 +25,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
+import com.example.murbin.App;
+import com.example.murbin.R;
+
 public class GpsTrackerService extends Service implements LocationListener {
 
     // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10000; // 10000 meters (10 km)
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1000; // 1000 meters (1 km)
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = ((1000 * 60) * 60); // 1 minute ((1000 * 60) * 1)
-    // Declaring a Location Manager
     protected LocationManager locationManager;
     // flag for GPS status
     boolean isGPSEnabled = false;
-    // flag for network status
-    boolean isNetworkEnabled = false;
     // flag for GPS status
     boolean canGetLocation = false;
-    Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
+    // flag for network status
+    boolean isNetworkEnabled = false;
+    Location location;
+    double latitude;
+    double longitude;
     private Context mContext = null;
 
     /**
@@ -93,7 +95,7 @@ public class GpsTrackerService extends Service implements LocationListener {
                             MIN_TIME_BW_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 
-                    Log.d("Network", "Network");
+//                    Log.d(App.DEFAULT_TAG, "GPS from Network");
                     if (locationManager != null) {
                         location = locationManager
                                 .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -117,7 +119,7 @@ public class GpsTrackerService extends Service implements LocationListener {
                                 MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 
-                        Log.d("GPS Enabled", "GPS Enabled");
+//                        Log.d(App.DEFAULT_TAG, "GPS Enabled");
                         if (locationManager != null) {
                             location = locationManager
                                     .getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -158,7 +160,6 @@ public class GpsTrackerService extends Service implements LocationListener {
             latitude = location.getLatitude();
         }
 
-        // return latitude
         return latitude;
     }
 
@@ -172,7 +173,6 @@ public class GpsTrackerService extends Service implements LocationListener {
             longitude = location.getLongitude();
         }
 
-        // return longitude
         return longitude;
     }
 
@@ -193,23 +193,19 @@ public class GpsTrackerService extends Service implements LocationListener {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         // Setting Dialog Title
-        alertDialog.setTitle("GPS is settings");
+        alertDialog.setTitle(R.string.GpsTrackerService_alert_dialog_title);
 
         // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+        alertDialog.setMessage(R.string.GpsTrackerService_alert_dialog_message);
 
         // On pressing Settings button
-        alertDialog.setPositiveButton("Settings", (dialog, which) -> {
+        alertDialog.setPositiveButton(R.string.GpsTrackerService_alert_dialog_btn_success, (dialog, which) -> {
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             mContext.startActivity(intent);
         });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertDialog.setNegativeButton(R.string.GpsTrackerService_alert_dialog_btn_cancel, (dialog, which) -> dialog.cancel());
 
         alertDialog.show();
     }

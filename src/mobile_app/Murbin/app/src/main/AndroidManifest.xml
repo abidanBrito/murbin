@@ -39,8 +39,9 @@
 
         <!-- Zone General (No need identification) -->
         <activity
-            android:name=".presentation.zone.general.GeneralMainActivity"
+            android:name=".presentation.zone.general.SplashActivity"
             android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,10 +49,8 @@
         </activity>
 
         <activity
-            android:name=".presentation.zone.general.SplashActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:name=".presentation.zone.general.GeneralMainActivity"
+            android:screenOrientation="portrait" />
 
         <!-- LOGIN -->
 
@@ -133,7 +132,7 @@
         <activity
             android:name=".presentation.zone.technician.TechnicianStreetlightsActivity"
             android:screenOrientation="portrait" />
-            <!--android:parentActivityName=".presentation.zone.technician.TechnicianSubzoneActivity"-->
+        <!--android:parentActivityName=".presentation.zone.technician.TechnicianSubzoneActivity"-->
 
         <activity
             android:name=".presentation.zone.technician.TechnicianStreetlightCreateActivity"

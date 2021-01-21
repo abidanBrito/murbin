@@ -87,13 +87,13 @@ public class Auth {
                     mFirebaseUser = mAuth.getCurrentUser();
                     userCrud.read(mFirebaseUser.getUid(), user -> {
 //                        Log.d(App.DEFAULT_TAG, mFirebaseUser.getUid());
-                        App.setCurrentUser(user);
-                        Log.d(App.DEFAULT_TAG, "App.getCurrentUser(): " + App.getCurrentUser());
+                        App.getInstance().setCurrentUser(user);
+//                        Log.d(App.DEFAULT_TAG, "App.getInstance().getCurrentUser(): " + App.getInstance().getCurrentUser());
                         // Update lastAccess field
                         user.setLastAccess(new Date(System.currentTimeMillis()));
                         userCrud.update(user.getUid(), user.parseToMap(), response -> {
                             if (response) {
-                                checkRole(App.getCurrentUser().getRole());
+                                checkRole(App.getInstance().getCurrentUser().getRole());
                             } else {
                                 Intent intent = new Intent(App.getContext(), GeneralMainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -128,7 +128,7 @@ public class Auth {
      */
     public void signOut() {
         mAuth.signOut();
-        App.setCurrentUser(null);
+        App.getInstance().setCurrentUser(null);
     }
 
     /**

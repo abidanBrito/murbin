@@ -11,8 +11,7 @@ import java.util.Map;
 
 public class Streetlight {
 
-    private String parentSubzoneID;
-    private GeoPoint geoPoint;
+    private GeoPoint location;
     private boolean status;
 
     /**
@@ -25,41 +24,29 @@ public class Streetlight {
     /**
      * Constructor
      *
-     * @param parentSubzoneID Name of the parent subzone [parent_ID]
      * @param status          Streetlight status [On/Off]
      */
-    public Streetlight(String parentSubzoneID, boolean status) {
-        this.parentSubzoneID = parentSubzoneID;
+    public Streetlight(boolean status) {
         this.status = status;
     }
 
     /**
      * Constructor
      *
-     * @param parentSubzoneID Name of the parent subzone [parent_ID]
-     * @param geoPoint
+     * @param location        Geopoint
      * @param status          Streetlight status [On/Off]
      */
-    public Streetlight(String parentSubzoneID, GeoPoint geoPoint, boolean status) {
-        this.parentSubzoneID = parentSubzoneID;
-        this.geoPoint = geoPoint;
+    public Streetlight(GeoPoint location, boolean status) {
+        this.location = location;
         this.status = status;
     }
 
-    public String getParentSubzoneID() {
-        return parentSubzoneID;
-    }
-
-    public void setParentSubzoneID(String parentSubzoneID) {
-        this.parentSubzoneID = parentSubzoneID;
-    }
-
     public GeoPoint getGeoPoint() {
-        return geoPoint;
+        return location;
     }
 
-    public void setGeoPoint(GeoPoint geoPoint) {
-        this.geoPoint = geoPoint;
+    public void setGeoPoint(GeoPoint location) {
+        this.location = location;
     }
 
     public boolean isStatus() {
@@ -73,8 +60,7 @@ public class Streetlight {
     @Override
     public String toString() {
         return "Streetlight{" +
-                "parentSubzoneID='" + parentSubzoneID + '\'' +
-                ", geoPoint=" + geoPoint +
+                "location=" + location +
                 ", status=" + status +
                 '}';
     }
@@ -82,7 +68,7 @@ public class Streetlight {
     public Map<String, Object> parseToMap() {
         Map<String, Object> streetlightMap = new HashMap<>();
 
-        streetlightMap.put("subzone", this.getParentSubzoneID());
+        streetlightMap.put("location", location);
 
         return streetlightMap;
     }
