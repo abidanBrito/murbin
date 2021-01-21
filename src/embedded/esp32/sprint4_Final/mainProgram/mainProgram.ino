@@ -533,7 +533,7 @@ void loop()
 
 void sendMqtt(String sensor,int v)
 {
-  String topicSend  = String("murbin/sensores/")+String(sensor);
+  String topicSend  = String("equipo1-2/murbin/sensores/")+String(sensor);
 
   mqttClient.poll();
   
