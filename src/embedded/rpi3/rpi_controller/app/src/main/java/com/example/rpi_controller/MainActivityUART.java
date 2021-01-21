@@ -7,9 +7,13 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.comun.Mqtt;
+import com.google.android.things.pio.Gpio;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -17,56 +21,107 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.rpi_controller.MainActivity.client;
+import static com.example.comun.Mqtt.TAG;
+import static com.example.comun.Mqtt.qos;
+import static com.example.comun.Mqtt.topicRoot;
 
-public class MainActivityUART extends Activity
+public class MainActivityUART extends Activity implements MqttCallback
 {
-    private static final String TAG = MainActivityUART.class.getSimpleName();
+    //private static final String TAG = MainActivityUART.class.getSimpleName();
     ArduinoUart uart;
 
+    public static final String LED_PIN = "BCM22"; //physical pin #15
+    private Gpio ledPin;
+    public static MqttClient client = null;
+    FirebaseFirestore db;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Lista de UART disponibles: " + ArduinoUart.disponibles());
         uart = new ArduinoUart("UART0", 115200);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+       db = FirebaseFirestore.getInstance();
 
         try {
-            Log.i(Mqtt.TAG, "Conectando al broker " + Mqtt.broker);
+            Log.i(TAG, "Conectando al broker " + Mqtt.broker);
             client = new MqttClient(Mqtt.broker, Mqtt.clientId,
                     new MemoryPersistence());
-            client.connect();
+            MqttConnectOptions connOpts = new MqttConnectOptions();
+            connOpts.setCleanSession(true);
+            connOpts.setKeepAliveInterval(60);
+            connOpts.setWill(topicRoot+"WillTopic", "App desconectada".getBytes(), qos, false);
+                    client.connect(connOpts);
         } catch (MqttException e) {
-            Log.e(Mqtt.TAG, "Error al conectar.", e);
+            Log.e(TAG, "Error al conectar.", e);
         }
 
-        run(db);
+        try {
+            Log.i(TAG, "Suscrito a " + topicRoot+"sensores/#");
+            client.subscribe(topicRoot+"sensores/#", qos);
+            client.setCallback((MqttCallback) this);
+        } catch (MqttException e) {
+            Log.e(TAG, "Error al suscribir.", e);
+        }
+        //run(db);
     }
 
     @Override public void onDestroy() {
         try {
-            Log.i(Mqtt.TAG, "Desconectado");
+            Log.i(TAG, "Desconectado");
             client.disconnect();
         } catch (MqttException e) {
-            Log.e(Mqtt.TAG, "Error al desconectar.", e);
+            Log.e(TAG, "Error al desconectar.", e);
         }
         super.onDestroy();
     }
+    @Override
+    public void connectionLost(Throwable cause) {
+        Log.d(TAG, "Conexión perdida");
+    }
+    @Override
+    public void messageArrived(String topic, MqttMessage message) throws Exception {
+        String payload = new String(message.getPayload());
+        Log.d(Mqtt.TAG, "Recibiendo: " + topic + "->" + payload);
+
+        if(topic.contains("CO2")){
+            String datos = new String(message.getPayload());
+            pushDataFirestore(db, datos, "co2");
+        }
+        if(topic.contains("light")){
+            String datos = new String(message.getPayload());
+            pushDataFirestore(db, datos, "brightness");
+        }
+        if(topic.contains("noise")){
+            String datos = new String(message.getPayload());
+            pushDataFirestore(db, datos, "noise");
+        }
+        if(topic.contains("humidity")){
+            String datos = new String(message.getPayload());
+            pushDataFirestore(db, datos, "humidity");
+        }
+        if(topic.contains("temperature")){
+            String datos = new String(message.getPayload());
+            pushDataFirestore(db, datos, "temperature");
+        }
+    }
+    @Override
+    public void deliveryComplete(IMqttDeliveryToken token) {
+        Log.d(TAG, "Entrega completa");
+    }
 
     void run(FirebaseFirestore db) {
-        while (true) {
-            String brightnessValue = getSensorData("Luminosity: ", "L");
+       /* while (true) {
+           /* String brightnessValue = getSensorData("Luminosity: ", "L");
             String soundValue = getSensorData("Noise level: ","S");
             String co2Value = getSensorData("CO2: ","C");
             String temperatureValue = getSensorData("Temperature: ", "T");
-            String humidityValue = getSensorData("Humidity", "H");
+            String humidityValue = getSensorData("Humidity", "H");*/
 
-            pushDataFirestore(db, brightnessValue, "brightness");
+            /*pushDataFirestore(db, brightnessValue, "brightness");
             pushDataFirestore(db, soundValue, "noise");
             pushDataFirestore(db, co2Value, "co2");
             pushDataFirestore(db, temperatureValue, "temperature");
-            pushDataFirestore(db, humidityValue, "humidity");
-
+            pushDataFirestore(db, humidityValue, "humidity");*/
+            /*
             try {
                 MqttMessage light = new MqttMessage(brightnessValue.getBytes());
                 light.setQos(Mqtt.qos);
@@ -84,8 +139,8 @@ public class MainActivityUART extends Activity
                 client.publish(Mqtt.topicRoot + "sound", sound);
             } catch (MqttException e) {
                 Log.e(Mqtt.TAG, "Error al publicar.", e);
-            }
-        }
+            }*/
+      //  }
     }
 
     String getSensorData(String sensorType, String data) {
