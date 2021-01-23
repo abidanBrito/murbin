@@ -22,6 +22,7 @@ import com.example.murbin.R;
 import com.example.murbin.data.adapters.AdministratorsListAdapter;
 import com.example.murbin.models.User;
 import com.example.murbin.presentation.zone.administrator.AdministratorTechnicianEditActivity;
+import com.example.murbin.presentation.zone.administrator.RootAdministratorEditActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -77,15 +78,12 @@ public class AdministratorsListFragment extends Fragment {
                 .setQuery(query, User.class).build();
 
         administratorsListAdapter = new AdministratorsListAdapter(options, getContext());
-        administratorsListAdapter.setOnItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = recyclerView.getChildAdapterPosition(v);
-                String id = administratorsListAdapter.getId(position);
-                Intent intent = new Intent(App.getContext(), AdministratorTechnicianEditActivity.class);
-                intent.putExtra("id", id);
-                startActivity(intent);
-            }
+        administratorsListAdapter.setOnItemClickListener(v -> {
+            int position = recyclerView.getChildAdapterPosition(v);
+            String id = administratorsListAdapter.getId(position);
+            Intent intent = new Intent(App.getContext(), RootAdministratorEditActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
         });
 
         recyclerView = view.findViewById(R.id.global_recyclerview);

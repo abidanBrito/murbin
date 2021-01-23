@@ -10,13 +10,10 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,6 +26,7 @@ import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.data.UsersDatabaseCrud;
 import com.example.murbin.models.User;
+import com.example.murbin.presentation.zone.administrator.fragments.AdministratorSubzoneSelectActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Date;
@@ -52,7 +50,7 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.administrator_technicians_edit_formulary);
+        setContentView(R.layout.root_administrators_edit_activity);
         initializeLayoutElements();
     }
 
@@ -61,7 +59,7 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_technicians_edit_toolbar);
+        mToolbar = findViewById(R.id.root_administrators_edit_activity_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,16 +68,14 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
             getSupportActionBar().setTitle("");
         }
 
-        mContainer = findViewById(R.id.administrator_technicians_edit_activity_container);
+        mContainer = findViewById(R.id.root_administrators_edit_activity_container);
 
-        m_et_name = findViewById(R.id.administrator_technicians_edit_et_name);
-        m_et_pass = findViewById(R.id.administrator_technicians_edit_et_pass);
-        m_et_email = findViewById(R.id.administrator_technicians_edit_et_email);
+        m_et_name = findViewById(R.id.root_administrators_edit_activity_et_name);
+//        m_et_pass = findViewById(R.id.root_administrators_edit_activity_et_pass);
+        m_et_email = findViewById(R.id.root_administrators_edit_activity_et_email);
 
-        m_btn_cancel = findViewById(R.id.administrator_technicians_edit_btn_cancelar);
-        m_btn_save = findViewById(R.id.administrator_technicians_edit_btn_crear);
-        // Al hacer click sobre este boton se abre el spinner.
-        m_btn_spinner = findViewById(R.id.administrator_technicians_edit_spinner_subzones);
+        m_btn_cancel = findViewById(R.id.root_administrators_edit_activity_btn_cancel);
+        m_btn_save = findViewById(R.id.root_administrators_edit_activity_btn_save);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
@@ -118,7 +114,7 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.administrator_technicians_edit_menu, menu);
+        getMenuInflater().inflate(R.menu.root_administrators_edit_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -126,7 +122,7 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.administrator_technicians_edit_menu_delete) {
+        if (item.getItemId() == R.id.root_administrators_edit_menu_delete) {
             AlertDialog alertDialog = confirmDeleteDialog();
             alertDialog.show();
         }
@@ -195,7 +191,7 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.administrator_technicians_edit_btn_cancelar: {
+            case R.id.root_administrators_edit_activity_btn_cancel: {
                 Intent intent = new Intent(RootAdministratorEditActivity.this, RootAdministratorListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("message", "Acción cancelada.");
@@ -203,7 +199,7 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
 
                 break;
             }
-            case R.id.administrator_technicians_edit_btn_crear: {
+            case R.id.root_administrators_edit_activity_btn_save: {
                 if (checkForm()) {
                     User updatedUser = mUser;
                     updatedUser.setName(m_email);
@@ -227,12 +223,6 @@ public class RootAdministratorEditActivity extends BaseActivity implements View.
                     // Update variable with changes
                     mUser = updatedUser;
                 }
-
-                break;
-            }
-            case R.id.administrator_technicians_edit_spinner_subzones: {
-                Intent intent = new Intent(RootAdministratorEditActivity.this, AdministratorSubzoneSelectActivity.class);
-                startActivity(intent);
 
                 break;
             }

@@ -10,13 +10,10 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,6 +26,7 @@ import com.example.murbin.BaseActivity;
 import com.example.murbin.R;
 import com.example.murbin.data.UsersDatabaseCrud;
 import com.example.murbin.models.User;
+import com.example.murbin.presentation.zone.administrator.fragments.AdministratorSubzoneSelectActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -50,11 +48,13 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
     private Spinner m_spinner_subzone;
     private UsersDatabaseCrud mUsersDatabaseCrud;
     private User mUser;
+    private List<String> listSubzones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrator_technicians_edit_formulary);
+        listSubzones = new ArrayList<>();
         initializeLayoutElements();
     }
 
@@ -212,8 +212,6 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
                     String name = m_et_name.getText().toString();
                     String email = m_et_email.getText().toString();
                     String pass = m_et_pass.getText().toString();
-                    //String subzone = m_spinner_subzone.getSelectedItem().toString();
-                    List<String> listSubzones = new ArrayList<>();
                     User updatedUser = mUser;
                     updatedUser.setName(name);
                     updatedUser.setEmail(email);
@@ -305,5 +303,18 @@ public class AdministratorTechnicianEditActivity extends BaseActivity implements
         }
 
         return result;
+    }
+
+    /**
+     *
+     * @param listSubzones List<String>
+     */
+    public void setListSubzones(List<String> listSubzones) {
+        this.listSubzones = listSubzones;
+        if (!listSubzones.isEmpty()) {
+            m_btn_spinner.setHint(R.string.AdministratorSubzoneCreateActivity_alert_dialog_location_message);
+        } else {
+            m_btn_spinner.setHint(R.string.global_string_location);
+        }
     }
 }

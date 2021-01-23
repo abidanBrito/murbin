@@ -46,7 +46,7 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.administrator_technicians_create_formulary);
+        setContentView(R.layout.root_administrators_create_activity);
         initializeLayoutElements();
     }
 
@@ -55,7 +55,7 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_technicians_create_toolbar);
+        mToolbar = findViewById(R.id.root_administrators_create_activity_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,14 +64,14 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
             getSupportActionBar().setTitle("");
         }
 
-        mContainer = findViewById(R.id.administrator_technicians_create_activity_container);
+        mContainer = findViewById(R.id.root_administrators_create_activity_container);
 
-        m_et_name = findViewById(R.id.administrator_technicians_create_et_name);
-        m_et_pass = findViewById(R.id.administrator_technicians_create_et_name);
-        //m_et_email = findViewById(R.id.administrator_technicians_create_activity_et_email);
+        m_et_name = findViewById(R.id.root_administrators_create_activity_et_name);
+        m_et_pass = findViewById(R.id.root_administrators_create_activity_et_name);
+        //m_et_email = findViewById(R.id.root_administrators_create_activity_et_email);
 
-        m_btn_cancel = findViewById(R.id.administrator_technicians_create_btn_cancelar);
-        m_btn_save = findViewById(R.id.administrator_technicians_create_btn_crear);
+        m_btn_cancel = findViewById(R.id.root_administrators_create_activity_btn_cancel);
+        m_btn_save = findViewById(R.id.root_administrators_create_activity_btn_save);
 
         m_btn_cancel.setOnClickListener(this);
         m_btn_save.setOnClickListener(this);
@@ -159,7 +159,7 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.administrator_technicians_create_btn_cancelar: {
+            case R.id.root_administrators_create_activity_btn_cancel: {
                 Intent intent = new Intent(RootAdministratorCreateActivity.this, RootAdministratorListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("message", "Acción cancelada.");
@@ -167,7 +167,7 @@ public class RootAdministratorCreateActivity extends BaseActivity implements Vie
 
                 break;
             }
-            case R.id.administrator_technicians_create_btn_crear: {
+            case R.id.root_administrators_create_activity_btn_save: {
                 if (checkForm()) {
                     String name = m_et_name.getText().toString();
                     String email = m_et_email.getText().toString();

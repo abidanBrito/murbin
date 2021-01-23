@@ -6,9 +6,9 @@
 
 package com.example.murbin.presentation.global.fragments;
 
+import android.app.Dialog;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +31,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -54,6 +55,7 @@ public class MapDialogFragment extends androidx.fragment.app.DialogFragment
     private Area areaSubzone;
     private GeoPoint location;
     private Polygon polygon;
+    private Marker marker;
 
     /**
      * Constructor
@@ -77,6 +79,17 @@ public class MapDialogFragment extends androidx.fragment.app.DialogFragment
         m_btn_cancel.setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            dialog.getWindow().setLayout(width, height);
+        }
     }
 
     @Override
@@ -157,6 +170,8 @@ public class MapDialogFragment extends androidx.fragment.app.DialogFragment
         }
 
         LatLng centerPoint = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
+        marker = mMap.addMarker(new MarkerOptions().position(centerPoint));
+        marker.setVisible(false);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerPoint, 12));
 
         mMap.setOnMapClickListener(
@@ -176,7 +191,7 @@ public class MapDialogFragment extends androidx.fragment.app.DialogFragment
                         }
                         case "location": {
                             location = new GeoPoint(latLng.latitude, latLng.longitude);
-                            mMap.addMarker(new MarkerOptions().position(latLng));
+                            marker.setPosition(latLng);
                             break;
                         }
                     }

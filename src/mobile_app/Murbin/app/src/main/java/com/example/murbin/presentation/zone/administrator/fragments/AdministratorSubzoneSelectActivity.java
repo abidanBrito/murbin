@@ -1,4 +1,10 @@
-package com.example.murbin.presentation.zone.administrator;
+/*
+ * Created by Francisco Javier Paños Madrona on 22/01/21 8:33
+ * Copyright (c) 2021 . All rights reserved.
+ * Last modified 21/01/21 18:04
+ */
+
+package com.example.murbin.presentation.zone.administrator.fragments;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +19,7 @@ import com.example.murbin.R;
 import com.example.murbin.firebase.Auth;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdministratorSubzoneSelectActivity extends BaseActivity {
@@ -29,6 +36,7 @@ public class AdministratorSubzoneSelectActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administrator_select_subzone);
+        selectedSubzones = new ArrayList<>();
         initializeLayoutElements();
     }
 
@@ -37,7 +45,7 @@ public class AdministratorSubzoneSelectActivity extends BaseActivity {
      */
     private void initializeLayoutElements() {
         // Toolbar menu
-        mToolbar = findViewById(R.id.administrator_select_toolbar);
+//        mToolbar = findViewById(R.id.administrator_select_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
@@ -45,7 +53,6 @@ public class AdministratorSubzoneSelectActivity extends BaseActivity {
 
         btnCancel = findViewById(R.id.administrator_select_subzone_btn_cancelar);
         btnSave = findViewById(R.id.administrator_select_subzone_btn_aceptar);
-        mContainer = findViewById(R.id.administrator_select_container);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

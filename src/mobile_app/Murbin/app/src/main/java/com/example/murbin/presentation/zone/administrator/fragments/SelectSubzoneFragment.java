@@ -1,7 +1,7 @@
 package com.example.murbin.presentation.zone.administrator.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.murbin.App;
 import com.example.murbin.R;
 import com.example.murbin.data.SubzonesDatabaseCrud;
-import com.example.murbin.data.UsersDatabaseCrud;
 import com.example.murbin.data.adapters.SelectSubzonesAdapter;
-import com.example.murbin.data.adapters.SubzonesListAdapter;
-import com.example.murbin.data.adapters.TechniciansListAdapter;
 import com.example.murbin.models.Subzone;
-import com.example.murbin.models.User;
-import com.example.murbin.presentation.zone.administrator.AdministratorSubzoneEditActivity;
-import com.example.murbin.presentation.zone.administrator.AdministratorTechnicianEditActivity;
+import com.example.murbin.presentation.global.fragments.SubzoneCheckboxesDialogFragment;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class SelectSubzoneFragment extends Fragment {
@@ -78,7 +73,9 @@ public class SelectSubzoneFragment extends Fragment {
             public void onClick(View v) {
                 int position = recyclerView.getChildAdapterPosition(v);
                 String id = subzonesListAdapter.getId(position);
-
+                Log.d(App.DEFAULT_TAG, "id:" + id);
+                SubzoneCheckboxesDialogFragment.listSubzones.add(id);
+                Log.d(App.DEFAULT_TAG, "listSubzones:" + SubzoneCheckboxesDialogFragment.listSubzones.toString());
             }
         });
 
