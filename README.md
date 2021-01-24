@@ -13,7 +13,7 @@
 6.  [Acknowledgements](#acknowledgements)
 
 ## MOTIVATION
-This project is a team effort for our thrid semester class **Internet of Things** (IoT) project. It aims to implement **smart streetlighting** in a way that is **not only efficient**, but also provides some **added functionalities** and interaction with the user via an **Android App**.
+This project is a team effort for our thrid semester class **Internet of Things** (IoT). It aims to implement **smart streetlighting** in a way that is **not only efficient**, but also provides some **added functionalities** and interaction with the user via an **Android App**.
 
 ## TECHNOLOGIES AND FRAMEWORKS
 ### Electronic Devices and Components
