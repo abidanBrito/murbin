@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -33,9 +34,12 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import com.example.murbin.comun.Mqtt;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class AdministratorMainActivity extends BaseActivity {
-
+    private TextView brightness, temperature, co2, noise, humidity;
     private final Auth mAuth = new Auth(this);
 
     private Toolbar mToolbar;
@@ -70,7 +74,7 @@ public class AdministratorMainActivity extends BaseActivity {
                     MqttMessage message = new MqttMessage("TOGGLE".getBytes());
                     message.setQos(Mqtt.qos);
                     message.setRetained(false);
-                    client.publish(Mqtt.topicRoot+"TOGGLE", message);
+                    client.publish("ycansam/practica/POWER", message);
                 } catch (MqttException e) {
 //                    Log.d(Mqtt.TAG, "Error al publicar.", e);
                 }
@@ -108,6 +112,13 @@ public class AdministratorMainActivity extends BaseActivity {
                 }
             }
         }
+
+        brightness = findViewById(R.id.administrator_main_home_bright);
+        temperature = findViewById(R.id.administrator_main_home_temperature);
+        co2 = findViewById(R.id.administrator_main_home_co2);
+        noise = findViewById(R.id.administrator_main_home_noise);
+        humidity = findViewById(R.id.administrator_main_home_humidity);
+        getLastMeasures();
     }
 
     @Override
@@ -205,5 +216,50 @@ public class AdministratorMainActivity extends BaseActivity {
 //            Log.d(Mqtt.TAG, "Error al desconectar.", e);
         }
         super.onDestroy();
+    }
+
+
+    private void getLastMeasures() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference sensors;
+
+        sensors = db.collection("streetlights").document("1")
+                .collection("sensors");
+
+        sensors.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String value;
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    value = document.getData().get("value").toString();
+//                        Log.d(App.DEFAULT_TAG, document.getId() + " => " + value);
+                    setValueSensor(document.getId(), value);
+                }
+            } else {
+//                Log.d(App.DEFAULT_TAG, "Error getting documents.", task.getException());
+            }
+        });
+
+    }
+
+    private void setValueSensor(String id, String badFormatValue) {
+        String value = badFormatValue.replace("\n", "").replace("\r", "");
+        switch (id) {
+            case "brightness":
+                brightness.setText(value);
+                break;
+            case "co2":
+                co2.setText(value);
+                break;
+            case "noise":
+                noise.setText(value);
+                break;
+            case "temperature":
+                temperature.setText(value);
+                break;
+            case "humidity":
+                humidity.setText(value);
+                break;
+        }
     }
 }

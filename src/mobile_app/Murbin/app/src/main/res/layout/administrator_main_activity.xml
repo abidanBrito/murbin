@@ -147,7 +147,7 @@
 
                 <TextView
                     android:id="@+id/administrator_main_home_noise"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/montserratlight"
@@ -159,7 +159,8 @@
                     android:textSize="56sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_noise_tv_type" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -191,7 +192,7 @@
 
                 <TextView
                     android:id="@+id/administrator_main_home_temperature"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/montserratlight"
@@ -203,7 +204,8 @@
                     android:textSize="56sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_temperature_tv_type" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -235,8 +237,9 @@
 
                 <TextView
                     android:id="@+id/administrator_main_home_humidity"
-                    android:layout_width="40dp"
-                    android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/montserratlight"
                     android:foregroundGravity="center"
@@ -247,7 +250,8 @@
                     android:textSize="56sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_humidity_tv_type" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -279,8 +283,9 @@
 
                 <TextView
                     android:id="@+id/administrator_main_home_co2"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/montserratlight"
                     android:foregroundGravity="center"
@@ -291,7 +296,8 @@
                     android:textSize="56sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_co2_tv_type" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -320,8 +326,9 @@
 
                 <TextView
                     android:id="@+id/administrator_main_home_bright"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/montserratlight"
                     android:foregroundGravity="center"
@@ -332,7 +339,8 @@
                     android:textSize="56sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/administrator_main_home_bright_tv_type" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
