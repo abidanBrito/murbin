@@ -43,7 +43,7 @@ This project is a team effort for our thrid semester class **Internet of Things*
 *   Android Studio.
 *   FreeRTOS.   
 
-## SYSTEM ARCHITECTURE
+## SYSTEM ARCHITECTURE (OUTDATED DIAGRAM)
 ![System Architecture Diagram](img/system_architecture_diagram.png)
 Refer to the [documentation](docs/Documento_Técnico_Diseño_v3.pdf) (spanish) for further details and schematics.
 
