@@ -7,7 +7,7 @@
 ## TABLE OF CONTENTS
 1.  [Motivation](#motivation)
 2.  [Technologies and Frameworks](#technologies-and-frameworks)
-3.  [System Architecture](#system-architecture)
+3.  [System Architecture](#system-architecture-outdated-diagram)
 4.  [Functionalities and Features](#functionalities-and-features)
 5.  [Documentation](#documentation)
 6.  [Acknowledgements](#acknowledgements)
