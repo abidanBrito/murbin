@@ -26,7 +26,7 @@
   //--SENSORES SIN WIFI-//
   void sensor_LUM(int, int);
   void detectar_movimiento();
-  void encender_rele(int);
+  //void encender_rele(int);
 //  void retro_Led(int, Adafruit_NeoPixel);
     
 #endif

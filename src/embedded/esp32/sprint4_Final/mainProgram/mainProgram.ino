@@ -1,3 +1,4 @@
+
 #include <M5Stack.h>
 #include "Sensores.h"
 #include "DHT.h" //para sensor DHT
@@ -7,9 +8,7 @@
 /*********************************/
 /*        Definiendo MQTT        */
 /*********************************/
-
 #include <ArduinoMqttClient.h>
-
 #include <WiFiClient.h>
 #include <WiFiGeneric.h>
 #include <WiFiMulti.h>
@@ -41,7 +40,7 @@ MqttClient mqttClient(wifiClient);
 
 const char broker[] = "broker.hivemq.com";
 int        port     = 1883;
-const char topic[]  = "ycansam/practica/power";
+const char topic[]  = "ycansam/practica/POWER";
 
 const long interval = 1000;
 unsigned long previousMillis = 0;
@@ -51,10 +50,9 @@ unsigned long previousMillis = 0;
 /*********************************/
 const int sensorCO2 = 34;    
 const int sensorLUM = 35;
-const int sensorRUIDO = 4;
 const int sensorRetro = 27; 
+const int sensorRUIDO = 33;
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, sensorRetro, NEO_GRB + NEO_KHZ800);
-
 
 /***********************************************/
 /*   Definiendo Valores Iddle Hook sensores    */
@@ -98,7 +96,6 @@ hw_timer_t * timer2 = NULL; //timer para sensor PIR
 
 volatile int Flag_ISR_Timer0= 0;
 volatile int Flag_ISR_Timer1 = 0;
-volatile int Flag_ISR_Timer2 = 0;
 
 void IRAM_ATTR ISR_Timer0(){
   Flag_ISR_Timer0 = 1;
@@ -108,9 +105,6 @@ void IRAM_ATTR ISR_Timer1(){
   Flag_ISR_Timer1 = 1;
 }
 
-void IRAM_ATTR ISR_Timer2(){
-  Flag_ISR_Timer1 = 2;
-}
 
 
 void interr_task_noise(void *pvParameter)
@@ -119,21 +113,20 @@ void interr_task_noise(void *pvParameter)
   int limit;
   while(1) {
     if(xSemaphoreTake(xSemaphore_Noise,portMAX_DELAY)){
-      if (xSemaphoreTake( xSemaphore_PaintLeds, portMAX_DELAY )){
-       while(analogRead(sensorRUIDO)> 3000){
+      if (xSemaphoreTake(xSemaphore_PaintLeds, portMAX_DELAY)){
+       while(analogRead(sensorRUIDO) > 400){
         Serial.println("INTR NOISE: ");
         pixels.clear();
-        Serial.print(analogRead(sensorRUIDO));
         value = analogRead(sensorRUIDO);
+        Serial.print(analogRead(sensorRUIDO));
         limit = 4095;
         int bright_value = (value * 255) / limit;
         int pin_value = round((value * 24) / limit);
         
-        for(int i=0;i<pin_value;i++)
+        for(int i = 0; i < pin_value; i++)
         {
-          if(bright_value >= 170) pixels.setPixelColor(i, pixels.Color(255, 0, 0));
-        else if(bright_value <= 170 && bright_value >= 128) pixels.setPixelColor(i, pixels.Color(255, 180, 0));
-        else pixels.setPixelColor(i, pixels.Color(0, 255, 0));
+          if(bright_value >= 125) pixels.setPixelColor(i, pixels.Color(255, 0, 0));
+          else pixels.setPixelColor(i, pixels.Color(0, 255, 0));
         }
         pixels.setBrightness(bright_value);
         pixels.show(); 
@@ -147,19 +140,15 @@ void interr_task_noise(void *pvParameter)
       xSemaphoreGive(xSemaphore_PaintLeds);
      }
     }
-     
   }
 }
-
-
 
 /*********************************/
 /*  Definiendo tareas sensores   */
 /*********************************/
-
 void taskCo2(void *pvParameter)
 {
-  String sensor = "CO2";
+  String sensor = "co2";
   while(1) {
     if(xSemaphoreTake(SMQTT,portMAX_DELAY)){
     Serial.println("Ejecutando tarea Co2");
@@ -175,12 +164,17 @@ void taskCo2(void *pvParameter)
 
 void taskLight(void *pvParameter)
 {
-  String sensor = "light";
+  String sensor = "brightness";
     while(1) {
       if(xSemaphoreTake(SCO2,portMAX_DELAY)){
         Serial.println("Ejecutando tarea LUM");
-      
-        int percent = (analogRead(sensorLUM) * 100) / 4095;
+ 
+        // Calibrated upon saturation voltage
+        int percent = (analogRead(sensorLUM) * 100) / 3072;
+        if (percent > 100) {
+          percent = 100;
+        }
+        
         sendMqtt(sensor,(int) percent);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
         xSemaphoreGive(SLIGHT);
@@ -195,7 +189,7 @@ void taskNoise(void *pvParameter)
     if(xSemaphoreTake(SLIGHT,portMAX_DELAY)){
       Serial.println("Ejecutando tarea Noise");
       lastVal_Noise = analogRead(sensorRUIDO);
-      sendMqtt(sensor, (int) analogRead(sensorRUIDO));
+      sendMqtt(sensor, lastVal_Noise);
       vTaskDelay(1000 / portTICK_PERIOD_MS);
       xSemaphoreGive(SNOISE);
     }
@@ -208,8 +202,12 @@ void taskHumidity(void *pvParameter)
   while(1) {
     if(xSemaphoreTake(SNOISE,portMAX_DELAY)){
       Serial.println("Ejecutando tarea Humedad");
-      lastVal_Humidity =(int) dht.readHumidity();
-      sendMqtt(sensor,(int) dht.readHumidity());
+      int humValue = dht.readHumidity();
+      if (humValue <= 100) {
+        lastVal_Humidity = humValue;
+      }
+      
+      sendMqtt(sensor, lastVal_Humidity);
       vTaskDelay(1000 / portTICK_PERIOD_MS);
       xSemaphoreGive(SHUM);
     }
@@ -222,19 +220,23 @@ void taskTemp(void *pvParameter)
   while(1) {
     if(xSemaphoreTake(SHUM,portMAX_DELAY)){
       Serial.println("Ejecutando tarea Temperatura");
-      lastVal_Temp = (int) dht.readTemperature();
-      sendMqtt(sensor,(int) dht.readTemperature());
+      int tempValue = dht.readTemperature();
+      if (tempValue <= 50) {
+        lastVal_Temp = tempValue;
+      }
+      
+      sendMqtt(sensor, lastVal_Temp);
       vTaskDelay(1000 / portTICK_PERIOD_MS);
 
       counterSleep++;
 
-     if(counterSleep ==4){
-       Serial.println("light_sleep_enter");
-    esp_sleep_enable_timer_wakeup(20000000); //20 seconds
-    int ret = esp_light_sleep_start();
-    Serial.printf("light_sleep: %d\n", ret);
+     if(counterSleep == 4){
+    //  Serial.println("light_sleep_enter");
+     // esp_sleep_enable_timer_wakeup(10000000); // 10 seconds
+    //  int ret = esp_light_sleep_start();
+   //   Serial.printf("light_sleep: %d\n", ret);
+   //counterSleep=0;
      }
-   
     }
   }
 }
@@ -305,14 +307,13 @@ if(udp.listen(1234)) {
   }
   // Fin procesos mqtt
  
-  // Inicializa el sensor de temperatura.
+  // Inicializa el sensor de temperatura y humedad
   dht.begin();
    
   // Configurando los pines de entrada y salida
   pinMode(sensorCO2, INPUT);       // Sensor CO2
   pinMode(sensorLUM, INPUT);       // Sensor LUZ
   pinMode(sensorRUIDO, INPUT);       // Sensor LUZ
-  pinMode(DHTPin, INPUT);          // Sensor de Temperatura y Humedad
   detectar_movimiento();           // Llama a la funcion para programar la interrupcion del sensor de movimiento.
 
   // Configurando Leds
@@ -321,17 +322,13 @@ if(udp.listen(1234)) {
   // Timer 0: alarma 4s RetroLed
   timer0 = timerBegin(0, 80, true);  // Timer 0 (TIMG0_T0),Periodo TB_clk = 12.5 ns * TIMGn_Tx_CLK_PRESCALE = 12.5 ns * 80 -> 1000 ns = 1 us, countUp
   timerAttachInterrupt(timer0, &ISR_Timer0, true); // edge (not level) triggered 
-  timerAlarmWrite(timer0, 6000000, true); // Alarma con autorecarga, Periodo alarma = 6000000 * 1 us = 6 s 
+  timerAlarmWrite(timer0, 3000000, true); // Alarma con autorecarga, Periodo alarma = 3000000 * 1 us = 6 s 
 
   // Timer 1: alarma 20s Enviar Valores Mqtt
   timer1 = timerBegin(1, 80, true);  // Timer 1 (TIMG0_T1),Periodo TB_clk = 12.5 ns * TIMGn_Tx_CLK_PRESCALE = 12.5 ns * 80 -> 1000 ns = 1 us, countUp
   timerAttachInterrupt(timer1, &ISR_Timer1, true); // edge (not level) triggered 
-  timerAlarmWrite(timer1, 20000000, true); // Alarma con autorecarga, Periodo alarma = 20000000 * 1 us = 20 s 
+  timerAlarmWrite(timer1, 6500000, true); // Alarma con autorecarga, Periodo alarma = 20000000 * 1 us = 20 s 
 
-  // Timer 2: alarma 0.5s Sensor PIR
-  timer2 = timerBegin(2, 80, true);  // Timer 2 (TIMG1_T0),Periodo TB_clk = 12.5 ns * TIMGn_Tx_CLK_PRESCALE = 12.5 ns * 80 -> 1000 ns = 1 us, countUp
-  timerAttachInterrupt(timer2, &ISR_Timer2, true); // edge (not level) triggered 
-  timerAlarmWrite(timer2, 500000, true); // Alarma con autorecarga, Periodo alarma = 3000000 * 1 us = 3 s 
 
 
   timerAlarmEnable(timer0); // Habilitar alarma
@@ -361,14 +358,14 @@ if(udp.listen(1234)) {
 // Idle task hook
     esp_register_freertos_idle_hook(IddleHook);
 
-  esp_sleep_enable_ext0_wakeup(GPIO_NUM_12,1); //despierta mediante sensor PIR
+//  esp_sleep_enable_ext0_wakeup(GPIO_NUM_12,1); //despierta mediante sensor PIR
   //esp_sleep_enable_ext1_wakeup(GPIO_NUM_4,1); //despierta mediante sensor ruido
 }
 
 /* Funcion IdleHook */
 bool IddleHook(void){
      
-  if(analogRead(sensorLUM) > 4000){
+  if(analogRead(sensorRUIDO) > 400){
     xSemaphoreGive(xSemaphore_Noise);
   }
   return true;
@@ -405,9 +402,8 @@ void pintarUltimoValor(){
       
       for(int i=0;i<pin_value;i++)
       {
-        if(bright_value >= 170) pixels.setPixelColor(i, pixels.Color(255, 0, 0));
-        else if(bright_value <= 170 && bright_value >= 128) pixels.setPixelColor(i, pixels.Color(255, 180, 0));
-        else pixels.setPixelColor(i, pixels.Color(0, 255, 0));
+                 if(bright_value >= 125) pixels.setPixelColor(i, pixels.Color(255, 0, 0));
+          else pixels.setPixelColor(i, pixels.Color(0, 255, 0));
       }
 
       pixels.setBrightness(bright_value);
@@ -415,38 +411,57 @@ void pintarUltimoValor(){
 }
 
 void printRetroLedSensors(){
-  
   int limit;
   int value;
-  String sensor;
+  char sensor[16];
   int valueLCD = 0;
   
   if(contador_sensores == 0){
-    Serial.println("****CO2****");
+   Serial.println("****CO2****");
    limit = 4095;
    value = lastVal_CO2;
-   valueLCD = (value*100)/4095;
-   sensor = "CO2: percent = ";
-   
+   valueLCD = (value * 100) / 4095;
+   strcpy(sensor, "CO2: percent = ");
   }
+  
   if(contador_sensores== 1){
     Serial.println("****NOISE****");
      limit = 4095;
    value = lastVal_Noise;
    valueLCD = (value*100)/4095;
-   sensor = "Noise: Db =";
+   strcpy(sensor, "Noise: Db =");
   }
+  
   if(contador_sensores== 2){
-    Serial.println("****HUMIDITY****");
-     limit = 100;
-   value = lastVal_Humidity;
-   sensor = "Humidity: Percent = ";
+   Serial.println("****HUMIDITY****");
+   limit = 100;
+    value =lastVal_Humidity;
+    Serial.print(value);
+    if (xSemaphoreTake( xSemaphore_PaintLeds, portMAX_DELAY )){
+   pixels.clear();
+      int bright_value = (lastVal_Humidity * 255) / limit;
+      int pin_value = round((lastVal_Humidity * 24) / limit);
+      
+      for(int i=0;i<pin_value;i++)
+      {
+                 if(bright_value >= 125) pixels.setPixelColor(i, pixels.Color(255, 0, 0));
+          else pixels.setPixelColor(i, pixels.Color(0, 255, 0));
+      }
+
+      pixels.setBrightness(bright_value);
+      pixels.show(); 
+
+      xSemaphoreGive(xSemaphore_PaintLeds);  
   }
-  if(contador_sensores== 3){
+   
+   strcpy(sensor, "Humidity: Percent = ");
+  }
+   
+  if(contador_sensores == 3){
     Serial.println("****TEMP****");
-     limit = 50;
-   value = lastVal_Temp;
-   sensor = "Temp: C· = ";
+    limit = 50;
+    value = dht.readTemperature();
+    strcpy(sensor, "Temp: C· = ");
   }
 
   //mensaje envio pantalla lcd udp
@@ -462,15 +477,13 @@ void printRetroLedSensors(){
       udp.broadcastTo(texto,1234);
   if (xSemaphoreTake( xSemaphore_PaintLeds, portMAX_DELAY )){
    pixels.clear();
-      
       int bright_value = (value * 255) / limit;
       int pin_value = round((value * 24) / limit);
       
       for(int i=0;i<pin_value;i++)
       {
-        if(bright_value >= 170) pixels.setPixelColor(i, pixels.Color(255, 0, 0));
-        else if(bright_value <= 170 && bright_value >= 128) pixels.setPixelColor(i, pixels.Color(255, 180, 0));
-        else pixels.setPixelColor(i, pixels.Color(0, 255, 0));
+                 if(bright_value >= 125) pixels.setPixelColor(i, pixels.Color(255, 0, 0));
+          else pixels.setPixelColor(i, pixels.Color(0, 255, 0));
       }
 
       pixels.setBrightness(bright_value);
@@ -479,10 +492,13 @@ void printRetroLedSensors(){
       xSemaphoreGive(xSemaphore_PaintLeds);  
   }
   contador_sensores++;
-
-  if(contador_sensores == 4){
+  if(contador_sensores > 3){
     contador_sensores = 0;
   }
+
+
+ 
+  Flag_ISR_Timer0 = 0;
  
 }
 unsigned long delayStart = 0; // the time the delay started
@@ -496,19 +512,14 @@ void loop()
   
    // Variable que detecta si la interrupcion ha sido producida
    if (movimiento){  
-      
+       digitalWrite(LED_PIR,HIGH);
+       delay(3000);
       movimiento= 0;
    }
    else if(movimiento == 0){
-    //si se ha activado mediante mqtt no se apagará
-    if (delayRunning && ((millis() - delayStart) >= 3000)) {
-    delayRunning = false; // // prevent this code being run more then once
     if(ISR_MQTT == 0){
        digitalWrite(LED_PIR,LOW);
     }
-  }
-    
-     timerAlarmDisable(timer2); // Deshabilitar alarma cuando hayan pasado 3 segundos
    }
    if(ISR_MQTT == 1){
     digitalWrite(LED_PIR,HIGH);
@@ -520,7 +531,7 @@ void loop()
 //timer cada 6 segundos en el retroled
    if (Flag_ISR_Timer0) {
     printRetroLedSensors();
-    Flag_ISR_Timer0 = 0;
+    
   }
 //timer cada 20 segundos en el mqtt
   if (Flag_ISR_Timer1) {
@@ -531,9 +542,9 @@ void loop()
     
 }
 
-void sendMqtt(String sensor,int v)
+void sendMqtt(String sensor, int v)
 {
-  String topicSend  = String("equipo1-2/murbin/sensores/")+String(sensor);
+  String topicSend  = String("equipo1-2/murbin/sensors/") + String(sensor);
 
   mqttClient.poll();
   
@@ -597,8 +608,7 @@ void  IRAM_ATTR detectarMovimiento(void* arg)
 {
   movimiento=1;
   delayRunning = true; // not finished yet
-  timerAlarmEnable(timer2); // Habilitar alarma
-  digitalWrite(LED_PIR,HIGH);
+ 
   Serial.println(" -- Movimiento detectado --"); 
 }
 
@@ -606,12 +616,16 @@ void detectar_movimiento()
 {
   // Configurar pines
   gpio_set_direction(sensorPIR, GPIO_MODE_INPUT);
+  
   // Configurar interrupciones en pines
   gpio_set_intr_type(sensorPIR, GPIO_INTR_POSEDGE);
-    // Setting pull down mode.
+  
+  // Setting pull down mode.
   gpio_set_pull_mode(sensorPIR, GPIO_PULLDOWN_ONLY);
+  
   // install ISR service with default configuration
   gpio_install_isr_service(sensorPIR_FLAG_LEVEL);
-    // attach the interrupt service routine
+  
+  // attach the interrupt service routine
   gpio_isr_handler_add(sensorPIR, detectarMovimiento, NULL);
 }
