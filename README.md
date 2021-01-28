@@ -13,7 +13,7 @@
 6.  [Acknowledgements](#acknowledgements)
 
 ## MOTIVATION
-This project is a team effort for our thrid semester class **Internet of Things** (IoT). It aims to implement **smart streetlighting** in a way that is **not only efficient**, but also provides some **added functionalities** and interaction with the user via an **Android App**.
+This project is a team effort for our third semester class **Internet of Things** (IoT). It aims to implement **smart streetlighting** in a way that is **not only efficient**, but also provides some **added functionalities** and interaction with the user via an **Android App**.
 
 ## TECHNOLOGIES AND FRAMEWORKS
 ### Electronic Devices and Components
@@ -56,7 +56,7 @@ Refer to the [documentation](docs/Documento_Técnico_Diseño_v3.pdf) (spanish) f
 *   [x] **Flashing LED** alarms.
 *   [x] Interactive **Mobile App** (ON/OFF switch, sensor readings, geolocation, map subzones and different user roles).
 *   [x] **Light Sleep** Mode.
-*   [x] PCB design.
+*   [x] **PCB** design.
 *   [ ] Dimming LED.
 
 ## DOCUMENTATION
