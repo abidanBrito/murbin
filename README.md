@@ -46,16 +46,16 @@ This project is a team effort for our third semester class **Internet of Things*
 Refer to the [documentation](docs/Documento_Técnico_Diseño_v3.pdf) (spanish) for further details and schematics.
 
 ## FUNCTIONALITIES AND FEATURES 
--   [x] High **CO2 and Pollution** Detection.
--   [x] **Temperature and Humidity** Sensor.
--   [x] **Noise** Sensor.
--   [x] **Motion Detection**.
--   [x] **Luminosity** Sensor.
--   [x] **Flashing LED** alarms.
--   [x] Interactive **Mobile App** (ON/OFF switch, sensor readings, geolocation, map subzones and different user roles).
--   [x] **Light Sleep** Mode.
--   [x] **PCB** design.
--   [ ] Dimming LED.
+* [x] High **CO2 and Pollution** Detection.
+* [x] **Temperature and Humidity** Sensor.
+* [x] **Noise** Sensor.
+* [x] **Motion Detection**.
+* [x] **Luminosity** Sensor.
+* [x] **Flashing LED** alarms.
+* [x] Interactive **Mobile App** (ON/OFF switch, sensor readings, geolocation, map subzones and different user roles).
+* [x] **Light Sleep** Mode.
+* [x] **PCB** design.
+* [ ] Dimming LED.
 
 ## DOCUMENTATION
 It can be found in the form of a PDF file for each and every Sprint, accordingly. Those of previous Sprints may contain errors (schematics, pins, etc.). Please, refer to the lastest version: [technical documentation](docs/Documento_Técnico_Diseño_v3.pdf) (spanish). 
