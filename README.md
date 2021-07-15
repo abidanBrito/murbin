@@ -1,4 +1,5 @@
 ![WIP_Badge](https://img.shields.io/badge/version-0.1-blue.svg)
+[![LoC_Badge](https://tokei.rs/b1/github/abidanBrito/murbin?category=code)](https://github.com/XAMPPRocky/tokei)
 
 ![Project_Logo](/img/murbin_logo.png)
 
