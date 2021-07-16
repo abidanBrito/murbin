@@ -63,3 +63,6 @@ It can be found in the form of a PDF file for each and every Sprint, accordingly
 
 ## ACKNOWLEDGEMENTS
 We would like to express our sincere gratitude to our **professors** for their invaluable support, feedback and encouragement throughout the development of this project, and to **Universitat Politècnica de València** for providing us with both the knowledge and the tools needed to complete it.
+
+## LICENSE
+This repository is released under the MIT license. See [LICENSE.md](LICENSE.md) for more information.
